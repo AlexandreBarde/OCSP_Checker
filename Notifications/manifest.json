@@ -1,0 +1,25 @@
+{
+
+  "manifest_version": 2,
+  "name": "OCSP Checker",
+  "version": "1.1",
+
+  "description": "Informer l'utilisateur du statut des certificats TLS des sites visités",
+  "homepage_url": "http://alexandre.brde.fr",
+  "icons": {
+    "32": "icon/icon.jpg"
+  },
+
+  "permissions": [
+    "activeTab",
+    "tabs",
+    "*://developer.mozilla.org/*"
+  ],
+
+  "browser_action": {
+    "default_icon": "icon/icon.jpg",
+    "default_title": "OCSP Checker",
+    "default_popup": "popup/index.html"
+  }
+
+}
