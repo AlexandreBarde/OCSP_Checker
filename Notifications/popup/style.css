@@ -1,0 +1,34 @@
+html, body
+{
+  width: 300px;
+}
+
+.test
+{
+  margin: 3% auto;
+  padding: 4px;
+  text-align: center;
+  font-size: 1.5em;
+  background-color: #E5F2F2;
+  cursor: pointer;
+}
+
+.test:hover
+{
+  background-color: #CFF2F2;
+}
+
+.clear
+{
+  margin: 3% auto;
+  padding: 4px;
+  text-align: center;
+  font-size: 1.5em;
+  background-color: #e60000;
+  cursor: pointer;
+}
+
+.clear:hover
+{
+  background-color: #cc0000;
+}
