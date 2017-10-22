@@ -1,15 +1,117 @@
 browser.tabs.query({'active': true, 'lastFocusedWindow': true}, function (tabs) {
     //get current url page
-    //var url = tabs[0].url;
-    //document.getElementById('site').innerHTML = "URL de la page : " + pingableLink(url);
+    var url = tabs[0].url;
 
-    //getSites("google", function(data) {
-        //document.getElementById('url').innerHTML = data.url;
-        //document.getElementById('duree').innerHTML = data.dtime;
-    //});
+
+    if (storageAvailable('localStorage')) {
+        addSite('https://google.com/', 10);
+        addSite('https://facebook.com/', 20);
+        addSite('https://twitter.com/', 30);
+        printSites(document.getElementById('sites'));
+    } else {
+        console.log("ko");
+    }
 
 });
 
+////// FONCTIONS //////
+
+/**
+ * Permet d'ajouter un site au stockage local
+ * @param url l'url du site
+ * @param time le temps max de la validité du cache du certificat
+ */
+function addSite(url, time) {
+    if (storageAvailable('localStorage')) {
+        localStorage.setItem(new String(convertURL(url, false)), url + "#" + time);
+    } else {
+        console.error("[ error ] The local storage isn't available.");
+    }
+}
+
+/**
+ * Récupère les informations d'un site stocké
+ * @param url l'url du site à récupérer
+ * @returns un tableau de valeurs, la première correspond à l'url, la seconde au temps max de la validité du cache du certificat
+ */
+function getSite(url) {
+    if (storageAvailable('localStorage')) {
+        var site = localStorage.getItem(new String(convertURL(url, false)));
+        if(site == null) {
+            console.error("The website " + convertURL(url, false) + " doesn't exist in the local storage.");
+            return null;
+        }
+        return site.split('#');
+    } else {
+        console.error("[ error ] The local storage isn't available.");
+        return null;
+    }
+}
+
+/**
+ * Affiche toutes les données des sites stockées dans un tableau
+ * @param le tableau dans lequel il faut afficher les données
+ */
+function printSites(element) {
+    if (storageAvailable('localStorage')) {
+
+        var header = element.insertRow(-1);
+        header.insertCell(0).innerHTML += "Site";
+        header.insertCell(1).innerHTML += "Adresse (URL)";
+        header.insertCell(2).innerHTML += "Nb jours max";
+
+        var line;
+        for(var i = 0; i < localStorage.length; i++) {
+            line = element.insertRow(-1);
+            line.insertCell(0).innerHTML += convertURL(localStorage.getItem(localStorage.key(i))[0], false);
+            line.insertCell(1).innerHTML += localStorage.getItem(localStorage.key(i))[0];
+            line.insertCell(2).innerHTML += localStorage.getItem(localStorage.key(i))[1];
+        }
+    } else {
+        console.error("[ error ] The local storage isn't available.");
+    }
+}
+
+/**
+ * Supprimer un site stocké
+ * @param name le nom du site à supprimer
+ */
+function removeSite(url) {
+    if (storageAvailable('localStorage')) {
+        localStorage.removeItem(new String(convertURL(url, false)));
+    } else {
+        console.error("[ error ] The local storage isn't available.");
+    }
+}
+
+/**
+ * Supprime l'ensemble des sites stockés
+ */
+function removeAllSites() {
+    if (storageAvailable('localStorage')) {
+        localStorage.clear();
+    } else {
+        console.error("[ error ] The local storage isn't available.");
+    }
+}
+
+/**
+ * Permet de savoir si le stockage local est disponible
+ * @param type le stockage
+ * @returns {boolean} true s'il est disponible
+ */
+function storageAvailable(type) {
+    try {
+        var storage = window[type];
+        var x = '__storage_test__';
+        storage.setItem(x, x);
+        storage.removeItem(x);
+        return true;
+    }
+    catch(e) {
+        return false;
+    }
+}
 
 /**
  * Converti une URL brute (avec https://www.* /) en une URL "pingable"
@@ -33,35 +135,4 @@ function convertURL(url, ext) {
         value = value.substring(0, value.length - value.split('.')[value.split('.').length-1].length - 1);
     }
     return value;
-}
-
-/**
- * Récupère un site dans la liste des sites
- * @param info l'information requise pour la recherche (le nom du site pour récupérer ses infos, "nbSites" pour récupérer le nombre de sites)
- * @param callback le callback permettant d'utiliser le site
- *
- * Utilisation du site : .url pour récupérer l'url et .dtime pour récupérer la durée en jours
- *
- */
-function getSites(info, callback) {
-    $(document).ready(function(){
-        $.getJSON('sites.json',{
-            format: "json"
-        }).done(function(data){
-            if(info == "nbSites") {
-                callback(data.sites.length);
-            } else {
-                var found = -1;
-                for(var i = 0; i < data.sites.length && found == -1; i++) {
-                    var tmpname = convertURL(data.sites[i].url, false);
-                    if(tmpname == info){
-                        found = 0;
-                        callback(data.sites[i]);
-                    } else {
-                        console.log("[ error ] The list doesn't contain the website " + info);
-                    }
-                }
-            }
-        });
-    });
 }
