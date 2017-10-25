@@ -9,6 +9,5 @@ fi
 #Recuperation de la date
 rep=$(echo QUIT |openssl s_client -connect $1:443 -status 2>/dev/null | grep "This Update" | cut -d " " -f 7-10)
 #Conversion de la date
-rep=$(date -d "$rep" +%d/%m/%Y)
-echo $rep
+echo rep=$(date -d "$rep" +%d/%m/%Y)
 
