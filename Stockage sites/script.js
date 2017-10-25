@@ -1,17 +1,31 @@
+// Pour récupérer l'url de l'onglet actif
 browser.tabs.query({'active': true, 'lastFocusedWindow': true}, function (tabs) {
-    //get current url page
+
+    //Récupère l'url
     var url = tabs[0].url;
 
+    //Mise à jour de l'alert
+    updateSiteState(url, true);
 
-    if (storageAvailable('localStorage')) {
-        addSite('https://google.com/', 10);
-        addSite('https://facebook.com/', 20);
-        addSite('https://twitter.com/', 30);
-        printSites(document.getElementById('sites'));
-    } else {
-        console.log("ko");
+});
+
+document.addEventListener("click", function(e) {
+    if (e.target.classList.contains("notfollowed")) {
+        browser.tabs.query({'active': true, 'lastFocusedWindow': true}, function (tabs) {
+            addSite(tabs[0].url, 20);
+            updateSiteState(tabs[0].url, false);
+        });
+    } else if (e.target.classList.contains("followed")) {
+        browser.tabs.query({'active': true, 'lastFocusedWindow': true}, function (tabs) {
+            removeSite(tabs[0].url, 20);
+            updateSiteState(tabs[0].url, false);
+        });
+    } else if (e.target.classList.contains("unstorage")) {
+        browser.tabs.query({'active': true, 'lastFocusedWindow': true}, function (tabs) {
+            removeAllSites();
+            updateSiteState(tabs[0].url, false);
+        });
     }
-
 });
 
 ////// FONCTIONS //////
@@ -38,7 +52,6 @@ function getSite(url) {
     if (storageAvailable('localStorage')) {
         var site = localStorage.getItem(new String(convertURL(url, false)));
         if(site == null) {
-            console.error("The website " + convertURL(url, false) + " doesn't exist in the local storage.");
             return null;
         }
         return site.split('#');
@@ -50,22 +63,32 @@ function getSite(url) {
 
 /**
  * Affiche toutes les données des sites stockées dans un tableau
- * @param le tableau dans lequel il faut afficher les données
+ * @param element le tableau dans lequel il faut afficher les données
+ * @param init un booleen (true si la fonction est utilisée à l'initialisation de la page)
  */
-function printSites(element) {
+function printSites(element, init) {
+    if(!init) {
+        element.innerHTML = "";
+    }
     if (storageAvailable('localStorage')) {
 
         var header = element.insertRow(-1);
         header.insertCell(0).innerHTML += "Site";
         header.insertCell(1).innerHTML += "Adresse (URL)";
-        header.insertCell(2).innerHTML += "Nb jours max";
+        header.insertCell(2).innerHTML += "Nb jours max (20 par défaut)";
 
         var line;
         for(var i = 0; i < localStorage.length; i++) {
             line = element.insertRow(-1);
-            line.insertCell(0).innerHTML += convertURL(localStorage.getItem(localStorage.key(i))[0], false);
-            line.insertCell(1).innerHTML += localStorage.getItem(localStorage.key(i))[0];
-            line.insertCell(2).innerHTML += localStorage.getItem(localStorage.key(i))[1];
+            line.insertCell(0).innerHTML += convertURL(localStorage.getItem(localStorage.key(i)), false);
+            line.insertCell(1).innerHTML += getSite(localStorage.getItem(localStorage.key(i)))[0];
+            line.insertCell(2).innerHTML += getSite(localStorage.getItem(localStorage.key(i)))[1];
+        }
+        if(localStorage.length == 0) {
+            line = element.insertRow(-1);
+            line.insertCell(0).innerHTML += "";
+            line.insertCell(1).innerHTML += "Aucun site tracké.";
+            line.insertCell(2).innerHTML += "";
         }
     } else {
         console.error("[ error ] The local storage isn't available.");
@@ -74,7 +97,7 @@ function printSites(element) {
 
 /**
  * Supprimer un site stocké
- * @param name le nom du site à supprimer
+ * @param url l'url du site à supprimer
  */
 function removeSite(url) {
     if (storageAvailable('localStorage')) {
@@ -135,4 +158,28 @@ function convertURL(url, ext) {
         value = value.substring(0, value.length - value.split('.')[value.split('.').length-1].length - 1);
     }
     return value;
+}
+
+/**
+ * Met à jour l'alerte d'information
+ * @param url l'url de l'onglet actif
+ * @param init un booleen (true si la fonction est utilisée à l'initialisation de la page)
+ */
+function updateSiteState(url, init) {
+    var track = document.getElementById('info_tracking');
+    if (storageAvailable('localStorage')) {
+        if(getSite(url) == null) {
+            track.className = "alert alert-warning";
+            track.innerHTML = "<strong>Attention: </strong>Ce site n'est pas suivi par OCSP Checker. "
+                + "<button type=\"button\" class=\"btn btn-outline-success btn-sm notfollowed\">Suivre</button>";
+        } else {
+            track.className = "alert alert-success";
+            track.innerHTML = "<strong>Site suivi: </strong>État : [todefine]"
+                + "<button type=\"button\" class=\"btn btn-link btn-sm followed\">Ne plus suivre</button>";
+        }
+        printSites(document.getElementById('sites'), init);
+    } else {
+        track.className = "alert alert-danger";
+        track.innerHTML = "<strong>Erreur: </strong>Les sites suivis sont indisponibles.";
+    }
 }
