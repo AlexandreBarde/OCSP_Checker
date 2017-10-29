@@ -35,6 +35,18 @@ html, body
   margin: auto;
 }
 
+#action_close
+{
+  color: white;
+  text-align: right;
+}
+
+#action_reduce
+{
+  color: white;
+  text-align: right;
+}
+
 #notif
 {
   width: 400px;
@@ -42,8 +54,6 @@ html, body
   visibility: hidden;
   z-index: 9999;
   position: absolute;
-  transition-property: visibility;
-  transition-duration: 1s;
 }
 
 #notif:enabled
