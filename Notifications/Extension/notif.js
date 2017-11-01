@@ -1,6 +1,11 @@
 generatePopup("IUT Paul Sabatier Toulouse III", "24 octobre 2017 à 14h", "12h:35m:23s");
 
-
+/**
+ * Permite to generate a popup with many informations
+ * @param website name of the website
+ * @param update last update of the OCSP cache
+ * @param date seniority of the certificate
+ */
 function generatePopup(website, update, date)
 {
   var div_notif = document.createElement('div');
@@ -59,6 +64,10 @@ function generatePopup(website, update, date)
 
 }
 
+/**
+ * Permite to know if the website is secure
+ * @returns {boolean} if the website use the SSL protocol
+ */
 function isSecure()
 {
   if(location.protocol == 'https:')

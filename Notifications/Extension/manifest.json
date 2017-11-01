@@ -1,7 +1,7 @@
 {
 
   "manifest_version": 2,
-  "name": "modify-page",
+  "name": "OCSP Checker Notif",
   "version": "1.0",
 
   "content_scripts": [
@@ -9,6 +9,12 @@
       "matches": ["https://*/*", "http://*/*"],
       "js": ["notif.js"]
     }
-  ]
+  ],
+
+  "browser_action": {
+    "default_icon": "icon.png",
+    "default_title": "OCSP Checker Notif",
+    "default_popup": "popup.html"
+  }
 
 }
