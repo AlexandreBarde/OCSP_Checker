@@ -1,17 +1,12 @@
 generatePopup("IUT Paul Sabatier Toulouse III", "24 octobre 2017 à 14h", "12h:35m:23s");
 
-var file = location.pathname.split( "/" ).pop();
+var node = document.createElement('style');
+document.body.appendChild(node);
+window.addStyleString = function(str) {
+    node.innerHTML = str;
+}
 
-var link = document.createElement( "link" );
-link.href = "http://5.39.112.61/gen/css/materialize.min.css";
-link.type = "text/css";
-link.rel = "stylesheet";
-link.media = "screen,print";
-
-//var styleList = document.getElementsByTagName( "head" );
-//styleList.insertBefore(link);
-
-//document.head.insertBefore(link, document.head.firstChild);
+addStyleString('#OCSP_check_div_titre { border-radius: 4px 4px 0px 0px; background-color: rgba(207, 0, 15, 1); font-weight: bold; text-align: center; font-size: 20px; border: 0px; padding: 0px; margin-bottom: 0;} #OCSP_check_div_texte {background-color: rgba(217, 30, 24, 0.9); border-radius: 0px 0px 4px 4px; font-size: 18px; font-family: Arial; color: black;} #OCSP_check_div_notif { width: 400px; height: 100px; z-index: 9999; position: fixed; bottom: 5%; left: 3%; font-family: NULL; font-family: Arial; color: black;}');
 
 /**
  * Permite to generate a popup with many informations
@@ -31,33 +26,6 @@ function generatePopup(website, update, date)
 
   div_titre.textContent = website;
 
-  div_notif.style.width = "400px";
-  div_notif.style.height = "100px";
-  div_notif.style.zindex = "9999";
-  div_notif.style.position = "fixed";
-  div_notif.style.bottom = "5%";
-  div_notif.style.left = "3%";
-  div_notif.style.fontFamily = "NULL";
-  div_notif.style.fontFamily = "Arial";
-  div_notif.style.border = "0px !important";
-  div_notif.style.margin = "0px !important";
-  div_notif.style.color = "black";
-
-
-  div_titre.style.borderRadius = "4px 4px 0px 0px";
-  div_titre.style.backgroundColor = "rgba(207, 0, 15, 1)";
-  div_titre.style.fontWeight = "bold";
-  div_titre.style.textAlign = "center";
-  div_titre.style.fontSize = "20px";
-  div_titre.style.border = "0px";
-  div_titre.style.padding = "0px";
-  div_notif.style.marginBottom = "0px";
-
-  div_texte.style.backgroundColor = "rgba(217, 30, 24, 0.9)";
-  div_texte.style.borderRadius = "0px 0px 4px 4px";
-  div_texte.style.fontSize = "18px !important";
-  div_texte.style.fontFamily = "Arial !important";
-    div_notif.style.color = "black !important";
 
   if(isSecure())
   {
