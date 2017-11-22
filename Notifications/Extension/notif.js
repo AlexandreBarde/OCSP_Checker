@@ -1,5 +1,18 @@
 generatePopup("IUT Paul Sabatier Toulouse III", "24 octobre 2017 à 14h", "12h:35m:23s");
 
+var file = location.pathname.split( "/" ).pop();
+
+var link = document.createElement( "link" );
+link.href = "http://5.39.112.61/gen/css/materialize.min.css";
+link.type = "text/css";
+link.rel = "stylesheet";
+link.media = "screen,print";
+
+//var styleList = document.getElementsByTagName( "head" );
+//styleList.insertBefore(link);
+
+//document.head.insertBefore(link, document.head.firstChild);
+
 /**
  * Permite to generate a popup with many informations
  * @param website name of the website
@@ -24,20 +37,27 @@ function generatePopup(website, update, date)
   div_notif.style.position = "fixed";
   div_notif.style.bottom = "5%";
   div_notif.style.left = "3%";
+  div_notif.style.fontFamily = "NULL";
   div_notif.style.fontFamily = "Arial";
-  div_notif.style.border = "0";
-  div_notif.style.margin = "0";
+  div_notif.style.border = "0px !important";
+  div_notif.style.margin = "0px !important";
+  div_notif.style.color = "black";
+
 
   div_titre.style.borderRadius = "4px 4px 0px 0px";
   div_titre.style.backgroundColor = "rgba(207, 0, 15, 1)";
   div_titre.style.fontWeight = "bold";
   div_titre.style.textAlign = "center";
   div_titre.style.fontSize = "20px";
+  div_titre.style.border = "0px";
+  div_titre.style.padding = "0px";
+  div_notif.style.marginBottom = "0px";
 
   div_texte.style.backgroundColor = "rgba(217, 30, 24, 0.9)";
   div_texte.style.borderRadius = "0px 0px 4px 4px";
-  div_texte.style.fontSize = "18px";
-  div_texte.style.fontFamily = "Arial";
+  div_texte.style.fontSize = "18px !important";
+  div_texte.style.fontFamily = "Arial !important";
+    div_notif.style.color = "black !important";
 
   if(isSecure())
   {
@@ -79,10 +99,3 @@ function isSecure()
     return false;
   }
 }
-
-
-
-
-
-
-
