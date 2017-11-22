@@ -1,4 +1,4 @@
-generatePopup("IUT Paul Sabatier Toulouse III", "24 octobre 2017 à 14h", "12h:35m:23s");
+generatePopup("2 mois et 2 jours", "2");
 
 var node = document.createElement('style');
 document.body.appendChild(node);
@@ -14,7 +14,7 @@ addStyleString('#OCSP_check_div_titre { border-radius: 4px 4px 0px 0px; backgrou
  * @param update last update of the OCSP cache
  * @param date seniority of the certificate
  */
-function generatePopup(website, update, date)
+function generatePopup(update, date)
 {
   var div_notif = document.createElement('div');
   var div_titre = document.createElement('div');
@@ -24,7 +24,7 @@ function generatePopup(website, update, date)
   div_titre.id = "OCSP_check_div_titre";
   div_texte.id = "OCSP_check_div_texte";
 
-  div_titre.textContent = website;
+  div_titre.textContent = "Attestation OCSP trop ancienne";
 
 
   if(isSecure())
@@ -33,8 +33,8 @@ function generatePopup(website, update, date)
     var maj = document.createElement('p');
     anciennete.id = "OCSP_check_anciennete";
     maj.id = "OCSP_check_maj";
-    anciennete.textContent = "Ancienneté de l'attestation : " + date; //12h:35m:23s
-    maj.textContent = " Date de la dernière mise à jour du cache OCSP : " + update; //24 octobre 2017 à 14h
+    anciennete.textContent = "Date limite dépassée de " + date + " jours"; //12h:35m:23s
+    maj.textContent = " L'Attestation a " + update; //24 octobre 2017 à 14h
     div_texte.appendChild(anciennete);
     div_texte.appendChild(maj);
   }
