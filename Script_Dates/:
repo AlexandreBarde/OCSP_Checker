@@ -1,3 +1,4 @@
+#!/usr/bin/python
 # coding: utf-8
 
 import sys
@@ -49,12 +50,10 @@ def get_OCSP_update(server_hostname):
     # Commande shell
     cmd = 'echo QUIT | openssl s_client -connect ' + server_hostname + ':443 -status 2>/dev/null \
           | grep "This Update" | cut -d ":" -f 2-'
-    # Capturer la sortie de la commande
-    return "date"
-
+    # Capturer la sorte de la commande
+    return "zizi"
 
 while True:
     msg = get_message()
-    if msg == "google.com":
-        d = get_OCSP_update(msg)
-        send_message(encode_message(d))
+    d = get_OCSP_update(msg)
+    send_message(encode_message(d))
