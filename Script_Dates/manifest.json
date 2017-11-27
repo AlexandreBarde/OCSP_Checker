@@ -1,7 +1,7 @@
 {
     "description": "Echange url <-> date",
     "manifest_version": 2,
-    "name": "date_getter",
+    "name": "date_getter_ext",
     "version": "1.0",
     "icons": {
 	"48": "icons/message.svg"
@@ -9,7 +9,7 @@
 
     "applications": {
 	"gecko": {
-	    "id": "date_getter@ptut.org",
+	    "id": "date_getter@ptut",
 	    "strict_min_version": "50.0"
 	}
     },
@@ -19,9 +19,7 @@
     },
 
     "browser_action": {
-	"default_icon": "icons/message.svg",
-	"browser_style": true
-
+	"default_icon": "icons/message.svg"
     },
 
     "permissions": ["nativeMessaging"]

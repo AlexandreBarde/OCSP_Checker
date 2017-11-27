@@ -1,15 +1,18 @@
-function onResponse(response) {
-    console.log("Recu " + response);
-}
+var port = browser.runtime.connectNative("date_getter");
 
-function onError(error) {
-    console.log(`Error: ${error}`);
-}
+port.onDisconnect.addListener((p) => {
+    if(p.error) {
+	console.log(`${p.error.message}`);
+    }
+});
+
+
+port.onMessage.addListener((response) => {
+    console.log('Recu');
+    console.log(response);
+});
 
 browser.browserAction.onClicked.addListener(() => {
-    console.log("Envoi url");
-    var sending = browser.runtime.sendNativeMessage(
-	"date_getter",
-	"google.com");
-    sending.then(onResponse, onError);
+    console.log("Envoi de l'url");
+    port.postMessage("google.com");
 });
