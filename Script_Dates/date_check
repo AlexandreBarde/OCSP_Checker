@@ -5,9 +5,7 @@ then
 	echo "Passez une URL en parametre"
 	exit
 fi
-
 #Recuperation de la date
-rep=$(echo QUIT |openssl s_client -connect $1:443 -status 2>/dev/null | grep "This Update" | cut -d " " -f 7-10)
+rep=$(echo QUIT | openssl s_client -connect $1:443 -status 2> /dev/null | grep "This Update" | cut -d " " -f 7-10)
 #Conversion de la date
-echo $(date -d "$rep" +%d/%m/%Y)
-
+echo $rep
