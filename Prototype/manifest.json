@@ -22,7 +22,7 @@
     ],
 
     "background": {
-	"scripts": ["addon/background.js"]
+	"scripts": ["addon/url_sender.js"]
     },
 
     "browser_action": {
