@@ -22,7 +22,7 @@
     ],
 
     "background": {
-	"scripts": ["addon/url_sender.js"]
+	"scripts": ["addon/url_sender.js", "addon/notif.js"]
     },
 
     "browser_action": {
@@ -32,6 +32,6 @@
     },
 
     "permissions": ["nativeMessaging", "activeTab", "tabs"],
-    
+
     "content_security_policy": "script-src 'self' https://*.jquery.com; object-src 'self'"
 }
