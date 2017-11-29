@@ -1,10 +1,17 @@
 var port = browser.runtime.connectNative("date_getter");
 
+// Quand on clique sur l'icone
+browser.browserAction.onClicked.addListener(() => {
+    console.log("Envoi de l'url");
+    // Envoyer un message sur le port
+    port.postMessage("google.com");
+});
+
 // Attends un message sur le port d'écoute
 port.onMessage.addListener((response) => {
     console.log('Recu');
     console.log(response);
-    generatePopup(reponse, "2");
+    generatePopup(response, "2");
 });
 
 //generatePopup(reponse, "2");
@@ -13,7 +20,7 @@ var node = document.createElement('style');
 document.body.appendChild(node);
 window.addStyleString = function(str) {
     node.innerHTML = str;
-}
+};
 
 addStyleString('#OCSP_check_div_titre { border-radius: 4px 4px 0px 0px; background-color: rgba(207, 0, 15, 1); font-weight: bold; text-align: center; font-size: 20px; border: 0px; padding: 0px; margin-bottom: 0;} #OCSP_check_div_texte {background-color: rgba(217, 30, 24, 0.9); border-radius: 0px 0px 4px 4px; font-size: 18px; font-family: Arial; color: black;} #OCSP_check_div_notif { width: 400px; height: 100px; z-index: 9999; position: fixed; bottom: 5%; left: 3%; font-family: NULL; font-family: Arial; color: black;}');
 

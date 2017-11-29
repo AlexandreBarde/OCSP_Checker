@@ -21,7 +21,7 @@
     ],
 
     "background": {
-	"scripts": ["addon/url_sender.js", "addon/notif.js"]
+	"scripts": ["addon/notif.js"]
     },
 
     "browser_action": {
