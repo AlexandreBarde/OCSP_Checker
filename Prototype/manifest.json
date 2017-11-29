@@ -16,12 +16,13 @@
 
     "content_scripts": [
 	{
-	    "matches": ["https://*/*", "http://*/*"]
+	    "matches": ["https://*/*", "http://*/*"],
+      "js": ["addon/content/content.js"]
 	}
     ],
 
     "background": {
-	"scripts": ["addon/notif.js"]
+	"scripts": ["addon/background/background.js"]
     },
 
     "browser_action": {
