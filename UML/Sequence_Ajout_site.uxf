@@ -95,11 +95,10 @@
       <x>260</x>
       <y>240</y>
       <w>270</w>
-      <h>50</h>
+      <h>40</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-
-Ajout d'un site
-URL et date du cache</panel_attributes>
+confirmation := addSite(url, age)</panel_attributes>
     <additional_attributes>250.0;20.0;10.0;20.0</additional_attributes>
   </element>
   <element>
@@ -136,7 +135,7 @@ format de stockage</panel_attributes>
       <h>40</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-
-Informations à stocker</panel_attributes>
+confirmation := setItem(url+#+age)</panel_attributes>
     <additional_attributes>250.0;20.0;10.0;20.0</additional_attributes>
   </element>
   <element>
@@ -187,12 +186,24 @@ Informations à stocker</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>260</x>
+      <y>380</y>
+      <w>270</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;.
+confirmation</panel_attributes>
+    <additional_attributes>10.0;20.0;250.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>520</x>
       <y>370</y>
       <w>270</w>
       <h>40</h>
     </coordinates>
-    <panel_attributes>lt=&lt;&lt;&lt;-
-Confirmation d'ajout</panel_attributes>
+    <panel_attributes>lt=&lt;&lt;&lt;.
+confirmation</panel_attributes>
     <additional_attributes>10.0;20.0;250.0;20.0</additional_attributes>
   </element>
 </diagram>

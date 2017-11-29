@@ -95,11 +95,10 @@
       <x>390</x>
       <y>360</y>
       <w>270</w>
-      <h>50</h>
+      <h>40</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-
-Suppression d'un site
-URL</panel_attributes>
+confirmation := removeSite(url)</panel_attributes>
     <additional_attributes>250.0;20.0;10.0;20.0</additional_attributes>
   </element>
   <element>
@@ -111,7 +110,7 @@ URL</panel_attributes>
       <h>40</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-
-Requête suppression du site</panel_attributes>
+confirmation := removeItem(url)</panel_attributes>
     <additional_attributes>250.0;20.0;10.0;20.0</additional_attributes>
   </element>
   <element>
@@ -166,8 +165,8 @@ Requête suppression du site</panel_attributes>
       <w>270</w>
       <h>40</h>
     </coordinates>
-    <panel_attributes>lt=&lt;&lt;&lt;-
-Confirmation suppression</panel_attributes>
+    <panel_attributes>lt=&lt;&lt;&lt;.
+confirmation</panel_attributes>
     <additional_attributes>10.0;20.0;250.0;20.0</additional_attributes>
   </element>
   <element>
@@ -178,8 +177,8 @@ Confirmation suppression</panel_attributes>
       <w>270</w>
       <h>40</h>
     </coordinates>
-    <panel_attributes>lt=&lt;&lt;&lt;-
-Confirmation suppression</panel_attributes>
+    <panel_attributes>lt=&lt;&lt;&lt;.
+confirmation</panel_attributes>
     <additional_attributes>10.0;20.0;250.0;20.0</additional_attributes>
   </element>
 </diagram>

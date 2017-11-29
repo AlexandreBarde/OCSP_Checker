@@ -95,11 +95,10 @@
       <x>330</x>
       <y>300</y>
       <w>270</w>
-      <h>50</h>
+      <h>40</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-
-Modification d'un site
-URL et/ou date du cache</panel_attributes>
+confirmation := updateSite(url, age)</panel_attributes>
     <additional_attributes>250.0;20.0;10.0;20.0</additional_attributes>
   </element>
   <element>
@@ -132,11 +131,10 @@ informations</panel_attributes>
       <x>590</x>
       <y>320</y>
       <w>270</w>
-      <h>50</h>
+      <h>40</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-
-Requête informations du
-site</panel_attributes>
+informations := getSite(url)</panel_attributes>
     <additional_attributes>250.0;20.0;10.0;20.0</additional_attributes>
   </element>
   <element>
@@ -191,8 +189,8 @@ site</panel_attributes>
       <w>270</w>
       <h>40</h>
     </coordinates>
-    <panel_attributes>lt=&lt;&lt;&lt;-
-Informations du site</panel_attributes>
+    <panel_attributes>lt=&lt;&lt;&lt;.
+informations</panel_attributes>
     <additional_attributes>10.0;20.0;250.0;20.0</additional_attributes>
   </element>
   <element>
@@ -204,19 +202,31 @@ Informations du site</panel_attributes>
       <h>40</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-
-Nouvelles informations à stocker</panel_attributes>
+confirmation := setItem(url+#+age)</panel_attributes>
     <additional_attributes>250.0;20.0;10.0;20.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
       <x>330</x>
+      <y>510</y>
+      <w>270</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;.
+confirmation</panel_attributes>
+    <additional_attributes>10.0;20.0;250.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>590</x>
       <y>500</y>
       <w>270</w>
       <h>40</h>
     </coordinates>
-    <panel_attributes>lt=&lt;&lt;&lt;-
-Confirmation modification</panel_attributes>
+    <panel_attributes>lt=&lt;&lt;&lt;.
+confirmation</panel_attributes>
     <additional_attributes>10.0;20.0;250.0;20.0</additional_attributes>
   </element>
 </diagram>
