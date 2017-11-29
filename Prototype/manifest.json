@@ -22,7 +22,7 @@
     ],
 
     "background": {
-	"scripts": ["addon/background/background.js"]
+	"scripts": ["addon/background/background.js", "addon/background/utils.js"]
     },
 
     "browser_action": {

@@ -8,6 +8,7 @@
 browser.tabs.onUpdated.addListener(function(tabId, infos, tab) {
   //Vérification que l'url est définie (utiliser l'url uniquement dans cette condition)
   if (typeof infos.url !== 'undefined') {
-    console.info(infos.url);
+    console.log("URL de base : " + infos.url);
+    console.log("URL pingable : " + convertURL(infos.url, true));
   }
 });
