@@ -1,21 +1,3 @@
-var port = browser.runtime.connectNative("date_getter");
-
-// Quand on clique sur l'icone
-browser.browserAction.onClicked.addListener(() => {
-    console.log("Envoi de l'url");
-    // Envoyer un message sur le port
-    port.postMessage("google.com");
-});
-
-// Attends un message sur le port d'écoute
-port.onMessage.addListener((response) => {
-    console.log('Recu');
-    console.log(response);
-    generatePopup(response, "2");
-});
-
-//generatePopup(reponse, "2");
-
 var node = document.createElement('style');
 document.body.appendChild(node);
 window.addStyleString = function(str) {
