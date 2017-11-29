@@ -76,7 +76,7 @@
       <h>40</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-
-Adresse du serveur</panel_attributes>
+age := getCacheAge(adresse)</panel_attributes>
     <additional_attributes>360.0;20.0;10.0;20.0</additional_attributes>
   </element>
   <element>
@@ -121,7 +121,7 @@ Adresse du serveur</panel_attributes>
       <h>40</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-
-Requête du cache OCSP</panel_attributes>
+date := getLastUpdate(adresse)</panel_attributes>
     <additional_attributes>310.0;20.0;10.0;20.0</additional_attributes>
   </element>
   <element>
@@ -132,8 +132,8 @@ Requête du cache OCSP</panel_attributes>
       <w>330</w>
       <h>40</h>
     </coordinates>
-    <panel_attributes>lt=&lt;&lt;&lt;-
-Contenu cache</panel_attributes>
+    <panel_attributes>lt=&lt;&lt;&lt;.
+date</panel_attributes>
     <additional_attributes>10.0;20.0;310.0;20.0</additional_attributes>
   </element>
   <element>
@@ -141,11 +141,11 @@ Contenu cache</panel_attributes>
     <coordinates>
       <x>670</x>
       <y>290</y>
-      <w>260</w>
+      <w>240</w>
       <h>70</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-
-Calcul différence date</panel_attributes>
+elapsedTime(date)</panel_attributes>
     <additional_attributes>10.0;50.0;90.0;50.0;90.0;10.0;10.0;10.0</additional_attributes>
   </element>
   <element>
@@ -178,8 +178,8 @@ Calcul différence date</panel_attributes>
       <w>380</w>
       <h>40</h>
     </coordinates>
-    <panel_attributes>lt=&lt;&lt;&lt;-
-Ancienneté cache</panel_attributes>
+    <panel_attributes>lt=&lt;&lt;&lt;.
+age</panel_attributes>
     <additional_attributes>10.0;20.0;360.0;20.0</additional_attributes>
   </element>
   <element>
