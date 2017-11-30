@@ -95,15 +95,3 @@ function handleMessage(msg) {
     else
 	generatePopup(msg.date);
 }
-
-// Port de connexion au script de background
-var port = chrome.runtime.connect({name: "conn1"});
-// Ecouter les messages sur le port
-port.onMessage.addListener(handleMessage);
-
-// Adresse du serveur
-var url = 'google.com';
-
-// Envoi de l'adresse au background script
-// Cet appel devrai être fait automatiquement quand on visite un site de la liste.
-port.postMessage({url: url});
