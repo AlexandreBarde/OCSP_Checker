@@ -68,7 +68,7 @@ function isSecure()
 * @param msg received message
 */
 function handleMessage(msg) {
-    if (msg.date.length == 1) 
+    if (msg.date.length == 1)
 	generatePopup('Le site n\'utilise pas OCSP Stapling');
     else
 	generatePopup(msg.date);

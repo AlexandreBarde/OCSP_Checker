@@ -15,14 +15,14 @@
     ],
 
     "background": {
-	"scripts": ["background.js"]
+	"scripts": ["background.js", "websitemanager.js"]
     },
 
     "browser_action": {
 	"default_icon":"icons/icon.svg",
 	"default_title": "OCSP Checker"
     },
-    
+
     "permissions": ["nativeMessaging", "activeTab", "tabs"],
 
     "content_security_policy": "script-src 'self' https://*.jquery.com; object-src 'self'"
