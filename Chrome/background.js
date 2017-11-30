@@ -11,16 +11,16 @@ function getContentMessage(message) {
 
 chrome.runtime.onConnect.addListener((port) => {
     // Si on est joint par le bon port
-    if (port.name == "conn1") {
-	console.log('Port active');
-	// L'ecouter et envoyer à l'application native à la reception
-	port.onMessage.addListener(getContentMessage);
-	// Puis attendre la reponse de l'application native
-	native_port.onMessage.addListener((message) => {
-	    console.log('app a repondu');
-	    // Quand on le recoit, le retransmettrre au content
-	    port.postMessage({date: message});
-	});
+    if(port.name == "conn1") {
+    console.log('Port active');
+    // L'ecouter et envoyer à l'application native à la reception
+    port.onMessage.addListener(getContentMessage);
+    // Puis attendre la reponse de l'application native
+    native_port.onMessage.addListener((message) => {
+        console.log('app a repondu');
+	// Quand on le recoit, le retransmettrre au content
+	port.postMessage({date: message});
+    });
     }
 });
 

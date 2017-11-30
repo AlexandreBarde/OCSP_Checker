@@ -12,7 +12,7 @@ addStyleString('#OCSP_check_div_titre { border-radius: 4px 4px 0px 0px; backgrou
  * @param update last update of the OCSP cache
  * @param date seniority of the certificate
  */
-function generatePopup(update, date)
+function generatePopup(date)
 {
   var div_notif = document.createElement('div');
   var div_titre = document.createElement('div');
@@ -30,11 +30,8 @@ function generatePopup(update, date)
     var anciennete = document.createElement('p');
     var maj = document.createElement('p');
     anciennete.id = "OCSP_check_anciennete";
-    maj.id = "OCSP_check_maj";
-    anciennete.textContent = "Date limite dépassée de " + date + " jours"; //12h:35m:23s
-    maj.textContent = " L'Attestation a " + update; //24 octobre 2017 à 14h
+    anciennete.textContent = "Date de la dernière mise à jour: " + date;
     div_texte.appendChild(anciennete);
-    div_texte.appendChild(maj);
   }
   else
   {
@@ -71,7 +68,10 @@ function isSecure()
 * @param msg received message
 */
 function handleMessage(msg) {
-    generatePopup('x', msg.date);
+    if (msg.date.length == 1) 
+	generatePopup('Le site n\'utilise pas OCSP Stapling');
+    else
+	generatePopup(msg.date);
 }
 
 // Port de connexion au script de background
@@ -79,5 +79,9 @@ var port = chrome.runtime.connect({name: "conn1"});
 // Ecouter les messages sur le port
 port.onMessage.addListener(handleMessage);
 
-// Envoi de la date au background script
-port.postMessage({url: 'reddit.com'});
+// Adresse du serveur
+var url = 'reddit.com';
+
+// Envoi de l'adresse au background script
+// Cet appel devrai être fait automatiquement quand on visite un site de la liste.
+port.postMessage({url: url});

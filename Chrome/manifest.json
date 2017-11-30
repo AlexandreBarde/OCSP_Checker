@@ -20,8 +20,7 @@
 
     "browser_action": {
 	"default_icon":"icons/icon.svg",
-	"default_title": "OCSP Checker",
-	"default_popup": "extension.html"
+	"default_title": "OCSP Checker"
     },
     
     "permissions": ["nativeMessaging", "activeTab", "tabs"],
