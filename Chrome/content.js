@@ -84,14 +84,3 @@ function isSecure()
     return false;
   }
 }
-
-/**
-* Create a popup notification from incoming message
-* @param msg received message
-*/
-function handleMessage(msg) {
-    if (msg.date.length == 1)
-	generateErreur();
-    else
-	generatePopup(msg.date);
-}

@@ -1,20 +1,45 @@
+/**
+* Create a popup notification from incoming message
+* @param msg received message
+*/
+function handleMessage(msg) {
+    if (msg.date.length == 1)
+	generateErreur();
+    else
+	generatePopup(msg.date);
+}
+
+
+// Port de connexion au script de background
+var port = chrome.runtime.connect({name: "conn1"});
+
 //Récupération de l'url de l'onglet actif
-chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
+chrome.tabs.onUpdated.addListener(sendurl);
+
+
+function sendurl(tabId, changeInfo, tab) {
+
   //Vérification que l'url est définie
   if (typeof changeInfo.url !== 'undefined') {
+
+    console.log("ok : " + changeInfo.url);
+    addSite(changeInfo.url, 20);
+
     var url = convertURL(changeInfo.url, true);
     if(getSite(url) != null) {
-      // Port de connexion au script de background
-      var port = chrome.runtime.connect({name: "conn1"});
+      console.log("cbon");
+
       // Ecouter les messages sur le port
       port.onMessage.addListener(handleMessage);
 
+      console.log("a");
       // Envoi de l'adresse au background script
       // Cet appel devrai être fait automatiquement quand on visite un site de la liste.
       port.postMessage({url: url});
+      console.log("b");
     }
   }
-});
+}
 
 /**
  * Convert an url (with https://www.* /) in a "pingable" url
