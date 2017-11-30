@@ -36,7 +36,7 @@ function generatePopup(date)
   else
   {
     var texte = document.createElement('p');
-    texte.textContent = "Ce site ne possède pas de certificat";
+    texte.textContent = "Ce site ne possède pas de certificat SSL";
     div_texte.appendChild(texte);
   }
 
@@ -44,8 +44,30 @@ function generatePopup(date)
   div_notif.appendChild(div_texte);
 
   document.body.appendChild(div_notif);
-
 }
+
+function generateErreur()
+{
+  var div_notif = document.createElement('div');
+  var div_titre = document.createElement('div');
+  var div_texte = document.createElement('div');
+
+  div_notif.id = "OCSP_check_div_notif";
+  div_titre.id = "OCSP_check_div_titre";
+  div_texte.id = "OCSP_check_div_texte";
+
+  div_titre.textContent = "Information";
+
+  var texte = document.createElement('p');
+  texte.textContent = "Le site n\'utilise pas OCSP Stapling";
+  div_texte.appendChild(texte);
+
+  div_notif.appendChild(div_titre);
+  div_notif.appendChild(div_texte);
+
+  document.body.appendChild(div_notif);
+}
+
 
 /**
  * Queries the sites protocol
@@ -68,8 +90,8 @@ function isSecure()
 * @param msg received message
 */
 function handleMessage(msg) {
-    if (msg.date.length == 1) 
-	generatePopup('Le site n\'utilise pas OCSP Stapling');
+    if (msg.date.length == 1)
+	generateErreur();
     else
 	generatePopup(msg.date);
 }
@@ -80,7 +102,7 @@ var port = chrome.runtime.connect({name: "conn1"});
 port.onMessage.addListener(handleMessage);
 
 // Adresse du serveur
-var url = 'reddit.com';
+var url = 'google.com';
 
 // Envoi de l'adresse au background script
 // Cet appel devrai être fait automatiquement quand on visite un site de la liste.
