@@ -431,8 +431,9 @@ h3 {
 	border-radius:2px;
 }
 
-h4 {
-	color:black;
+h4
+{
+	color:white;
 	padding:10px;
 	border-left: 3px solid #F44336;
 }
