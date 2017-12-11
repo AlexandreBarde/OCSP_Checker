@@ -1,6 +1,5 @@
-﻿/*CONFIGURATION GENERALE*/
-
-@media screen and (max-width:1280px) {
+﻿@media screen and (max-width:1280px)
+{
 	#titre img.sigrand{
 		visibility:hidden;
 	}
@@ -10,7 +9,8 @@
 
 }
 
-html {
+html
+{
 	font-family: 'Open Sans', sans-serif;
 	line-height: 1.5;
 	font-weight: normal;
@@ -20,57 +20,35 @@ html {
 	padding:0;
 }
 
-a{
+a
+{
 	text-decoration: none;
 	background-color: transparent;
 }
 
-ul{
+ul
+{
 	list-style-type: square;
 }
 
-a:active,
-a:hover {
+a:active, a:hover
+{
 	outline: 0;
 }
 
-p{
+p
+{
 	text-align:justify;
 	margin-bottom: 30px;
 }
 
-img {
+img
+{
 	border: 0;
 }
 
-video{
-	width: 100%;
-	height: auto;
-}
-
-table
+#titre, .bar, .sources, nav div, section, footer p
 {
-	width: 100%;
-	border-collapse: collapse;
-	border-spacing: 0;
-	display: block;
-	position: relative;
-}
-
-td:not(.table-head){
-	border-left:3px solid #F44336;
-	border-right:3px solid #F44336;
-}
-
-
-
-/*BALISES*/
-#titre,
-.bar,
-.sources,
-nav div,
-section,
-footer p{
 	display:block;
 	max-width: 1250px;
 	min-width: 720px;
@@ -79,55 +57,42 @@ footer p{
 	width: 80%;
 }
 
-.petit{
-	max-width: 720px; /*Pour de longues rédactions*/
-}
-
-.moyen{
-	max-width: 1024px;
-}
-
-.grand{
-	max-width: 1250px; /*Pour de grandes images*/
-}
-
-
-
-
-header{
+header
+{
 	background-image:linear-gradient(#e53935, #fafafa);
 	padding-top:20px;
 	margin-bottom:150px;
 	z-index:0;
 }
 
-section{
+section
+{
 	background-color:#fafafa;
 	padding: 20px;
 	box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
 }
 
-
-
-footer{
+footer
+{
 	margin-top: 20px;
 	padding-top: 10px;
 	background-color: #e53935;
 	font-size:11px;
 }
 
-
-
-.footer-haut a{
+.footer-haut a
+{
 	color:white;
 }
 
-.footer-haut a:hover{
+.footer-haut a:hover
+{
 	text-decoration: underline;
 	color:white;
 }
 
-.footer-bas{
+.footer-bas
+{
 	text-align:center;
 	background-color:#37474F;
 	color:#ECEFF1;
@@ -137,33 +102,28 @@ footer{
 	margin-top:20px;
 }
 
-
-
-nav{
+nav
+{
 	background-color:#455A64;
 	width:100%;
 	box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
 	border-top: 2px #f44336 solid;
 }
 
-/*IDS*/
-
-#topbar{
+#topbar
+{
 	margin-bottom:5px;
 }
 
-#membre{
-	float: right;
-}
-
-
-#titre {
+#titre
+{
 	margin-left: auto;
 	margin-right: auto;
 	display: inline;
 }
 
-#titre img{
+#titre img
+{
 	position: absolute;
 	float:left;
 	height: 67px;
@@ -171,391 +131,58 @@ nav{
 
 }
 
-#titre img.sipetit{
-	visibility:inherit;
-}
-
-/*Barre de recherche*/
-#recherche{
-	text-align:center;
-	/*position: relative;
-	z-index:999;*/
-    margin-bottom:30px;
-
-}
-
-#recherche input[type=text]:focus {
-	width: 100%;
-	position: relative;
-	border: 2px solid #e53935;
-	border-radius: 1px;
-	z-index:999;
-}
-
-#recherche input[type=text] {
-	background-image: url('http://www.larevuedekenza.fr/wp-content/themes/quarter/images/sidebar/loupe.png');
-	transition: width 0.4s ease-in-out;
-	width: 200px;
-	z-index:999;
-}
-
-/*CLASSES*/
-
-.contenu{
-	/*width: 94%;*/
-	margin: 0 3%;
-}
-
-.top{
+.top
+{
 	max-width: 1250px;
 	width: 100%;
 }
 
-.centrer{
+.centrer
+{
 	text-align:center;
 }
-	/*Boutons*/
 
-.bouton, .boutonbar{
-	color:#FFFFFF;
-	position:relative;
-	height: 36px;
-	line-height: 36px;
-	text-align: center;
-	display: inline-block;
-	outline: 0;
-	margin: 6px 0;
-	/*transition: .1s ease-out;*/
-	border: none;
-	border-radius: 2px;
-	vertical-align: middle;
-	box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
-	overflow:hidden;
-}
-
-.boutonbar{
-	background-color:#546E7A;
-	padding: 0 1vw; /*vw depend de la largeur de l'écran
-	/*width:6%;*/
-}
-
-.bouton{
-	background-color:#e53935;
-	padding: 0 1.2vw;
-}
-
-.bouton:hover,.boutonbar:hover{
-	box-shadow:0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15);
-}
-
-.boutonbar:hover{
-	background-color: #607D8B;
-}
-
-.bouton:hover{
-	background-color:#f44336;
-}
-
-	/*Accueil*/
-
-.moitiehautdroite, .moitiebasdroite{
-	width: 33.6%;
-	float: right;
-	height: auto;
-	max-height: 240px;
-	overflow: hidden;
-	z-index:1;
-}
-
-.moitiegauche{
-	max-width: 830px;
-	width: 66.4%;
-	height: auto;
-	float: left;
-	overflow: hidden;
-	z-index:2;
-}
-
-
-
-	/*CARTES*/
-
-
-.carte:hover {
-	box-shadow:0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15);
-}
-
-
-.carte {
-	position: relative;
-	background-color: #fff;
-	transition: box-shadow .25s;
-	box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
-
-}
-
-.carte .carte-image {
-	position: relative;
-	overflow: hidden;
-}
-
-
-.carte .carte-image img{
-	display: block;
-	position: relative;
-	left: 0;
-	right: 0;
-	top: 0;
-	bottom: 0;
-	width: 100%;
-}
-
-.carte .carte-image .carte-titre {
-	color: #fff;
-	position: absolute;
-	bottom: 0;
-	left: 0;
-	padding:10px;
-	background-color:rgba(0, 0, 0, 0.3);
-	transition: .3s ease;
-	width:100%;
-	text-transform: uppercase;
-}
-
-.carte .carte-image .carte-titre:hover {
-	background-color:rgba(0, 0, 0, 0.5);
-}
-
-.carte-titre .titre{
-	color:#e53935;
-    line-height: 36px;
-}
-
-.carte-titre b{
-	font-size:20px;
-}
-
-.horizontale{
-    display: flex;
-    margin-bottom:20px;
-}
-
-
-.carte.horizontale .carte-image img{
-    height:220px;
-    width: auto;
-}
-
-.carte.horizontale .carte-contenu{
-    flex-direction: column;
-    flex: 1;
-    position: relative;
-    display: flex;
-    flex-grow: 1;
-}
-
-.carte .carte-contenu {
-  padding: 20px;
-  border-radius: 0 0 2px 2px;
-}
-
-.carte .carte-contenu p {
-  margin: 0;
-}
-
-.carte .carte-contenu a {
-    color:black;
-}
-
-
-/*Barres de connexion*/
-.connexion {
-	display:block;
-
-}
-
-.connexion input[type=text]{
-	width: 60%;
-	margin-top : 40px;
-
-}
-
-.connexion .bouton {
-	margin-top: 10px;
-	margin-bottom: 10px;
-}
-
-.connexion a.boutonbar{
-	font-size: 12px;
-	height: 24px;
-	line-height: 24px;
-}
-
-#mdp input[type=text] {
-	background-image: url('../images/icons/ic_lock_black_24dp_1x.png');
-}
-
-#pseudo input[type=text] {
-	background-image: url('../images/icons/ic_account_box_black_24dp_1x.png');
-}
-
-/*input*/
-
-input[type=text] {
-	box-sizing: border-box;
-	border: 2px solid #ccc;
-	border-radius: 4px;
-	font-size: 16px;
-	background-color: white;
-	background-position: 10px 10px;
-	background-repeat: no-repeat;
-	padding: 12px 20px 12px 40px;
-	z-index:999;
-}
-
-
-
-/*Tailles des titres*/
-h1, h2, h3, h4, h5, h6 {
+h1, h2, h3, h4, h5, h6
+{
 	font-weight: 400;
 	line-height: 1.1;
 	text-transform: uppercase;
 }
 
 
-
-h3 {
+h3
+{
 	background-color:#F44336;
 	color:white;
 	padding:20px;
 	border-radius:2px;
 }
 
-h4 {
-	color:black;
+h4
+{
+	color:white;
 	padding:10px;
 	border-left: 3px solid #F44336;
 }
 
-h5 {
+h5
+{
 	color:#455A64;
 }
 
-
-/*Vide : permet l'adaptation d'une div par rapport à son contenu flottant*/
-.vide:before, .vide:after {
+.vide:before, .vide:after
+{
   content: " ";
   display: table;
 }
 
-.vide:after {
+.vide:after
+{
   clear: both;
 }
 
-
-/*Dédiés aux pages tests*/
-
-/*Infos du jeu*/
-.infos {
-	box-shadow:0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15);
-	padding: 20px;
-}
-
-/*Image du jeu*/
-.infos img{
-	float:left;
-	top: 0;
-	display:block;
-	max-width: 400px;
-	padding: 20px;
-	overflow: hidden;
-}
-
-
-.infos ul{
-	margin-top: 40px;
-
-}
-
-/*TUTO : mettre classe="vignette [position]"; exemple : classe="vignette gauche"
-/*Propriétés des vignettes*/
-.vignette{
-	display: block;
-	  padding: 2px;
- 	 line-height: 1;
-	box-shadow: 0 0 4px rgba(0,0,0,.15);
-	background-color: #fff;
-	position: relative;
-	margin-left : 10px;
-	margin-right : 10px;
-	/*width: 137px;
-	height: 77px;*/
-}
-
-.signature .vignette{
-	width: auto;
-	height: auto;
-}
-
-	/*[position]*/
-.gauche {
-	float: left;
-}
-.droite{
-	float: right;
-}
-
-.test .conclusion {
-	box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
-	background-color: #EEEEEE;
-	padding:10px;
-
-}
-
-.signature {
-	font-size: 12px;
-	margin-top: 20px;
-}
-
-.signature a{
-	font-size: 12px;
-	margin-top: 20px;
-
-}
-
-/*Wrapper, permettant un redimentsionnement via formation d'un cadre*/
-.videoWrapper {
-	position: relative;
-	padding-bottom: 56.25%; /* 16:9 */
-	padding-top: 25px;
-	height: 0;
-	margin:25px;
-}
-.videoWrapper iframe {
-	position: absolute;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-}
-
-table .table-head{
-	border-bottom: 3px solid #F44336;
-}
-
-.note_finale{
-	font-family: Impact ;
-	font-weight:bold;
-	font-size:54px;
-	float:left;
-	margin: 30px;
-	border-bottom: 3px solid #F44336;
-	vertical-align: middle;
-}
-
-/*Facultatifs*/
-
-.remonter{
+.remonter
+{
 	position: fixed;
 	padding:16px;
 	box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
@@ -568,11 +195,13 @@ table .table-head{
 	z-index: 999;
 }
 
-.remonter:hover{
+.remonter:hover
+{
 	background-color: white;
 }
 
-.logo_iut img{
+.logo_iut img
+{
 	width:auto;
 	height:150px;
 	float:right;
@@ -580,6 +209,7 @@ table .table-head{
 	transition: all 0.2s ease-out;
 }
 
-.logo_iut img:hover {
+.logo_iut img:hover
+{
 	box-shadow:0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15);
 }
