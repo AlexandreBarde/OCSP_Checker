@@ -44,7 +44,8 @@ int main() {
     fprintf(stderr, "Erreur lors de la selection de la priorité: %d", err);
   }
   gnutls_credentials_set(tls_session, GNUTLS_CRD_CERTIFICATE, xcred);
-  gnutls_session_set_verify_cert(tls_session, SERVER, 0); sockfd = tcp_connect(SERVER, "443");
+  gnutls_session_set_verify_cert(tls_session, SERVER, 0);
+  sockfd = tcp_connect(SERVER, "443");
   gnutls_transport_set_int(tls_session, sockfd);
   gnutls_handshake_set_timeout(tls_session, GNUTLS_DEFAULT_HANDSHAKE_TIMEOUT);
   err = gnutls_handshake(tls_session);
