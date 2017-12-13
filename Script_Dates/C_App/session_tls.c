@@ -74,7 +74,6 @@ int main() {
   }
   err = gnutls_ocsp_resp_import(response, &encoded_attest);
   if (err < 0) {
-    perror("Decode");
   }
   err = gnutls_ocsp_resp_print(response, GNUTLS_OCSP_PRINT_FULL, &decoded_attest);
   printf("%.*s", 29, decoded_attest.data + 477);
