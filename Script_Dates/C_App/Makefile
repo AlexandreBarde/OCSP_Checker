@@ -1,11 +1,17 @@
-CC=gcc
-CFLAGS=Wall
+$(CC)=gcc
+CFLAGS=-Wall
 
-client: tcp_connection.o session_tls.o
-	$(CC) -o client tcp_connection.o session_tls.o `pkg-config gnutls --libs`
+date_getter: date_getter.o messaging.o ocsp_stapling.o tcp_connection.o
+	$(CC) -o date_getter date_getter.o messaging.o ocsp_stapling.o tcp_connection.o -lcjson `pkg-config gnutls --libs`
 
-tcp_connection.o: tcp_connection.c
-	$(CC) -o tcp_connection.o -c tcp_connection.c
+date_getter.o: date_getter.c
+	$(CC) -c date_getter.c -o date_getter.o
 
-session_tls.o: session_tls.c
-	$(CC) -o session_tls.o -c session_tls.c `pkg-config gnutls --cflags`
+messaging.o: messaging.c messaging.h
+	$(CC) -c messaging.c -o messaging.o -lcjson
+
+ocsp_stapling.o: ocsp_stapling.c ocsp_stapling.h
+	$(CC) -c ocsp_stapling.c -o ocsp_stapling.o `pkg-config gnutls --cflags`
+
+tcp_connection.o: tcp_connection.c tcp_connection.h
+	$(CC) -c tcp_connection.c -o tcp_connection.o
