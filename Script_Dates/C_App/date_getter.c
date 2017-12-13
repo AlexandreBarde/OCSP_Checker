@@ -3,11 +3,12 @@
 #include "ocsp_stapling.h"
 
 #define MAX_MSG_LEN 1024
+#define DATE_LEN 15
 
 int main() {
   char serv[MAX_MSG_LEN];
-  char date[100];
+  char date[DATE_LEN];
   getMessage(&serv);
   getOcspUpdate(serv, date);
-  printf("%s", date);
+  postMessage(date);
 }

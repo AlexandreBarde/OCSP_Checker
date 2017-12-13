@@ -19,6 +19,7 @@ function getContentMessage(message) {
     // Quand on recoit une url du content, la transmettre
     // a l'application native
     console.log('Message recu, transmission à l\'app');
+    console.log(message);
     sendMessage(message.url);
 }
 

@@ -69,5 +69,5 @@ void getOcspUpdate(char* server, char date[]) {
   }
   err = gnutls_ocsp_resp_print(response, GNUTLS_OCSP_PRINT_FULL, &decoded_attest);
   // Recuperer la partie contenant la date de mise à jour
-  sprintf(date, "%.*s", 29, decoded_attest.data + 477);
+  sprintf(date, "%.*s", 15, decoded_attest.data + 481);
 }

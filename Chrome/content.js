@@ -156,6 +156,7 @@ function isSecure()
 * @param msg received message
 */
 function handleMessage(msg) {
+    console.log(msg);
     if (msg.date.length == 1)
 	generateErreur();
     else
@@ -168,7 +169,7 @@ var port = chrome.runtime.connect({name: "conn1"});
 port.onMessage.addListener(handleMessage);
 
 // Adresse du serveur
-var url = 'reddit.com';
+var url = 'yahoo.com';
 
 // Envoi de l'adresse au background script
 // Cet appel devrai être fait automatiquement quand on visite un site de la liste.

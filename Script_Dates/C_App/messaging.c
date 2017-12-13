@@ -34,6 +34,6 @@ void postMessage(char* msg) {
 		     (char) ((length >> 16) & 0xFF),
 		     (char) ((length >> 24) & 0xFF));
   // Envoyer le message, formatté en JSON
-  printf("{\"date\": \"%s}", msg);
+  printf("{\"date\": \"%s\"}", msg);
 }
 
