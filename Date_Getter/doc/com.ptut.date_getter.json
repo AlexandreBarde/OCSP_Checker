@@ -1,0 +1,9 @@
+{
+  "name": "com.ptut.date_getter",
+  "description": "Ping Pong",
+  "path": "/home/mathieu/CLionProjects/Native_Ping_pong/cmake-build-debug/Native_Ping_pong",
+  "type": "stdio",
+  "allowed_origins": [
+    "chrome-extension://glbeihhjiaejkchkmabpgamippoohmgcid/"
+  ]
+}

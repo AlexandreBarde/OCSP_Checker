@@ -1,0 +1,22 @@
+{
+  "description": "Envoie une url à l'application, reçoit la date",
+  "manifest_version": 2,
+  "name": "OCSP Date Getter",
+  "version": "1.0",
+  "background": {
+    "scripts": [
+      "src/addon/background.js"
+    ]
+  },
+  "icons": {
+    "128": "assets/icon.svg"
+  },
+  "browser_action": {
+    "default_icon": "assets/icon.svg"
+  },
+  "permissions": [
+    "nativeMessaging",
+    "http://*/",
+    "https://*/"
+  ]
+}

@@ -1,7 +1,0 @@
-{
-    "name": "date_getter",
-    "description": "Ceci est une description",
-    "path": "Emplacement_du_repo/Prototype/app/date_getter.py",
-    "type": "stdio",
-    "allowed_extensions": ["id@ocsp_checker"]
-}

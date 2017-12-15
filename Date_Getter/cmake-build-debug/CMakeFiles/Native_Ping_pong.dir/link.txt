@@ -1,0 +1,1 @@
+/usr/bin/cc -g   CMakeFiles/Native_Ping_pong.dir/src/app/main.c.o CMakeFiles/Native_Ping_pong.dir/include/parser.c.o CMakeFiles/Native_Ping_pong.dir/include/native_messaging.c.o CMakeFiles/Native_Ping_pong.dir/include/ocsp_stapling.c.o CMakeFiles/Native_Ping_pong.dir/include/tcp_connection.c.o  -o Native_Ping_pong /usr/lib/x86_64-linux-gnu/libgnutls.so 
