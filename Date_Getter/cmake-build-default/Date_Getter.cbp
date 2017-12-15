@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="Date_Getter"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="gcc"/>
+		<Option virtualFolders="CMake Files\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="/home/mathieu/Projet_S3/Date_Getter/cmake-build-default"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/mathieu/Projet_S3/Date_Getter/cmake-build-default/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/mathieu/Projet_S3/Date_Getter/cmake-build-default/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/mathieu/Projet_S3/Date_Getter/cmake-build-default/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/mathieu/Projet_S3/Date_Getter/cmake-build-default/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="/home/mathieu/Projet_S3/Date_Getter/cmake-build-default"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/mathieu/Projet_S3/Date_Getter/cmake-build-default/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/mathieu/Projet_S3/Date_Getter/cmake-build-default/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/mathieu/Projet_S3/Date_Getter/cmake-build-default/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/mathieu/Projet_S3/Date_Getter/cmake-build-default/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="/home/mathieu/Projet_S3/Date_Getter/cmake-build-default"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/mathieu/Projet_S3/Date_Getter/cmake-build-default/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/mathieu/Projet_S3/Date_Getter/cmake-build-default/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/mathieu/Projet_S3/Date_Getter/cmake-build-default/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/mathieu/Projet_S3/Date_Getter/cmake-build-default/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="Date_Getter">
+				<Option output="/home/mathieu/Projet_S3/Date_Getter/cmake-build-default/Date_Getter" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/mathieu/Projet_S3/Date_Getter/cmake-build-default"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/mathieu/Projet_S3/Date_Getter/src"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/mathieu/Projet_S3/Date_Getter/cmake-build-default/Makefile&quot;  VERBOSE=1 Date_Getter"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/mathieu/Projet_S3/Date_Getter/cmake-build-default/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/mathieu/Projet_S3/Date_Getter/cmake-build-default/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/mathieu/Projet_S3/Date_Getter/cmake-build-default/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="Date_Getter/fast">
+				<Option output="/home/mathieu/Projet_S3/Date_Getter/cmake-build-default/Date_Getter" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/mathieu/Projet_S3/Date_Getter/cmake-build-default"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/mathieu/Projet_S3/Date_Getter/src"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/mathieu/Projet_S3/Date_Getter/cmake-build-default/Makefile&quot;  VERBOSE=1 Date_Getter/fast"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/mathieu/Projet_S3/Date_Getter/cmake-build-default/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/mathieu/Projet_S3/Date_Getter/cmake-build-default/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/mathieu/Projet_S3/Date_Getter/cmake-build-default/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="/home/mathieu/Projet_S3/Date_Getter/src/app/main.c">
+			<Option target="Date_Getter"/>
+		</Unit>
+		<Unit filename="/home/mathieu/Projet_S3/Date_Getter/src/app/native_messaging.c">
+			<Option target="Date_Getter"/>
+		</Unit>
+		<Unit filename="/home/mathieu/Projet_S3/Date_Getter/src/app/native_messaging.h">
+			<Option target="Date_Getter"/>
+		</Unit>
+		<Unit filename="/home/mathieu/Projet_S3/Date_Getter/src/app/ocsp_stapling.c">
+			<Option target="Date_Getter"/>
+		</Unit>
+		<Unit filename="/home/mathieu/Projet_S3/Date_Getter/src/app/ocsp_stapling.h">
+			<Option target="Date_Getter"/>
+		</Unit>
+		<Unit filename="/home/mathieu/Projet_S3/Date_Getter/src/app/parser.c">
+			<Option target="Date_Getter"/>
+		</Unit>
+		<Unit filename="/home/mathieu/Projet_S3/Date_Getter/src/app/parser.h">
+			<Option target="Date_Getter"/>
+		</Unit>
+		<Unit filename="/home/mathieu/Projet_S3/Date_Getter/src/app/tcp_connection.c">
+			<Option target="Date_Getter"/>
+		</Unit>
+		<Unit filename="/home/mathieu/Projet_S3/Date_Getter/src/app/tcp_connection.h">
+			<Option target="Date_Getter"/>
+		</Unit>
+		<Unit filename="/home/mathieu/Projet_S3/Date_Getter/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>

@@ -16,6 +16,8 @@
   },
   "permissions": [
     "nativeMessaging",
+    "webNavigation",
+    "tabs",
     "http://*/",
     "https://*/"
   ]

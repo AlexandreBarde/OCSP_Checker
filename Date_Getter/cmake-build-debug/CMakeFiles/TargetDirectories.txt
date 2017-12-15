@@ -1,3 +1,0 @@
-/home/mathieu/Projet_S3/Date_Getter/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-/home/mathieu/Projet_S3/Date_Getter/cmake-build-debug/CMakeFiles/edit_cache.dir
-/home/mathieu/Projet_S3/Date_Getter/cmake-build-debug/CMakeFiles/Date_Getter.dir
