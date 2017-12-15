@@ -8,6 +8,16 @@
       "src/addon/background.js"
     ]
   },
+  "content_scripts": [
+    {
+      "js": [
+        "src/addon/content.js"
+      ],
+      "matches": [
+        "<all_urls>"
+      ]
+    }
+  ],
   "icons": {
     "128": "assets/icon.svg"
   },

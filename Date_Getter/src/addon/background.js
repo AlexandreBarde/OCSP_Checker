@@ -1,6 +1,4 @@
-// Variable qui contiendra l'adresse du dernier
-// serveur consulté
-var prec_serv;
+var prec_serv; // Dernier serveur consulté
 
 // Recupere l'adresse d'un serveur depuis une url
 function getServerAdress(url) {
@@ -12,15 +10,23 @@ function getServerAdress(url) {
     return parser.hostname;
 }
 
+// Envoie un message au content script
+function sendContent(msg) {
+    chrome.tabs.query({active: true, currentWindow: true}, function (tabs) {
+        chrome.tabs.sendMessage(tabs[0].id, {date: msg});
+    });
+}
+
 // Envoie un message à l'application native
 // et gere la réponse avec la fonction en
 // parametre
-function sendMessage(msg) {
+function sendNative(msg) {
     chrome.runtime.sendNativeMessage('com.ptut.date_getter',
         {url: msg},
         function (resp) {
             // Afficher le réponse
             console.log(resp.text);
+            sendContent(resp.text);
         })
 }
 
@@ -39,13 +45,13 @@ chrome.tabs.onUpdated.addListener(function (tabId, changeInfo) {
                 // Verifier qu'on ne soit pas toujour sur le meme serveur
                 if (hostname !== prec_serv) {
                     // Demander la date
-                    sendMessage(hostname);
+                    sendNative(hostname);
                     // Sauvegarder le serveur
                     prec_serv = hostname;
                 }
             } else {
                 // Sinon envoyer le message
-                sendMessage(hostname);
+                sendNative(hostname);
                 // Et sauvegarder le serveur
                 prec_serv = hostname;
             }
