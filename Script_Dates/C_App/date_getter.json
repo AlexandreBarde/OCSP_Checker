@@ -1,7 +1,0 @@
-{
-    "name": "date_getter",
-    "description": "Renvoie sur la sortie standard la date de maj d'une attestation OCSP",
-    "path": "/home/mathieu/Projet_S3/Script_Dates/C_App/date_getter",
-    "type": "stdio",
-    "allowed_origins": ["chrome-extension://ephenibemokabpkneimckgdkdgfgkicp/"]
-}
