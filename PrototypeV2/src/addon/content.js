@@ -50,6 +50,9 @@ function showDate(var_date) {
 
   div_titre.textContent = "Attestation OCSP trop ancienne";
 
+  // TODO: utiliser les MATHÉMATIQUES pour calculer la différence
+  // et les fonctions de Date pour pas convertir manuellement le format
+
   //Date actuelle
   dateNow = new Date();
   //Split de la date mise en paramètre
@@ -111,6 +114,7 @@ function showDate(var_date) {
   var anciennete = document.createElement('p');
   var maj = document.createElement('p');
   anciennete.id = "OCSP_check_anciennete";
+  // TODO pas afficher les mois si c'est 0 etc
   anciennete.textContent = "Dernière maj il y a: " + dateBetween.getMonth() + " mois " + (dateBetween.getDate() - 1) + " jour(s) " + dateBetween.getHours() + " heure(s)";
   div_texte.appendChild(anciennete);
   div_notif.appendChild(div_titre);

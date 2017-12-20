@@ -16,7 +16,6 @@ function sendToContent(msg) {
 
 // Gère la réponse de l'application
 var handleNativeResp = function (resp) {
-    console.log(resp.text);
     sendToContent(resp.text)
 }
 
