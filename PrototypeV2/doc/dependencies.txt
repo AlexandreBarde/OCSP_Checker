@@ -1,0 +1,3 @@
+- GnuTLS: https://www.gnutls.org/download.html 
+Si demandé pendant l'install de GnuTLS:
+- Nettle: https://ftp.gnu.org/gnu/nettle/
