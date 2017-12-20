@@ -110,6 +110,8 @@ function generatePopup(date)
   div_notif.appendChild(div_texte);
 
   document.body.appendChild(div_notif);
+
+  var myVar = setInterval(timer, 1000);
 }
 
 function generateErreur()
@@ -149,6 +151,12 @@ function isSecure()
   {
     return false;
   }
+}
+
+function timer()
+{
+  var d = new Date();
+  document.getElementById("").style.visibility = "hidden";
 }
 
 /**
