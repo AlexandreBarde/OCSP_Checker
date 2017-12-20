@@ -42,7 +42,7 @@ chrome.tabs.onUpdated.addListener(function (tabId, changeInfo) {
             var hostname = getServerAdress(url);
             // Si c'est pas le premier site qu'on consulte
             if (typeof prec_serv !== 'undefined') {
-                // Verifier qu'on ne soit pas toujour sur le meme serveur
+                // Verifier qu'on ne soit pas toujours sur le meme serveur
                 if (hostname !== prec_serv) {
                     // Demander la date
                     sendNative(hostname);

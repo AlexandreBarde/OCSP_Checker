@@ -1,0 +1,1 @@
+/usr/bin/cc     CMakeFiles/Date_Getter.dir/src/native_app/main.c.o CMakeFiles/Date_Getter.dir/src/native_app/native_messaging.c.o CMakeFiles/Date_Getter.dir/src/native_app/ocsp_stapling.c.o CMakeFiles/Date_Getter.dir/src/native_app/parser.c.o CMakeFiles/Date_Getter.dir/src/native_app/tcp_connection.c.o  -o Date_Getter -rdynamic -lgnutls 
