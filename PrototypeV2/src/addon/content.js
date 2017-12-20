@@ -1,24 +1,21 @@
 // Ecouter une connexion du background script
 chrome.runtime.onMessage.addListener(function (msg) {
-    showDate(msg.date);
+  showDate(msg.date);
 });
 
 var node = document.createElement('style');
 document.body.appendChild(node);
-window.addStyleString = function(str) {
-    node.innerHTML = str;
+window.addStyleString = function (str) {
+  node.innerHTML = str;
 };
 
 addStyleString('#OCSP_check_div_titre { border-radius: 4px 4px 0px 0px; background-color: rgba(207, 0, 15, 1); font-weight: bold; text-align: center; font-size: 20px; border: 0px; padding: 0px; margin-bottom: 0;} #OCSP_check_div_texte {background-color: rgba(217, 30, 24, 0.9); border-radius: 0px 0px 4px 4px; font-size: 18px; font-family: Arial; color: black;} #OCSP_check_div_notif { width: 400px; height: 100px; z-index: 9999; position: fixed; bottom: 5%; left: 3%; font-family: NULL; font-family: Arial; color: black;}');
-
-showDate('Dec 20 11:12:12');
 
 /**
   * Génère la popup et la fait disparaitre 10 secondes après
   * @param date Ancienneté du certificat
   */
-function showDate(var_date)
-{
+function showDate(var_date) {
 
   var div_notif = document.createElement('div');
   var div_titre = document.createElement('div');
@@ -39,8 +36,7 @@ function showDate(var_date)
   //Split de la partie des heures
   dateHeure = dateHeure.split(":");
   //Transformation des mois (ang) en chiffres
-  switch (dateTab[0])
-  {
+  switch (dateTab[0]) {
     case "Jan":
       month = "0";
       break;
@@ -77,8 +73,6 @@ function showDate(var_date)
     case "Dec":
       month = "11";
       break;
-    default:
-      break;
   }
   //Création d'une nouvelle date
   dateConvert = new Date();
@@ -91,20 +85,18 @@ function showDate(var_date)
   //On créer une nouvelle date qui est la différence entre les 2 dates
   dateBetween = new Date(dateNow - dateConvert);
   //Debug
-  console.log("Date actuelle : " + dateNow.getDate()  + "/" + (dateNow.getMonth()+1) + "/" + dateNow.getFullYear() + " " + dateNow.getHours() + ":" + dateNow.getMinutes() + ":" + dateNow.getSeconds());
-  console.log("Date OCSP : " + dateConvert.getDate() + "/" + (dateConvert.getMonth()+1) + "/" + dateConvert.getFullYear() + " " + dateConvert.getHours() + ":" + dateConvert.getMinutes() + ":" + dateConvert.getSeconds());
+  console.log("Date actuelle : " + dateNow.getDate() + "/" + (dateNow.getMonth() + 1) + "/" + dateNow.getFullYear() + " " + dateNow.getHours() + ":" + dateNow.getMinutes() + ":" + dateNow.getSeconds());
+  console.log("Date OCSP : " + dateConvert.getDate() + "/" + (dateConvert.getMonth() + 1) + "/" + dateConvert.getFullYear() + " " + dateConvert.getHours() + ":" + dateConvert.getMinutes() + ":" + dateConvert.getSeconds());
   console.log("Date : " + dateBetween.getMonth() + " mois " + (dateBetween.getDate() - 1) + " jour(s) " + dateBetween.getHours() + " heure(s)");
 
-  if(isSecure())
-  {
+  if (isSecure()) {
     var anciennete = document.createElement('p');
     var maj = document.createElement('p');
     anciennete.id = "OCSP_check_anciennete";
-    anciennete.textContent = "Date de la dernière mise à jour: " + (dateConvert.getDate() - 1) + "/" + (dateConvert.getMonth()+1) + "/" + dateConvert.getFullYear() + " à " + dateConvert.getHours() + ":" + dateConvert.getMinutes() + ":" + dateConvert.getSeconds();
+    anciennete.textContent = "Date de la dernière mise à jour: " + (dateConvert.getDate() - 1) + "/" + (dateConvert.getMonth() + 1) + "/" + dateConvert.getFullYear() + " à " + dateConvert.getHours() + ":" + dateConvert.getMinutes() + ":" + dateConvert.getSeconds();
     div_texte.appendChild(anciennete);
   }
-  else
-  {
+  else {
     var texte = document.createElement('p');
     texte.textContent = "Ce site ne possède pas de certificat SSL";
     div_texte.appendChild(texte);
@@ -115,21 +107,18 @@ function showDate(var_date)
 
   document.body.appendChild(div_notif);
 
-  var delai = setInterval(timer, 10000);
+  var delai = setInterval(timer, 200);
 }
 
 /**
  * Vérification du protocole
  * @returns {boolean} Si le site web utilise le protocole SSL
  */
-function isSecure()
-{
-  if(location.protocol == 'https:')
-  {
+function isSecure() {
+  if (location.protocol == 'https:') {
     return true;
   }
-  else
-  {
+  else {
     return false;
   }
 }
@@ -138,8 +127,7 @@ function isSecure()
   *
   * Permet de cacher la popup au bout d'un certain temps
   */
-function timer()
-{
+function timer() {
   var d = new Date();
   document.getElementById("OCSP_check_div_notif").style.visibility = "hidden";
 }
