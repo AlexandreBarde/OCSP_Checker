@@ -120,18 +120,6 @@ function showDate(var_date) {
 }
 
 /**
- * Vérification du protocole
- * @returns {boolean} Si le site web utilise le protocole SSL
- */
-function isSecure() {
-  if (location.protocol == 'https:') {
-    return true;
-  } else {
-    return false;
-  }
-}
-
-/**
  *
  * Permet de cacher la popup au bout d'un certain temps
  */

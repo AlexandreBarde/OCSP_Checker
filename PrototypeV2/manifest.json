@@ -28,7 +28,6 @@
     "nativeMessaging",
     "webNavigation",
     "tabs",
-    "http://*/",
     "https://*/"
   ]
 }
