@@ -22,7 +22,9 @@
     "128": "assets/icons/icon.png"
   },
   "browser_action": {
-    "default_icon": "assets/icons/icon.png"
+    "default_icon": "assets/icons/icon.png",
+    "default_title": "OCSP Checker",
+    "default_popup": "src/extension.html"
   },
   "permissions": [
     "nativeMessaging",
