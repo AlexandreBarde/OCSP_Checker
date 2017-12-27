@@ -57,10 +57,7 @@ chrome.tabs.onUpdated.addListener(function (tabId, changeInfo) {
 function isFollowed(url) {
     if (storageAvailable('localStorage')) {
         var site = localStorage.getItem(new String(convertURL(url, false)));
-        if(site == null) {
-            return false;
-        }
-        return true;
+        return site != null;
     } else {
         console.error("[ error ] The local storage isn't available.");
         return null;
