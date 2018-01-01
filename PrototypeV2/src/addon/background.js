@@ -1,5 +1,29 @@
 var prec_serv; // Dernier serveur consulté
 
+// Enregistrement des événements sur le div
+document.getElementById("OCSP_circle").addEventListener("click", showNotif);
+
+// Affiche la popup
+function showNotif()
+{
+  document.getElementById("OCSP_check_div_notif").style.visibility = "visible";
+  document.getElementById("OCSP_circle").style.visibility = "hidden";
+  var delai = setInterval(timer, 5000);
+}
+
+// Cache la popup
+function hideNotif()
+{
+  document.getElementById("OCSP_check_div_notif").style.visibility = "hidden";
+  document.getElementById("OCSP_circle").style.visibility = "visible";
+}
+
+// Minuteur
+function timer()
+{
+  hideNotif();
+}
+
 // Recupere l'adresse d'un serveur depuis une url
 function getServerAdress(url) {
     var parser = document.createElement('a');

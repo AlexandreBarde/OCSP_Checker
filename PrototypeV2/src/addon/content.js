@@ -38,15 +38,42 @@ function showDate(var_date) {
                   font-family: NULL;\
                   font-family: Arial;\
                   color: black;\
-                 }');
+                }\
+                #OCSP_circle {\
+                 background-color: rgba(217, 30, 24, 0.9);\
+                 visibility: hidden;\
+                 width: 50px;\
+                 height: 50px;\
+                 z-index: 9999;\
+                 border-radius: 50%;\
+                 position: fixed;\
+                 bottom: 5%;\
+                 left: 3%;\
+                 font-family: NULL;\
+                 font-family: Arial;\
+                 color: black;\
+                 cursor: pointer;\
+               }\
+               #OCSP_circle:hover\
+               {\
+                 width: 52px;\
+                 height: 52px;\
+                 bottom: 4.9%;\
+                 left: 2.9%;\
+               }');
 
   var div_notif = document.createElement('div');
   var div_titre = document.createElement('div');
   var div_texte = document.createElement('div');
 
+  var div_circle = document.createElement('div');
+
   div_notif.id = "OCSP_check_div_notif";
   div_titre.id = "OCSP_check_div_titre";
   div_texte.id = "OCSP_check_div_texte";
+
+  div_circle.id = "OCSP_circle";
+
 
   div_titre.textContent = "Attestation OCSP trop ancienne";
 
@@ -86,7 +113,7 @@ function showDate(var_date) {
       month = "06";
       break;
     case "Aug":
-      month = "07"
+      month = "07";
       break;
     case "Sep":
       month = "08";
@@ -120,13 +147,29 @@ function showDate(var_date) {
   div_notif.appendChild(div_titre);
   div_notif.appendChild(div_texte);
   document.body.appendChild(div_notif);
-  var delai = setInterval(timer, 50000);
+  document.body.appendChild(div_circle);
+  var delai = setInterval(timer, 1000);
 }
 
 /**
  *
  * Permet de cacher la popup au bout d'un certain temps
  */
-function timer() {
+function timer()
+{
+  hideNotif();
+}
+
+function showNotif()
+{
+  document.getElementById("OCSP_check_div_notif").style.visibility = "visible";
+  document.getElementById("OCSP_circle").style.visibility = "hidden";
+  alert("ok");
+}
+
+function hideNotif()
+{
   document.getElementById("OCSP_check_div_notif").style.visibility = "hidden";
+  document.getElementById("OCSP_circle").style.visibility = "visible";
+  alert("ok2");
 }
