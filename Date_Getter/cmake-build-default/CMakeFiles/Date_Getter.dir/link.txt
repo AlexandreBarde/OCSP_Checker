@@ -1,1 +1,0 @@
-/usr/bin/cc    CMakeFiles/Date_Getter.dir/src/app/main.c.o CMakeFiles/Date_Getter.dir/src/app/native_messaging.c.o CMakeFiles/Date_Getter.dir/src/app/ocsp_stapling.c.o CMakeFiles/Date_Getter.dir/src/app/parser.c.o CMakeFiles/Date_Getter.dir/src/app/tcp_connection.c.o  -o Date_Getter /usr/lib/x86_64-linux-gnu/libgnutls.so 

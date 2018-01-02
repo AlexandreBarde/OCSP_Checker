@@ -1,4 +1,0 @@
-/home/mathieu/build/clion-2017.3/bin/cmake/bin/cmake -DCMAKE_BUILD_TYPE= -G "CodeBlocks - Unix Makefiles" /home/mathieu/Projet_S3/Date_Getter
--- Configuring done
--- Generating done
--- Build files have been written to: /home/mathieu/Projet_S3/Date_Getter/cmake-build-default
