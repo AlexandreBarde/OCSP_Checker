@@ -16,6 +16,8 @@ document.addEventListener("click", function(e) {
         chrome.tabs.query({'active': true, 'lastFocusedWindow': true}, function (tabs) {
             addSite(tabs[0].url, 20);
             updateSiteState(tabs[0].url, false);
+            // Recharge la page pour afficher la notif
+            chrome.tabs.reload();
         });
     // Unfollow Site button
     } else if (e.target.classList.contains("followed")) {

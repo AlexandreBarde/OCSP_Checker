@@ -1,7 +1,7 @@
 /**
- * Permite to follow a website
+ * Permite (eh) to follow a website
  * @param url the url of the website
- * @param time the time max for a certificate validity
+ * @param time the time max (eh) for a certificate validity
  */
 function addSite(url, time) {
     if (storageAvailable('localStorage')) {
@@ -12,14 +12,14 @@ function addSite(url, time) {
 }
 
 /**
- * Get informations about a stocked website
- * @param url the url of the website
- * @returns an array of values, first value correspond to the url of the website, the second to the time max for a certificate validity
+ * Get informations about a stocked (eh) website
+ * @param url the url of the website (eh)
+ * @returns an array of values, first value correspond (eh) to the url of the website, the second to the time max (eh) for a certificate validity
  */
 function getSite(url) {
     if (storageAvailable('localStorage')) {
         var site = localStorage.getItem(new String(convertURL(url, false)));
-        if(site == null) {
+        if (site == null) {
             return null;
         }
         return site.split('#');
@@ -35,7 +35,7 @@ function getSite(url) {
  * @param init a boolean (true if the function is used for the initialization of the page)
  */
 function printSites(element, init) {
-    if(!init) {
+    if (!init) {
         element.innerHTML = "";
     }
     if (storageAvailable('localStorage')) {
@@ -46,13 +46,13 @@ function printSites(element, init) {
         header.insertCell(2).innerHTML += "Nb jours max (20 par défaut)";
 
         var line;
-        for(var i = 0; i < localStorage.length; i++) {
+        for (var i = 0; i < localStorage.length; i++) {
             line = element.insertRow(-1);
             line.insertCell(0).innerHTML += convertURL(localStorage.getItem(localStorage.key(i)), false);
             line.insertCell(1).innerHTML += getSite(localStorage.getItem(localStorage.key(i)))[0];
             line.insertCell(2).innerHTML += getSite(localStorage.getItem(localStorage.key(i)))[1];
         }
-        if(localStorage.length == 0) {
+        if (localStorage.length == 0) {
             line = element.insertRow(-1);
             line.insertCell(0).innerHTML += "";
             line.insertCell(1).innerHTML += "Aucun site tracké.";
@@ -64,7 +64,7 @@ function printSites(element, init) {
 }
 
 /**
- * Delete a stocked website
+ * Delete a stocked (eh) website
  * @param url the url of the website
  */
 function removeSite(url) {
@@ -76,7 +76,7 @@ function removeSite(url) {
 }
 
 /**
- * Delete all stocked websites
+ * Delete all stocked (eh) websites
  */
 function removeAllSites() {
     if (storageAvailable('localStorage')) {
@@ -87,7 +87,7 @@ function removeAllSites() {
 }
 
 /**
- * Permite to know if the local storage is available
+ * Permite (eh) to know if the local storage is available
  * @param type the local storage
  * @returns {boolean} true if its available
  */
@@ -99,7 +99,7 @@ function storageAvailable(type) {
         storage.removeItem(x);
         return true;
     }
-    catch(e) {
+    catch (e) {
         return false;
     }
 }

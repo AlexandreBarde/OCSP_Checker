@@ -35,7 +35,7 @@ chrome.tabs.onUpdated.addListener(function (tabId, changeInfo) {
             var hostname = getServerAdress(url);
             if (isFollowed(url)) {
                 if (typeof prec_serv !== 'undefined') {
-                    // Si le site n'est pas le même que le denier consulté
+                    // Si le site n'est pas le même que le dernier consulté
                     if (hostname !== prec_serv) {
                         sendNative(hostname);
                         prec_serv = hostname;
@@ -67,6 +67,9 @@ function isFollowed(url) {
 /**
  * Cette fonction a vraiment un visage disgracieux, et elle est déclarée deux fois,
  * mais quand j'essaie de la remplacer ça marche plus, embêtant
+ * 
+ * 
+ * 
  * Convert an url (with https://www.* /) in a "pingable" url
  * @param url the url to convert
  * @param ext a boolean

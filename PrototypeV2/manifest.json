@@ -13,6 +13,9 @@
       "js": [
         "src/addon/content.js"
       ],
+      "css": [
+        "src/addon/style/popup.css"
+      ],
       "matches": [
         "<all_urls>"
       ]
