@@ -1,5 +1,6 @@
 #OCSP_check_div_titre {
     border-radius: 4px 4px 0px 0px;
+    padding-bottom: 2px;
     background-color: rgba(207, 0, 15, 1);
     font-weight: bold;
     text-align: center;
@@ -10,7 +11,8 @@
 }
 
 #OCSP_check_div_texte {
-    background-color: rgba(217, 30, 24, 0.9);
+    padding: 4px;
+    background-color: rgba(217, 30, 24, 0.95);
     border-radius: 0px 0px 4px 4px;
     font-size: 18px;
     font-family: Arial;
@@ -24,7 +26,6 @@
     position: fixed;
     bottom: 5%;
     left: 3%;
-    font-family: NULL;
     font-family: Arial;
     color: black;
 }
@@ -39,8 +40,6 @@
     position: fixed;
     bottom: 5%;
     left: 3%;
-    font-family: NULL;
-    font-family: Arial;
     color: black;
     cursor: pointer;
 }

@@ -32,7 +32,7 @@ function showDate(var_date) {
   var anciennete = document.createElement('p');
   var maj = document.createElement('p');
   anciennete.id = "OCSP_check_anciennete";
-  anciennete.textContent = `Dernière mise à jour il y a ${dateDiff(new Date(var_date), new Date())}`;
+  anciennete.textContent = `Mise à jour il y a ${dateDiff(new Date(var_date), new Date())}`;
   div_texte.appendChild(anciennete);
   div_notif.appendChild(div_titre);
   div_notif.appendChild(div_texte);
