@@ -5,7 +5,11 @@ var div_notif
 
 // Ecouter une connexion du background script
 chrome.runtime.onMessage.addListener(function (msg) {
-  showDate(msg.date);
+  // Verifier qu'on ai bien reçu une date
+  if (!isNaN(Date.parse(msg.date)))
+    showDate(msg.date);
+  else
+    console.log('Impossible de recuperer l\'attestation: ' + msg.date);
 });
 
 // Créer le cercle persistant
