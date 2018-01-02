@@ -2,7 +2,7 @@
 #include "native_messaging.h"
 #include "ocsp_stapling.h"
 
-#define MAX_MSG_LEN 1024
+#define MAX_MSG_LEN 2048
 
 int main() {
     // Buffer qui contiendra la date

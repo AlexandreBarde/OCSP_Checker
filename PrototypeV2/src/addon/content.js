@@ -1,20 +1,25 @@
+// Les variable declarées en dehors d'un bloc ont une portée globale
+var div_circle
+var div_notif
+var div_notif
+
+
 // Ecouter une connexion du background script
 chrome.runtime.onMessage.addListener(function (msg) {
   showDate(msg.date);
 });
 
-// En declarant en dehors d'un bloc, div_circle à une portée globale
-// par contre elle est créée sur toutes les pages
-var div_circle = document.createElement('div');
+// Créer le cercle persistant
+div_circle = document.createElement('div');
 div_circle.id = "OCSP_circle";
 // Attendre un click sur le cercle et montrer la notification
-div_circle.addEventListener('click', function() {
+div_circle.addEventListener('click', function () {
   showNotif()
 })
 
 /**
  * Génère la popup et la fait disparaitre 10 secondes après
- * @param date Ancienneté du certificat
+ * @param var_date Ancienneté du certificat
  */
 function showDate(var_date) {
   var node = document.createElement('style');
@@ -71,8 +76,8 @@ function showDate(var_date) {
                  left: 2.9%;\
                }');
 
-  var div_notif = document.createElement('div');
-  var div_titre = document.createElement('div');
+  div_notif = document.createElement('div');
+  div_titre = document.createElement('div');
   var div_texte = document.createElement('div');
 
 
@@ -143,13 +148,13 @@ function showDate(var_date) {
   dateConvert.setMinutes(dateHeure[1]);
   dateConvert.setSeconds(dateHeure[2]);
   dateConvert.setMonth(month);
+  var testDate = new Date(var_date);
   //On créer une nouvelle date qui est la différence entre les 2 dates
   dateBetween = new Date(dateNow - dateConvert);
   var anciennete = document.createElement('p');
   var maj = document.createElement('p');
   anciennete.id = "OCSP_check_anciennete";
-  // TODO pas afficher les mois si c'est 0 etc
-  anciennete.textContent = "Dernière maj il y a: " + dateBetween.getMonth() + " mois " + (dateBetween.getDate() - 1) + " jour(s) " + dateBetween.getHours() + " heure(s)";
+  anciennete.textContent = "Dernière maj il y a: " + formatDelay(dateBetween);
   div_texte.appendChild(anciennete);
   div_notif.appendChild(div_titre);
   div_notif.appendChild(div_texte);
@@ -167,11 +172,25 @@ function timer() {
 }
 
 function showNotif() {
-  document.getElementById("OCSP_check_div_notif").style.visibility = "visible";
+  div_notif.style.visibility = "visible";
   div_circle.style.visibility = "hidden";
 }
 
 function hideNotif() {
-  document.getElementById("OCSP_check_div_notif").style.visibility = "hidden";
+  div_notif.style.visibility = "hidden";
   div_circle.style.visibility = "visible";
+}
+
+/**
+ * Supprime les parties à 0 d'une date 
+ * @param {Date} delay 
+ */
+function formatDelay(delay) {
+  var formatted = "";
+  if (delay.getMonth() > 0)
+    formatted += delay.getMonth() + ' mois ';
+  if (delay.getDay() > 0)
+    formatted += delay.getDay() + ' jours ';
+  formatted += delay.getHours() + ' heures';
+  return formatted;
 }
