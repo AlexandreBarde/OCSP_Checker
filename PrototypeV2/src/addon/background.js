@@ -1,29 +1,5 @@
 var prec_serv; // Dernier serveur consulté
 
-// Enregistrement des événements sur le div
-document.getElementById("OCSP_circle").addEventListener("click", showNotif);
-
-// Affiche la popup
-function showNotif()
-{
-  document.getElementById("OCSP_check_div_notif").style.visibility = "visible";
-  document.getElementById("OCSP_circle").style.visibility = "hidden";
-  var delai = setInterval(timer, 5000);
-}
-
-// Cache la popup
-function hideNotif()
-{
-  document.getElementById("OCSP_check_div_notif").style.visibility = "hidden";
-  document.getElementById("OCSP_circle").style.visibility = "visible";
-}
-
-// Minuteur
-function timer()
-{
-  hideNotif();
-}
-
 // Recupere l'adresse d'un serveur depuis une url
 function getServerAdress(url) {
     var parser = document.createElement('a');
@@ -89,6 +65,8 @@ function isFollowed(url) {
 }
 
 /**
+ * Cette fonction a vraiment un visage disgracieux, et elle est déclarée deux fois,
+ * mais quand j'essaie de la remplacer ça marche plus, embêtant
  * Convert an url (with https://www.* /) in a "pingable" url
  * @param url the url to convert
  * @param ext a boolean
@@ -97,7 +75,7 @@ function isFollowed(url) {
  * @returns the URL as a String
  */
 function convertURL(url, ext) {
-    if(url.indexOf("/") >= 0){
+    if (url.indexOf("/") >= 0) {
         var sl = url.split('/');
         if (sl[2].substring(0, 4) == "www.") {
             sl[2] = sl[2].substring(4, sl[2].length);
@@ -106,8 +84,8 @@ function convertURL(url, ext) {
     } else {
         var value = url;
     }
-    if(ext == false) {
-        value = value.substring(0, value.length - value.split('.')[value.split('.').length-1].length - 1);
+    if (ext == false) {
+        value = value.substring(0, value.length - value.split('.')[value.split('.').length - 1].length - 1);
     }
     return value;
 }
@@ -125,7 +103,7 @@ function storageAvailable(type) {
         storage.removeItem(x);
         return true;
     }
-    catch(e) {
+    catch (e) {
         return false;
     }
 }

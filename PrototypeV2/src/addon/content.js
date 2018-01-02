@@ -1,9 +1,16 @@
-console.log('ah')
-
 // Ecouter une connexion du background script
 chrome.runtime.onMessage.addListener(function (msg) {
   showDate(msg.date);
 });
+
+// En declarant en dehors d'un bloc, div_circle à une portée globale
+// par contre elle est créée sur toutes les pages
+var div_circle = document.createElement('div');
+div_circle.id = "OCSP_circle";
+// Attendre un click sur le cercle et montrer la notification
+div_circle.addEventListener('click', function() {
+  showNotif()
+})
 
 /**
  * Génère la popup et la fait disparaitre 10 secondes après
@@ -68,13 +75,11 @@ function showDate(var_date) {
   var div_titre = document.createElement('div');
   var div_texte = document.createElement('div');
 
-  var div_circle = document.createElement('div');
 
   div_notif.id = "OCSP_check_div_notif";
   div_titre.id = "OCSP_check_div_titre";
   div_texte.id = "OCSP_check_div_texte";
 
-  div_circle.id = "OCSP_circle";
 
 
   div_titre.textContent = "Attestation OCSP trop ancienne";
@@ -157,21 +162,16 @@ function showDate(var_date) {
  *
  * Permet de cacher la popup au bout d'un certain temps
  */
-function timer()
-{
+function timer() {
   hideNotif();
 }
 
-function showNotif()
-{
+function showNotif() {
   document.getElementById("OCSP_check_div_notif").style.visibility = "visible";
-  document.getElementById("OCSP_circle").style.visibility = "hidden";
-  alert("ok");
+  div_circle.style.visibility = "hidden";
 }
 
-function hideNotif()
-{
+function hideNotif() {
   document.getElementById("OCSP_check_div_notif").style.visibility = "hidden";
-  document.getElementById("OCSP_circle").style.visibility = "visible";
-  alert("ok2");
+  div_circle.style.visibility = "visible";
 }
