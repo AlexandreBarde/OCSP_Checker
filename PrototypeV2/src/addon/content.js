@@ -3,7 +3,6 @@ var div_circle
 var div_notif
 var div_notif
 
-
 // Ecouter une connexion du background script
 chrome.runtime.onMessage.addListener(function (msg) {
   showDate(msg.date);
@@ -88,87 +87,17 @@ function showDate(var_date) {
 
 
   div_titre.textContent = "Attestation OCSP trop ancienne";
-
-  // TODO: utiliser les MATHÉMATIQUES pour calculer la différence
-  // et les fonctions de Date pour pas convertir manuellement le format
-
-  //Date actuelle
-  dateNow = new Date();
-  //Split de la date mise en paramètre
-  dateTab = var_date.split(" ");
-  //On récupère la partie des heures
-  dateHeure = dateTab[2];
-  //Split de la partie des heures
-  dateHeure = dateHeure.split(":");
-  //Transformation des mois (ang) en chiffres
-  switch (dateTab[0]) {
-    case "Jan":
-      month = "0";
-      break;
-    case "Feb":
-      month = "01";
-      break;
-    case "Mar":
-      month = "02";
-      break;
-    case "Apr":
-      month = "03";
-      break;
-      beaut
-    case "May":
-      month = "04";
-      break;
-    case "Jun":
-      month = "05";
-      break;
-    case "Jul":
-      month = "06";
-      break;
-    case "Aug":
-      month = "07";
-      break;
-    case "Sep":
-      month = "08";
-      break;
-    case "Oct":
-      month = "09";
-      break;
-    case "Nov":
-      month = "10";
-      break;
-    case "Dec":
-      month = "11";
-      break;
-  }
-  //Création d'une nouvelle date
-  dateConvert = new Date();
-  //Attribution des valeurs de la date passée en paramètre dans notre nouvelle date
-  dateConvert.setDate(dateTab[1]);
-  dateConvert.setHours(dateHeure[0]);
-  dateConvert.setMinutes(dateHeure[1]);
-  dateConvert.setSeconds(dateHeure[2]);
-  dateConvert.setMonth(month);
-  var testDate = new Date(var_date);
   //On créer une nouvelle date qui est la différence entre les 2 dates
-  dateBetween = new Date(dateNow - dateConvert);
   var anciennete = document.createElement('p');
   var maj = document.createElement('p');
   anciennete.id = "OCSP_check_anciennete";
-  anciennete.textContent = "Dernière maj il y a: " + formatDelay(dateBetween);
+  anciennete.textContent = `Dernière mise à jours il y à ${dateDiff(new Date(var_date), new Date())}`;
   div_texte.appendChild(anciennete);
   div_notif.appendChild(div_titre);
   div_notif.appendChild(div_texte);
   document.body.appendChild(div_notif);
   document.body.appendChild(div_circle);
-  var delai = setInterval(timer, 1000);
-}
-
-/**
- *
- * Permet de cacher la popup au bout d'un certain temps
- */
-function timer() {
-  hideNotif();
+  var delai = setInterval(hideNotif, 1000);
 }
 
 function showNotif() {
@@ -182,15 +111,42 @@ function hideNotif() {
 }
 
 /**
- * Supprime les parties à 0 d'une date 
- * @param {Date} delay 
+ * Retourne un string formatté de la différence
+ * entre 2 dates
+ * @param {Date} d1 
+ * @param {Date} d2 
  */
-function formatDelay(delay) {
-  var formatted = "";
-  if (delay.getMonth() > 0)
-    formatted += delay.getMonth() + ' mois ';
-  if (delay.getDay() > 0)
-    formatted += delay.getDay() + ' jours ';
-  formatted += delay.getHours() + ' heures';
-  return formatted;
+function dateDiff(d1, d2) {
+  // Différence totale en secondes
+  var millis = (Math.abs(d2.getTime() - d1.getTime()));
+  // Jours
+  var days = millis / (1000 * 60 * 60 * 24);
+  var arrond_days = Math.floor(days);
+  var d = arrond_days > 9 ? arrond_days : '0' + arrond_days;
+  // Heures
+  var hours = (days - arrond_days) * 24
+  var arrond_hours = Math.floor(hours);
+  var h = arrond_hours > 9 ? arrond_hours : '0' + arrond_hours;
+  // Minutes
+  var minutes = (hours - arrond_hours) * 60;
+  var arrond_minutes = Math.floor(minutes);
+  var m = arrond_minutes > 9 ? arrond_minutes : '0' + arrond_minutes;
+  // Secondes
+  var seconds = (minutes - arrond_minutes) * 60;
+  var arrond_seconds = Math.floor(seconds);
+  var s = arrond_seconds > 9 ? arrond_seconds : '0' + arrond_seconds;
+  // Formatter le message pour ne pas inclure les unites à 0
+  var str = "";
+  var elems = {
+    "jours": d,
+    "heures": h,
+    "minutes": m,
+    "secondes": s
+  };
+  for (el in elems) {
+    if (elems[el] != '00') {
+      str += `${elems[el]} ${[el]} `;
+    }
+  }
+  return str;
 }
