@@ -1,8 +1,6 @@
 /**
  * MANIPULATION DE LA PAGE
  */
-
-
 var div_notif
 var div_notif
 
@@ -36,7 +34,10 @@ function showDate(var_date) {
   div_notif.appendChild(div_titre);
   div_notif.appendChild(div_texte);
   document.body.appendChild(div_notif);
-  var delai = setInterval(hideNotif, 2000);
+  // Montrer la notification
+  showNotif();
+  // La cacher après un temps défini
+  setTimeout(hideNotif, 2500);
 }
 
 function showNotif() {
