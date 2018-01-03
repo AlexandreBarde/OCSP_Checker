@@ -4,16 +4,21 @@
 
 // Nom d'hôte du site précedemment consulté
 var old_hostname
+// Vrai quand l'appel vient d'un ajout/ d'une modification dans la liste
+var click
 
 // Ecouter les mises à jour des pages
 chrome.tabs.onUpdated.addListener(function (tabId, changeInfo) {
     if (changeInfo.status === 'complete') {
+        click = false
         transfer_date()
     }
 })
 
 // Ecouter les message du content script
 chrome.runtime.onMessage.addListener(function () {
+    // Il s'agit d'un message, afficher de nouveau la notification
+    click = true
     transfer_date()
 })
 
@@ -24,8 +29,8 @@ chrome.runtime.onMessage.addListener(function () {
  */
 function getUpdate(tabs) {
     var hostname = getHostname(tabs[0].url)
-    // Si on est pas sur le même site qu'avant
-    if (typeof old_hostname === 'undefined' || old_hostname !== hostname) {
+    // Si on est pas sur le même site qu'avant // ou qu'on vient de suivre/modifier le site
+    if (typeof old_hostname === 'undefined' || old_hostname !== hostname || click) {
         // Sauvegarder le site courant
         old_hostname = hostname
         // Si ce site est suivi

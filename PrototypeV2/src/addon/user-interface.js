@@ -19,7 +19,7 @@ document.addEventListener("click", function (e) {
     // Si on a cliqué sur suivre
     if (e.target.classList.contains("notfollowed")) {
         // On doit passer l'entrée de l'utilisateur en millisecondes
-        var duree = prompt("Combien de millisecondes ?")
+        var duree = prompt("Combien de millisecondes mon super pote ?")
         addSite(url, duree);
         updateSiteState(url);
         // Envoyer une demande à l'application native via la background script 
@@ -51,7 +51,7 @@ function updateSiteState(url, init = false) {
             track.innerHTML = "<strong>Site suivi: </strong>État : [todefine]"
                 + "<button type=\"button\" class=\"btn btn-link btn-sm followed\">Ne plus suivre</button>";
         }
-        printSites(document.getElementById('sites'), init);
+        printSites(init);
     } else {
         track.className = "alert alert-danger";
         track.innerHTML = "<strong>Erreur: </strong>Les sites suivis sont indisponibles.";
@@ -59,11 +59,12 @@ function updateSiteState(url, init = false) {
 }
 
 /**
- * Print all data into a HTML table
- * @param element the HTML table
- * @param init a boolean (true if the function is used for the initialization of the page)
+ * Affiche la liste des sites dans un tableau
+ * @param element
+ * @param {boolean} init 
  */
-function printSites(element, init) {
+function printSites(init) {
+    var element = document.getElementById('sites')
     if (!init) {
         element.innerHTML = "";
     }
