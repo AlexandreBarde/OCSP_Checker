@@ -1,13 +1,23 @@
 /**
+ *  Retourne le nom d'hote d'une url donnée 
+ * @param {String} url 
+ */
+function getHostname(url) {
+    var parser = document.createElement('a')
+    parser.href = url
+    return parser.hostname
+}
+
+/** 
  * Permite (eh) to follow a website
  * @param url the url of the website
  * @param time the time max (eh) for a certificate validity
  */
 function addSite(url, time) {
     if (storageAvailable('localStorage')) {
-        localStorage.setItem(new String(convertURL(url, false)), url + "#" + time);
+        localStorage.setItem(getHostname(url), time);
     } else {
-        console.error("[ error ] The local storage isn't available.");
+        storageUnavailableError()
     }
 }
 
@@ -18,11 +28,11 @@ function addSite(url, time) {
  */
 function getSite(url) {
     if (storageAvailable('localStorage')) {
-        var site = localStorage.getItem(new String(convertURL(url, false)));
+        var site = localStorage.getItem(getHostname(url));
         if (site == null) {
             return null;
         }
-        return site.split('#');
+        return site
     } else {
         console.error("[ error ] The local storage isn't available.");
         return null;
@@ -42,24 +52,19 @@ function printSites(element, init) {
 
         var header = element.insertRow(-1);
         header.insertCell(0).innerHTML += "Site";
-        header.insertCell(1).innerHTML += "Adresse (URL)";
-        header.insertCell(2).innerHTML += "Nb jours max (20 par défaut)";
-
+        header.insertCell(1).innerHTML += "Ancienneté";
         var line;
         for (var i = 0; i < localStorage.length; i++) {
             line = element.insertRow(-1);
-            line.insertCell(0).innerHTML += convertURL(localStorage.getItem(localStorage.key(i)), false);
-            line.insertCell(1).innerHTML += getSite(localStorage.getItem(localStorage.key(i)))[0];
-            line.insertCell(2).innerHTML += getSite(localStorage.getItem(localStorage.key(i)))[1];
+            line.insertCell(0).innerHTML += localStorage.key(i)
+            line.insertCell(1).innerHTML += localStorage.getItem(localStorage.key(i))
         }
         if (localStorage.length == 0) {
             line = element.insertRow(-1);
-            line.insertCell(0).innerHTML += "";
-            line.insertCell(1).innerHTML += "Aucun site tracké.";
-            line.insertCell(2).innerHTML += "";
+            line.insertCell(0).innerHTML += "Aucun site suivi.";
         }
     } else {
-        console.error("[ error ] The local storage isn't available.");
+        storageUnavailableError()
     }
 }
 
@@ -69,9 +74,9 @@ function printSites(element, init) {
  */
 function removeSite(url) {
     if (storageAvailable('localStorage')) {
-        localStorage.removeItem(new String(convertURL(url, false)));
+        localStorage.removeItem(getHostname(url));
     } else {
-        console.error("[ error ] The local storage isn't available.");
+        storageUnavailableError();
     }
 }
 
@@ -82,7 +87,7 @@ function removeAllSites() {
     if (storageAvailable('localStorage')) {
         localStorage.clear();
     } else {
-        console.error("[ error ] The local storage isn't available.");
+        storageUnavailableError();
     }
 }
 
@@ -102,4 +107,8 @@ function storageAvailable(type) {
     catch (e) {
         return false;
     }
+}
+
+function storageUnavailableError() {
+    console.error("[ error ] The local storage isn't available.");
 }

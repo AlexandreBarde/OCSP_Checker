@@ -57,7 +57,8 @@ function hideNotif() {
 
 /**
  * Retourne un string formatté de la différence
- * entre 2 dates
+ * entre 2 dates avec jours heures minutes et secondes
+ * si non nuls
  * @param {Date} d1 
  * @param {Date} d2 
  */
