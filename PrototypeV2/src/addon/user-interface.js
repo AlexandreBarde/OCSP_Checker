@@ -1,3 +1,8 @@
+/**
+ * CONTIENT LA LOGIQUE LIÉE AUX ACTIONS DE L'UTILISATEUR
+ * ET A LA PRESENTATION DES DONNEES
+ */
+
 // URL du site courant
 var url
 
@@ -13,7 +18,9 @@ chrome.tabs.query({ 'active': true, 'lastFocusedWindow': true }, function (tabs)
 document.addEventListener("click", function (e) {
     // Si on a cliqué sur suivre
     if (e.target.classList.contains("notfollowed")) {
-        addSite(url, 20);
+        // On doit passer l'entrée de l'utilisateur en millisecondes
+        var duree = prompt("Combien de millisecondes ?")
+        addSite(url, duree);
         updateSiteState(url);
         // Envoyer une demande à l'application native via la background script 
         chrome.runtime.sendMessage({ query: 'sendURL' });
@@ -34,7 +41,7 @@ document.addEventListener("click", function (e) {
  */
 function updateSiteState(url, init = false) {
     var track = document.getElementById('info_tracking');
-    if (storageAvailable('localStorage')) {
+    if (storageAvailable()) {
         if (getSite(url) == null) {
             track.className = "alert alert-warning";
             track.innerHTML = "<strong>Attention: </strong>Ce site n'est pas suivi par OCSP Checker. "
@@ -48,5 +55,33 @@ function updateSiteState(url, init = false) {
     } else {
         track.className = "alert alert-danger";
         track.innerHTML = "<strong>Erreur: </strong>Les sites suivis sont indisponibles.";
+    }
+}
+
+/**
+ * Print all data into a HTML table
+ * @param element the HTML table
+ * @param init a boolean (true if the function is used for the initialization of the page)
+ */
+function printSites(element, init) {
+    if (!init) {
+        element.innerHTML = "";
+    }
+    if (storageAvailable()) {
+        var header = element.insertRow(-1);
+        header.insertCell(0).innerHTML += "Site";
+        header.insertCell(1).innerHTML += "Ancienneté";
+        var line;
+        for (var i = 0; i < localStorage.length; i++) {
+            line = element.insertRow(-1);
+            line.insertCell(0).innerHTML += localStorage.key(i)
+            line.insertCell(1).innerHTML += localStorage.getItem(localStorage.key(i))
+        }
+        if (localStorage.length == 0) {
+            line = element.insertRow(-1);
+            line.insertCell(0).innerHTML += "Aucun site suivi.";
+        }
+    } else {
+        storageUnavailableError()
     }
 }

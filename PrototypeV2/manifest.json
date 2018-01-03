@@ -4,6 +4,7 @@
   "name": "OCSP Checker",
   "version": "2.0",
   "background": {
+    "persistent": true,
     "scripts": [
       "src/addon/background.js"
     ]

@@ -1,3 +1,8 @@
+/**
+ * MANIPULATION DE LA PAGE
+ */
+
+
 // Les variable declarées en dehors d'un bloc ont une portée globale
 var div_circle
 var div_notif

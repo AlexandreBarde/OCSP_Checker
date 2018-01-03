@@ -1,3 +1,10 @@
+/**
+ * GESTION DE LA COMMUNICATION AVEC L'APPLICATION NATIVE
+ */
+
+// Nom d'hôte du site précedemment consulté
+var old_hostname
+
 // Ecouter les mises à jour des pages
 chrome.tabs.onUpdated.addListener(function (tabId, changeInfo) {
     if (changeInfo.status === 'complete') {
@@ -17,11 +24,20 @@ chrome.runtime.onMessage.addListener(function () {
  */
 function getUpdate(tabs) {
     var hostname = getHostname(tabs[0].url)
-    if (isFollowed(hostname)) {
-        chrome.runtime.sendNativeMessage('com.ptut.date_getter', { url: hostname }, function (response) {
-            if (typeof response !== 'undefined')
-                chrome.tabs.sendMessage(tabs[0].id, { date: response.text })
-        })
+    // Si on est pas sur le même site qu'avant
+    if (typeof old_hostname === 'undefined' || old_hostname !== hostname) {
+        // Sauvegarder le site courant
+        old_hostname = hostname
+        // Si ce site est suivi
+        if (isFollowed(hostname)) {
+            chrome.runtime.sendNativeMessage('com.ptut.date_getter', { url: hostname }, function (response) {
+                if (typeof response !== 'undefined') {
+                    // Si l'ancienneté est critique, envoyer un message au content script
+                    if (isCritical(response.text, localStorage.getItem(hostname)))
+                        chrome.tabs.sendMessage(tabs[0].id, { date: response.text })
+                }
+            })
+        }
     }
 }
 
@@ -29,6 +45,7 @@ function getUpdate(tabs) {
  * Initialise le transfert de données.
  */
 function transfer_date() {
+    // Recupère les infos des onglets
     chrome.tabs.query({ active: true, lastFocusedWindow: true }, getUpdate)
 }
 
@@ -47,44 +64,41 @@ function getHostname(url) {
  * @param {String} hostname 
  */
 function isFollowed(hostname) {
-    if (storageAvailable('localStorage')) {
+    if (storageAvailable()) {
         var site = localStorage.getItem(hostname);
         return site != null;
     } else {
-        console.error("[ error ] The local storage isn't available.");
+        storageUnavailableError()
         return false;
     }
 }
 
 /**
- * Récupère l'ancienneté critique d'un site
- * @param {String} hostname 
+ * Vérifie si la différence entre la date actuelle
+ * et la date de mise à jours dépasse l'ancienneté max
+ * @param {String} str_date 
+ * @param {number} duration
+ *      Ancienneté max en millisecondes
  */
-function getDuration(hostname) {
-    if (!isFollowed)
-        return null;
-    return localStorage.getItem(hostname)
+function isCritical(str_date, duration) {
+    // Date de la réponse de l'application native
+    var d = new Date(str_date);
+    // Différence en millisecondes entre le date
+    // actuelle et la réponse
+    var diff = Math.abs(new Date() - d);
+    return diff >= duration
 }
 
 /**
- * Détermine si une ancienneté d'attestation est critique
- * @param {*} hostname 
- * @param {*} duration 
- */
-function isCritical(hostname, duration) {
-    console.log('Site ' + hostname)
-    console.log('Anciennete ' + duration)
-}
+ * Fonctions partagées
 
 /**
- * DOIT ETRE GLOBALE
- * Permite (eh) to know if the local storage is available
- * @param type the local storage
- * @returns {boolean} true if its available
+ * Détermine si la localStorage est disponible
+ * @returns {boolean}
  */
-function storageAvailable(type) {
+function storageAvailable() {
     try {
-        var storage = window[type];
+        var storage = window['localStorage'];
         var x = '__storage_test__';
         storage.setItem(x, x);
         storage.removeItem(x);
@@ -93,4 +107,8 @@ function storageAvailable(type) {
     catch (e) {
         return false;
     }
+}
+
+function storageUnavailableError() {
+    console.error("[ error ] The local storage isn't available.");
 }
