@@ -6,6 +6,8 @@
 var old_hostname
 // Vrai quand l'appel vient d'un ajout/ d'une modification dans la liste
 var click
+// Contient la date de la derniere mise a jour
+var date
 
 // Ecouter les mises à jour des pages
 chrome.tabs.onUpdated.addListener(function (tabId, changeInfo) {
@@ -23,6 +25,14 @@ chrome.runtime.onMessage.addListener(function () {
 })
 
 /**
+ * Initialise le transfert de données.
+ */
+function transfer_date() {
+    // Recupère les infos des onglets
+    chrome.tabs.query({ active: true, lastFocusedWindow: true }, getUpdate)
+}
+
+/**
  * Recupère la date depuis l'application native et la transmet 
  * au content script
  * @param {*} tabs 
@@ -37,6 +47,8 @@ function getUpdate(tabs) {
         if (isFollowed(hostname)) {
             chrome.runtime.sendNativeMessage('com.ptut.date_getter', { url: hostname }, function (response) {
                 if (typeof response !== 'undefined') {
+                    // Sauvegarder la date
+                    date = response.text
                     // Si l'ancienneté est critique, envoyer un message au content script
                     if (isCritical(response.text, localStorage.getItem(hostname)))
                         chrome.tabs.sendMessage(tabs[0].id, { date: response.text })
@@ -44,14 +56,6 @@ function getUpdate(tabs) {
             })
         }
     }
-}
-
-/**
- * Initialise le transfert de données.
- */
-function transfer_date() {
-    // Recupère les infos des onglets
-    chrome.tabs.query({ active: true, lastFocusedWindow: true }, getUpdate)
 }
 
 /**

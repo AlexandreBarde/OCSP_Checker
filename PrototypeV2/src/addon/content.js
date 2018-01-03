@@ -3,8 +3,6 @@
  */
 
 
-// Les variable declarées en dehors d'un bloc ont une portée globale
-var div_circle
 var div_notif
 var div_notif
 
@@ -16,14 +14,6 @@ chrome.runtime.onMessage.addListener(function (msg) {
   else
     console.log('Impossible de recuperer l\'attestation: ' + msg.date);
 });
-
-// Créer le cercle persistant
-div_circle = document.createElement('div');
-div_circle.id = "OCSP_circle";
-// Attendre un click sur le cercle et montrer la notification
-div_circle.addEventListener('click', function () {
-  showNotif()
-})
 
 /**
  * Génère la popup et la fait disparaitre 10 secondes après
@@ -46,18 +36,15 @@ function showDate(var_date) {
   div_notif.appendChild(div_titre);
   div_notif.appendChild(div_texte);
   document.body.appendChild(div_notif);
-  document.body.appendChild(div_circle);
   var delai = setInterval(hideNotif, 2000);
 }
 
 function showNotif() {
   div_notif.style.visibility = "visible";
-  div_circle.style.visibility = "hidden";
 }
 
 function hideNotif() {
   div_notif.style.visibility = "hidden";
-  div_circle.style.visibility = "visible";
 }
 
 /**
