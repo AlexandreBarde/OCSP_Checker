@@ -8,7 +8,7 @@ var div_notif
 chrome.runtime.onMessage.addListener(function (msg) {
   // Verifier qu'on ai bien reçu une date
   if (!isNaN(Date.parse(msg.date)))
-    showDate(msg.date);
+    showDate(msg);
   else
     console.log('Impossible de recuperer l\'attestation: ' + msg.date);
 });
@@ -17,7 +17,8 @@ chrome.runtime.onMessage.addListener(function (msg) {
  * Génère la popup et la fait disparaitre 10 secondes après
  * @param var_date Ancienneté du certificat
  */
-function showDate(var_date) {
+function showDate(msg) {
+  var var_date = msg.date
   div_notif = document.createElement('div');
   div_titre = document.createElement('div');
   var div_texte = document.createElement('div');
@@ -29,15 +30,15 @@ function showDate(var_date) {
   var anciennete = document.createElement('p');
   var maj = document.createElement('p');
   anciennete.id = "OCSP_check_anciennete";
-  anciennete.textContent = `Mise à jour il y a ${dateDiff(new Date(var_date), new Date())}`;
+  anciennete.textContent = `Mise à jour il y a ${formatDiff(msg.diff)}`;
   div_texte.appendChild(anciennete);
   div_notif.appendChild(div_titre);
   div_notif.appendChild(div_texte);
   document.body.appendChild(div_notif);
   // Montrer la notification
   showNotif();
-  // La cacher après un temps défini
-  setTimeout(hideNotif, 2500);
+  // La cacher après un temps défini dans les paramètres
+  setTimeout(hideNotif, 3000);
 }
 
 function showNotif() {
@@ -52,14 +53,10 @@ function hideNotif() {
  * Retourne un string formatté de la différence
  * entre 2 dates avec jours heures minutes et secondes
  * si non nuls
- * @param {Date} d1 
- * @param {Date} d2 
  */
-function dateDiff(d1, d2) {
-  // Différence totale en secondes
-  var millis = (Math.abs(d2.getTime() - d1.getTime()));
+function formatDiff(millis_diff) {
   // Jours
-  var days = millis / (1000 * 60 * 60 * 24);
+  var days = millis_diff / (1000 * 60 * 60 * 24);
   var arrond_days = Math.floor(days);
   // Heures
   var hours = (days - arrond_days) * 24

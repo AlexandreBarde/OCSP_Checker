@@ -6,22 +6,26 @@
 var old_hostname
 // Vrai quand l'appel vient d'un ajout/ d'une modification dans la liste
 var force
-// Contient la date de la derniere mise a jour
-var date
 
 // Ecouter les mises à jour des pages
 chrome.tabs.onUpdated.addListener(function (tabId, changeInfo) {
+    // Quand une page a fini de charger
     if (changeInfo.status === 'complete') {
         force = false
         transfer_date()
     }
 })
 
-// Ecouter les message du content script
-chrome.runtime.onMessage.addListener(function () {
-    // Il s'agit d'un message, afficher de nouveau la notification
-    force = true
-    transfer_date()
+// Ecouter les connection entrante
+chrome.runtime.onConnect.addListener(function (port) {
+    // Quand la popup envoie un message
+    if (port.name === 'popup-bg-port') {
+        port.onMessage.addListener(function (msg) {
+            // On renverra forcement une reponse
+            force = true
+            transfer_date()
+        })
+    }
 })
 
 /**
@@ -47,11 +51,15 @@ function getUpdate(tabs) {
         if (isFollowed(hostname)) {
             chrome.runtime.sendNativeMessage('com.ptut.date_getter', { url: hostname }, function (response) {
                 if (typeof response !== 'undefined') {
-                    // Sauvegarder la date
-                    date = response.text
                     // Si l'ancienneté est critique, envoyer un message au content script
-                    if (isCritical(response.text, localStorage.getItem(hostname)))
-                        chrome.tabs.sendMessage(tabs[0].id, { date: response.text })
+                    // contenant la date de la mise à jour et la différence entre la durée
+                    // ecoulée et la durée critique
+                    if (isCritical(response.text, localStorage.getItem(hostname))) {
+                        chrome.tabs.sendMessage(tabs[0].id, {
+                            date: response.text,
+                            diff: getDiff(response.text, localStorage.getItem(hostname))
+                        })
+                    }
                 }
             })
         }
@@ -90,16 +98,21 @@ function isFollowed(hostname) {
  *      Ancienneté max en millisecondes
  */
 function isCritical(str_date, duration) {
+    return getDiff(str_date, duration) >= duration
+}
+
+/**
+ * Calcule la différence en millisecondes
+ * @param {String} str_date 
+ * @param {Number} duration 
+ */
+function getDiff(str_date, duration) {
     // Date de la réponse de l'application native
     var d = new Date(str_date);
     // Différence en millisecondes entre le date
     // actuelle et la réponse
-    var diff = Math.abs(new Date() - d);
-    return diff >= duration
+    return Math.abs(new Date() - d);
 }
-
-/**
- * Fonctions partagées
 
 /**
  * Détermine si la localStorage est disponible

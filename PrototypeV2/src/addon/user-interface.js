@@ -3,6 +3,14 @@
  * ET A LA PRESENTATION DES DONNEES
  */
 
+// Port de communication avec le background script
+var port = chrome.runtime.connect({ name: 'popup-bg-port' });
+
+port.onMessage.addListener(function (msg) {
+    console.log(msg)
+})
+
+
 // URL du site courant
 var url
 
@@ -23,7 +31,8 @@ document.addEventListener("click", function (e) {
         addSite(url, duree);
         updateSiteState(url);
         // Envoyer une demande à l'application native via la background script 
-        chrome.runtime.sendMessage({ query: 'sendURL' });
+        port.postMessage({ query: 'sendDate' })
+        chrome.runtime.sendMessage({ query: 'sendURL' })
         // Unfollow Site button
     } else if (e.target.classList.contains("followed")) {
         removeSite(url);
