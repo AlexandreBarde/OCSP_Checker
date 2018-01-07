@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+    <h3>OCSP Checker</h3>
+    <div id="unfollowed" class="alert alert-warning">
+        <p>
+            <strong>Ce site n'est pas suivi</strong>
+        </p>
+        <button type="button" class="btn btn-outline-success btn-sm" id="follow">Suivre</button>
+    </div>
+    <div id="followed" class="alert alert-success hidden">
+        <p>
+            <strong>Ce site est suivi</strong>
+        </p>
+        <button type="button" class="btn btn-outline-danger btn-sm" id="unfollow">Ne plus suivre</button>
+    </div>
+
+    <table class="table" id="sites">
+        <th>Site</th>
+        <th>Ancienneté critique</th>
+    </table>
+    <button type="button" class="btn btn-light btn-block unstorage">Vider la liste des sites suivis</button>
+
+    <script src="./js/popup.bundle.js"></script>
+</body>
+
+</html>
