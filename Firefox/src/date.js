@@ -52,8 +52,13 @@ function buildMoment(str_date) {
     return moment(d, 'MMM DD HH:mm:ss YYYY')
 }
 
+function isDate(text) {
+    return !isNaN(new Date(text))
+}
+
 module.exports = {
     ocspAge,
     timeDiff,
-    formatDuration
+    formatDuration,
+    isDate
 }

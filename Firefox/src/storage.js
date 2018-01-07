@@ -4,7 +4,7 @@ const url_parser = require('./url')
  * Vérifie que le localstorage soit disponible
  * @returns {boolean}
  */
-function storageAvailable() {
+function isAvailable() {
     try {
         var storage = window['localStorage'];
         var x = '__storage_test__';
@@ -17,37 +17,37 @@ function storageAvailable() {
     }
 }
 
-function storageUnavailableError() {
+function isUnavailableError() {
     console.error("[ error ] The local storage isn't available.");
 }
 
 /**
  * Ajoute un site à la liste
- * @param {String} url 
+ * @param {String} hostname 
  * POUR L'INSTANT
  * @param {String} time 
  */
-function addSite(url, time) {
-    if (storageAvailable()) {
-        localStorage.setItem(url_parser(url), time);
+function addSite(hostname, time) {
+    if (isAvailable()) {
+        localStorage.setItem(hostname, time);
     } else {
-        storageUnavailableError()
+        isUnavailableError()
     }
 }
 
 /**
  * Récupère un site de la liste
- * @param {String} url 
+ * @param {String} hostname 
  */
-function getSite(url) {
-    if (storageAvailable()) {
-        var site = localStorage.getItem(url_parser(url));
+function getSite(hostname) {
+    if (isAvailable()) {
+        var site = localStorage.getItem(hostname);
         if (site == null) {
             return null;
         }
         return site
     } else {
-        storageUnavailableError()
+        isUnavailableError()
         return null;
     }
 }
@@ -55,13 +55,13 @@ function getSite(url) {
 
 /**
  * Supprime un site de la liste
- * @param {String} url 
+ * @param {String} hostname 
  */
-function removeSite(url) {
-    if (storageAvailable()) {
-        localStorage.removeItem(url_parser(url));
+function removeSite(hostname) {
+    if (isAvailable()) {
+        localStorage.removeItem(hostname);
     } else {
-        storageUnavailableError();
+        isUnavailableError();
     }
 }
 
@@ -69,11 +69,39 @@ function removeSite(url) {
  * Vide la liste
  */
 function removeAllSites() {
-    if (storageAvailable()) {
+    if (isAvailable()) {
         localStorage.clear();
     } else {
-        storageUnavailableError();
+        isUnavailableError();
     }
+}
+
+/**
+ * Donne l'ancienneté critique pour un nom d'hote
+ * @param {string} hostname 
+ */
+function getCriticalAge(hostname) {
+    if (isAvailable()) {
+        return localStorage.getItem(hostname)
+    } else {
+        isUnavailableError()
+    }
+}
+
+function getLength() {
+    return localStorage.length
+}
+
+function getHostname(i) {
+    return localStorage.key(i)
+}
+
+function isEmpty() {
+    return localStorage.length == 0
+}
+
+function isFollowed(hostname) {
+    return getSite(hostname) != null
 }
 
 module.exports = {
@@ -81,6 +109,11 @@ module.exports = {
     removeSite,
     getSite,
     addSite,
-    storageAvailable,
-    storageUnavailableError
+    isAvailable,
+    isUnavailableError,
+    getCriticalAge,
+    getLength,
+    getHostname,
+    isEmpty,
+    isFollowed
 }
