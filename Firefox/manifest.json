@@ -20,7 +20,7 @@
                 "dist/js/content.bundle.js"
             ],
             "matches": [
-                "<all_urls>"
+                "https://*/*"
             ]
         }
     ],

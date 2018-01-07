@@ -10,17 +10,21 @@
 <body>
 
     <h3>OCSP Checker</h3>
-    <div id="unfollowed" class="alert alert-warning">
+    <div id="unfollowed" class="alert alert-warning" hidden>
         <p>
             <strong>Ce site n'est pas suivi</strong>
         </p>
         <button type="button" class="btn btn-outline-success btn-sm" id="follow">Suivre</button>
     </div>
-    <div id="followed" class="alert alert-success hidden">
+    <div id="followed" class="alert alert-success" hidden>
         <p>
             <strong>Ce site est suivi</strong>
         </p>
         <button type="button" class="btn btn-outline-danger btn-sm" id="unfollow">Ne plus suivre</button>
+    </div>
+
+    <div id="no_stapling" hidden>
+        <p>Ce site n'utilise pas OCSP Stapling</p>
     </div>
 
     <table class="table" id="sites">

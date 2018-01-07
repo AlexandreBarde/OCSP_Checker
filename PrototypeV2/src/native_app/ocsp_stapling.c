@@ -78,4 +78,3 @@ void getOcspUpdate(char *server, char date[]) {
     // (20 caractères après le 488ème)
     sprintf(date, "%.*s", 24, decoded_attest.data + 481);
 }
-

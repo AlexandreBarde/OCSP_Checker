@@ -4,6 +4,7 @@ const url_parser = require('./url')
 let btn_follow = document.getElementById('follow')
 let btn_unfollow = document.getElementById('unfollow')
 var followed = document.getElementById('followed')
+var no_stapling = document.getElementById('no_stapling')
 var unfollowed = document.getElementById('unfollowed')
 var sites_list = document.getElementById('sites')
 
@@ -52,16 +53,24 @@ function unfollow(site) {
  * Affiche que le site est suivi
  */
 function showFollowed() {
-    followed.classList.remove('hidden')
-    unfollowed.classList.add('hidden')
+    followed.hidden = false
+    unfollowed.hidden = true
+    no_stapling.hidden = true
 }
 
 /**
  * Affiche que le site n'est pas suivi
  */
 function showUnfollowed() {
-    followed.classList.add('hidden')
-    unfollowed.classList.remove('hidden')
+    followed.hidden = true
+    no_stapling.hidden = true
+    unfollowed.hidden = false
+}
+
+function showDisabled() {
+    followed.hidden = true
+    unfollowed.hidden = true
+    no_stapling.hidden = false
 }
 
 module.exports = {
@@ -70,6 +79,7 @@ module.exports = {
     btn_unfollow,
     showFollowed,
     showUnfollowed,
+    showDisabled,
     follow,
     unfollow
 }
