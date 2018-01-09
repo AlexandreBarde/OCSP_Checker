@@ -2,14 +2,16 @@ const ui = require('./ui')
 const url_parser = require('./url')
 const messaging = require('./messaging')
 const date = require('./date')
+const stor = require('./storage')
+
 
 // Quand on ouvre la popup
 // récupérer le nom d'hote
 url_parser.getCurrentHostname()
-    .then((hostname) => {
+    .then(hostname => {
         console.log(hostname)
         browser.runtime.sendMessage(hostname)
-            .then((rep) => {
+            .then(rep => {
                 console.log(rep)
                 // Si le site n'utilise pas OCSP Stapling
                 if (!date.isDate(rep.text)) {
@@ -21,3 +23,13 @@ url_parser.getCurrentHostname()
                 }
             })
     })
+
+// Quand on clique sur "Suivre"
+ui.btn_follow.addEventListener('click', () => {
+    url_parser.getCurrentHostname()
+        .then(hostname => {
+            stor.addSite(hostname, 'zidane')
+            ui.printSites()
+        })
+
+})

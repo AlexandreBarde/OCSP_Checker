@@ -13,6 +13,8 @@ var sites_list = document.getElementById('sites')
  */
 function printSites() {
     if (storage.isAvailable()) {
+        // Vide l'ancien tableau
+        clear()
         let row = sites_list.insertRow(0)
         if (storage.isEmpty()) {
             row.insertCell(0).innerHTML += "Aucun site suivi.";
@@ -27,6 +29,13 @@ function printSites() {
     } else {
         storageUnavailableError()
     }
+}
+
+/**
+ * Vide la tableau
+ */
+function clear() {
+    sites_list.innerHTML = '';
 }
 
 /**
