@@ -3,7 +3,7 @@ const url_parser = require('./url')
 
 let btn_follow = document.getElementById('follow')
 let btn_unfollow = document.getElementById('unfollow')
-let btn_unfollowall = document.getElementById('unfollowall')
+//let btn_unfollowall = document.getElementById('unfollowall')
 var followed = document.getElementById('followed')
 var no_stapling = document.getElementById('no_stapling')
 var unfollowed = document.getElementById('unfollowed')
@@ -16,16 +16,16 @@ function printSites() {
     if (storage.isAvailable()) {
         // Vide l'ancien tableau
         clear()
-
+        let row = sites_list.insertRow(-1)
         if (storage.isEmpty()) {
             row.insertCell(0).innerHTML += "Aucun site suivi.";
         } else {
             for (let i = 0; i < storage.getLength(); i++) {
-                let row = sites_list.insertRow(-1)
                 let hostname = storage.getHostname(i)
                 let critical_age = storage.getCriticalAge(hostname)
                 row.insertCell(0).innerHTML += hostname
                 row.insertCell(1).innerHTML += critical_age
+                let row = sites_list.insertRow(-1)
             }
         }
     } else {

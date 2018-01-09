@@ -43,9 +43,10 @@ ui.btn_unfollow.addEventListener('click', () => {
 
 //TODO marche pas encore
 // Quand on clique sur "Vider la liste des sites"
-ui.btn_unfollowall.addEventListener('click', () => {
+/*ui.btn_unfollowall.addEventListener('click', () => {
   url_parser.getCurrentHostname()
       .then(hostname => {
           ui.unfollowall()
       })
 })
+*/
