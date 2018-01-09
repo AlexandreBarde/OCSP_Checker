@@ -13,6 +13,7 @@ url_parser.getCurrentHostname()
         browser.runtime.sendMessage(hostname)
             .then(rep => {
                 console.log(rep)
+                ui.printSites()
                 // Si le site n'utilise pas OCSP Stapling
                 if (!date.isDate(rep.text)) {
                     // Ne pas afficher la div permettant de le suivre
@@ -29,6 +30,7 @@ ui.btn_follow.addEventListener('click', () => {
     url_parser.getCurrentHostname()
         .then(hostname => {
             stor.addSite(hostname, 'zidane')
+            ui.showFollowed()
             ui.printSites()
         })
 

@@ -15,7 +15,7 @@ function printSites() {
     if (storage.isAvailable()) {
         // Vide l'ancien tableau
         clear()
-        let row = sites_list.insertRow(0)
+        let row = sites_list.insertRow(-1)
         if (storage.isEmpty()) {
             row.insertCell(0).innerHTML += "Aucun site suivi.";
         } else {
@@ -24,6 +24,7 @@ function printSites() {
                 let critical_age = storage.getCriticalAge(hostname)
                 row.insertCell(0).innerHTML += hostname
                 row.insertCell(1).innerHTML += critical_age
+                row = sites_list.insertRow(-1)
             }
         }
     } else {
@@ -40,7 +41,7 @@ function clear() {
 
 /**
  * Ajoute un site dans la liste
- * @param {String} site 
+ * @param {String} site
  */
 function follow(site) {
     storage.addSite(site, '12 jours')
@@ -50,7 +51,7 @@ function follow(site) {
 
 /**
  * Retire un site de la liste
- * @param {String} site 
+ * @param {String} site
  */
 function unfollow(site) {
     storage.removeSite(site)

@@ -9,29 +9,31 @@
 
 <body>
 
-    <h3>OCSP Checker</h3>
-    <div id="unfollowed" class="alert alert-warning" hidden>
-        <p>
-            <strong>Ce site n'est pas suivi</strong>
-        </p>
-        <button type="button" class="btn btn-outline-success btn-sm" id="follow">Suivre</button>
-    </div>
-    <div id="followed" class="alert alert-success" hidden>
-        <p>
-            <strong>Ce site est suivi</strong>
-        </p>
-        <button type="button" class="btn btn-outline-danger btn-sm" id="unfollow">Ne plus suivre</button>
-    </div>
+    <div class="container-fluid">
+      <h3 class="ext_title">OCSP Checker</h3>
+      <div id="unfollowed" class="alert alert-warning" hidden>
+          <p>
+              <strong>Ce site n'est pas suivi</strong>
+          </p>
+          <button type="button" class="btn btn-outline-success btn-sm" id="follow">Suivre</button>
+      </div>
+      <div id="followed" class="alert alert-success" hidden>
+          <p>
+              <strong>Ce site est suivi</strong>
+          </p>
+          <button type="button" class="btn btn-outline-danger btn-sm" id="unfollow">Ne plus suivre</button>
+      </div>
 
-    <div id="no_stapling" hidden>
-        <p>Ce site n'utilise pas OCSP Stapling</p>
-    </div>
+      <div id="no_stapling"  class="alert alert-info" hidden>
+          <p>Ce site n'utilise pas OCSP Stapling</p>
+      </div>
 
-    <table class="table" id="sites">
-        <th>Site</th>
-        <th>Ancienneté critique</th>
-    </table>
-    <button type="button" class="btn btn-light btn-block unstorage">Vider la liste des sites suivis</button>
+      <table class="table" id="sites">
+          <th>Site</th>
+          <th>Ancienneté critique</th>
+      </table>
+      <button type="button" class="btn btn-light btn-block unstorage">Vider la liste des sites suivis</button>
+    </div>
 
     <script src="./js/popup.bundle.js"></script>
 </body>
