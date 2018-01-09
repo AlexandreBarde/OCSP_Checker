@@ -29,9 +29,23 @@ url_parser.getCurrentHostname()
 ui.btn_follow.addEventListener('click', () => {
     url_parser.getCurrentHostname()
         .then(hostname => {
-            stor.addSite(hostname, 'zidane')
-            ui.showFollowed()
-            ui.printSites()
+            ui.follow(hostname) //TODO : Durée
         })
+})
 
+// Quand on clique sur "Ne plus suivre"
+ui.btn_unfollow.addEventListener('click', () => {
+    url_parser.getCurrentHostname()
+        .then(hostname => {
+            ui.unfollow(hostname)
+        })
+})
+
+//TODO marche pas encore
+// Quand on clique sur "Vider la liste des sites"
+ui.btn_unfollowall.addEventListener('click', () => {
+  url_parser.getCurrentHostname()
+      .then(hostname => {
+          ui.unfollowall()
+      })
 })

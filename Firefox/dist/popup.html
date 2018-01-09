@@ -13,9 +13,29 @@
       <h3 class="ext_title">OCSP Checker</h3>
       <div id="unfollowed" class="alert alert-warning" hidden>
           <p>
-              <strong>Ce site n'est pas suivi</strong>
+              <strong>Attention : ce site n'est pas suivi</strong>
           </p>
-          <button type="button" class="btn btn-outline-success btn-sm" id="follow">Suivre</button>
+          <p>
+            Vous pouvez suivre ce site et être informé de la sécurité de ce dernier. Pour cela, veuillez entrer
+            l'ancienneté maximale acceptée du cache de son certificat et valider.
+          </p>
+          <!-- Jours -->
+          <input id="days" type="number" maxlength="2" value="10" required>
+          <label>jour(s)</label>
+
+          <!-- Heures -->
+          <input id="hours" type="number" maxlength="2" value="0" required>
+          <label>heure(s)</label>
+
+          <!-- Minutes -->
+          <input id="minutes" type="number" maxlength="2" value="0" required>
+          <label>minute(s)</label>
+
+          <!-- Secondes -->
+          <input id="seconds" type="number" maxlength="2" value="0" required>
+          <label>seconde(s)</label>
+
+          <button type="button" class="btn btn-outline-success btn-sm" id="follow">Valider</button>
       </div>
       <div id="followed" class="alert alert-success" hidden>
           <p>
@@ -24,7 +44,7 @@
           <button type="button" class="btn btn-outline-danger btn-sm" id="unfollow">Ne plus suivre</button>
       </div>
 
-      <div id="no_stapling"  class="alert alert-info" hidden>
+      <div id="no_stapling"  class="alert alert-warning" hidden>
           <p>Ce site n'utilise pas OCSP Stapling</p>
       </div>
 
@@ -32,7 +52,7 @@
           <th>Site</th>
           <th>Ancienneté critique</th>
       </table>
-      <button type="button" class="btn btn-light btn-block unstorage">Vider la liste des sites suivis</button>
+      <button type="button" class="btn btn-light btn-block" id="unfollowall">Vider la liste des sites suivis</button>
     </div>
 
     <script src="./js/popup.bundle.js"></script>
