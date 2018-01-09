@@ -17,6 +17,7 @@ function printSites() {
         // Vide l'ancien tableau
         clear()
         let row = sites_list.insertRow(-1)
+
         if (storage.isEmpty()) {
             row.insertCell(0).innerHTML += "Aucun site suivi.";
         } else {
@@ -25,7 +26,7 @@ function printSites() {
                 let critical_age = storage.getCriticalAge(hostname)
                 row.insertCell(0).innerHTML += hostname
                 row.insertCell(1).innerHTML += critical_age
-                let row = sites_list.insertRow(-1)
+                row = sites_list.insertRow(-1)
             }
         }
     } else {
