@@ -3,7 +3,7 @@
     "manifest_version": 2,
     "name": "OCSP Checker",
     "version": "2.1",
-    "options_page" : "src/options/option.html",
+    "options_page" : "option.html",
     "applications": {
         "gecko": {
             "id": "my_ext@example.org",
@@ -12,13 +12,13 @@
     },
     "background": {
         "scripts": [
-            "src/background.js"
+            "dist/js/background.bundle.js"
         ]
     },
     "content_scripts": [
         {
             "js": [
-                "src/content.js"
+                "dist/js/content.bundle.js"
             ],
             "matches": [
                 "https://*/*"
@@ -26,10 +26,10 @@
         }
     ],
     "icons": {
-        "128": "icons/icon.png"
+        "128": "assets/icons/icon.png"
     },
     "browser_action": {
-        "default_icon": "icons/icon.png",
+        "default_icon": "assets/icons/icon.png",
         "default_title": "OCSP Checker",
         "default_popup": "dist/popup.html"
     },
