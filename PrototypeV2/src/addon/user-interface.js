@@ -30,7 +30,7 @@ document.addEventListener("click", function (e) {
         var duree = prompt("Combien de millisecondes mon super pote ?")
         addSite(url, duree);
         updateSiteState(url);
-        // Envoyer une demande à l'application native via la background script 
+        // Envoyer une demande à l'application native via la background script
         port.postMessage({ query: 'sendDate' })
         chrome.runtime.sendMessage({ query: 'sendURL' })
         // Unfollow Site button
@@ -70,7 +70,7 @@ function updateSiteState(url, init = false) {
 /**
  * Affiche la liste des sites dans un tableau
  * @param element
- * @param {boolean} init 
+ * @param {boolean} init
  */
 function printSites(init) {
     var element = document.getElementById('sites')

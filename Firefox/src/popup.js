@@ -43,13 +43,9 @@ ui.btn_unfollow.addEventListener('click', () => {
 
 //TODO marche pas encore
 // Quand on clique sur "Vider la liste des sites"
-/*ui.btn_unfollowall.addEventListener('click', () => {
-  url_parser.getCurrentHostname()
-      .then(hostname => {
-          ui.unfollowall()
-      })
+ui.btn_unfollowall.addEventListener('click', () => {
+  ui.unfollowAllSites()
 })
-*/
 
 //TODO debug
 // Quand on clique sur "Développer" pour afficher la liste des sites
@@ -59,6 +55,7 @@ ui.btn_chevron_down.addEventListener('click', () => {
         ui.btn_chevron_down.hidden = true;
         ui.btn_chevron_up.hidden = false;
         ui.sites_list.hidden = false;
+        ui.btn_unfollowall.hidden = false;
       })
 })
 
@@ -68,4 +65,5 @@ ui.btn_chevron_up.addEventListener('click', () => {
   ui.btn_chevron_down.hidden = false;
   ui.btn_chevron_up.hidden = true;
   ui.sites_list.hidden = true;
+  ui.btn_unfollowall.hidden = true;
 })

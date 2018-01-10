@@ -6,13 +6,14 @@ let btn_follow = document.getElementById('follow')
 let btn_unfollow = document.getElementById('unfollow')
 var btn_chevron_down = document.getElementById('chevron-down')
 var btn_chevron_up = document.getElementById('chevron-up')
-//TODO: var btn_unfollowall = document.getElementById('unfollowall')
+var btn_unfollowall = document.getElementById('unfollowall')
 
 // Autres éléments
 var followed = document.getElementById('followed')
 var no_stapling = document.getElementById('no_stapling')
 var unfollowed = document.getElementById('unfollowed')
 var sites_list = document.getElementById('sites')
+
 //Oui c'est pas beau mais je fais comment moi ?
 // TODO ajouter id pour éditer/supprimer le site en question
 var edit_site = "<i class=\"fa fa-pencil edit\"></i> <i class=\"fa fa-remove edit\"></i>"
@@ -83,7 +84,7 @@ function unfollow(site) {
 /**
  * Retire tous les sites de la liste
  */
-function unfollowall() {
+function unfollowAllSites() {
     storage.removeAllSites()
     showUnfollowed()
     printSites()
@@ -118,9 +119,11 @@ module.exports = {
     printSites,
     btn_follow,
     btn_unfollow,
+    btn_unfollowall,
     btn_chevron_down,
     btn_chevron_up,
     sites_list,
+    unfollowAllSites,
     showFollowed,
     showUnfollowed,
     showDisabled,
