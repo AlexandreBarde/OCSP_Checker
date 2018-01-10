@@ -1,3 +1,5 @@
+const moment = require('moment')
+
 const ui = require('./ui')
 const url_parser = require('./url')
 const messaging = require('./messaging')
@@ -19,8 +21,12 @@ url_parser.getCurrentHostname()
                     // Ne pas afficher la div permettant de le suivre
                     ui.showDisabled()
                 } else {
-                    // Sinon donner la possibilité de suivre
-                    ui.showUnfollowed()
+                    // Sinon si le site n'est pas déjà suivi, lui proposer de le suivre
+                    if(stor.getSite(hostname) == null) {
+                      ui.showUnfollowed()
+                    } else {
+                      ui.showFollowed()
+                    }
                 }
             })
     })
@@ -29,7 +35,29 @@ url_parser.getCurrentHostname()
 ui.btn_follow.addEventListener('click', () => {
     url_parser.getCurrentHostname()
         .then(hostname => {
-            ui.follow(hostname) //TODO : Durée
+            var days = document.getElementById("days").value;
+            var hours = document.getElementById("hours").value;
+            var mins = document.getElementById("minutes").value;
+            var secs = document.getElementById("seconds").value;
+
+            if(!isNaN(days) && !isNaN(hours) && !isNaN(mins) && !isNaN(secs)
+               && (days >= 0 && hours >= 0 && mins >= 0 && secs >= 0)
+               && (days + hours + mins + secs > 0)) {
+
+              var time = moment.duration({
+                  seconds: secs,
+                  minutes: mins,
+                  hours: hours,
+                  days: days,
+                  weeks: 0,
+                  months: 0,
+                  years: 0
+                });
+
+              ui.follow(hostname, time.asSeconds());
+            } else {
+              //TODO: message d'erreur
+            }
         })
 })
 
@@ -41,13 +69,11 @@ ui.btn_unfollow.addEventListener('click', () => {
         })
 })
 
-//TODO marche pas encore
 // Quand on clique sur "Vider la liste des sites"
 ui.btn_unfollowall.addEventListener('click', () => {
   ui.unfollowAllSites()
 })
 
-//TODO debug
 // Quand on clique sur "Développer" pour afficher la liste des sites
 ui.btn_chevron_down.addEventListener('click', () => {
   url_parser.getCurrentHostname()
@@ -59,7 +85,6 @@ ui.btn_chevron_down.addEventListener('click', () => {
       })
 })
 
-//TODO debug
 // Quand on clique sur "Réduire" pour cacher la liste des sites
 ui.btn_chevron_up.addEventListener('click', () => {
   ui.btn_chevron_down.hidden = false;

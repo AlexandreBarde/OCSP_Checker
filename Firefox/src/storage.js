@@ -1,4 +1,7 @@
 const url_parser = require('./url')
+const moment = require('moment')
+const moment_formatter = require('moment-duration-format')
+const date = require('./date')
 
 /**
  * Vérifie que le localstorage soit disponible
@@ -23,9 +26,9 @@ function isUnavailableError() {
 
 /**
  * Ajoute un site à la liste
- * @param {String} hostname 
+ * @param {String} hostname
  * POUR L'INSTANT
- * @param {String} time 
+ * @param {String} time
  */
 function addSite(hostname, time) {
     if (isAvailable()) {
@@ -37,7 +40,7 @@ function addSite(hostname, time) {
 
 /**
  * Récupère un site de la liste
- * @param {String} hostname 
+ * @param {String} hostname
  */
 function getSite(hostname) {
     if (isAvailable()) {
@@ -55,7 +58,7 @@ function getSite(hostname) {
 
 /**
  * Supprime un site de la liste
- * @param {String} hostname 
+ * @param {String} hostname
  */
 function removeSite(hostname) {
     if (isAvailable()) {
@@ -78,11 +81,12 @@ function removeAllSites() {
 
 /**
  * Donne l'ancienneté critique pour un nom d'hote
- * @param {string} hostname 
+ * @param {string} hostname
  */
 function getCriticalAge(hostname) {
     if (isAvailable()) {
-        return localStorage.getItem(hostname)
+        var timesec = moment.duration(Number(localStorage.getItem(hostname)), 'seconds');
+        return date.formatDuration(timesec);
     } else {
         isUnavailableError()
     }

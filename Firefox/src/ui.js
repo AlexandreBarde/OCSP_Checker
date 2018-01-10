@@ -62,9 +62,10 @@ function clear() {
 /**
  * Ajoute un site dans la liste
  * @param {String} site
+ * @param {number} duree
  */
-function follow(site) { //TODO: Durée
-    storage.addSite(site, '12 jours')
+function follow(site, duree) {
+    storage.addSite(site, duree)
     showFollowed()
     printSites()
     console.log(localStorage)
