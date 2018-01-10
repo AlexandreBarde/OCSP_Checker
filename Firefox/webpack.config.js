@@ -1,4 +1,5 @@
 const path = require('path')
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 
 module.exports = {
     // Fichiers en entrée
@@ -11,5 +12,10 @@ module.exports = {
     output: {
         path: path.join(__dirname, "dist", "js"),
         filename: "[name].bundle.js"
-    }
+    },
+
+    plugins: [
+
+	    new UglifyJsPlugin()
+    ]
 }
