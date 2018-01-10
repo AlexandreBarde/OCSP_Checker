@@ -6,8 +6,12 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "author": "Groupe E2",
   "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://gitlab.com/PTUTS3/Projet_S3"
+  },
   "dependencies": {
     "asn1.js-rfc2560": "^5.0.0",
     "https": "^1.0.0",

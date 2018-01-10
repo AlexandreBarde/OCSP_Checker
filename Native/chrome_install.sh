@@ -1,12 +1,16 @@
 #!/bin/sh
 
+# ID de l'extension
+
+ID="kldfjlsdkjsllkdfjsldkj"
+
 # Si on est sur macOS
 if [ "$(uname -s)" = "Darwin" ]; then
     # Installer pour l'utilisateur
-    TARGET_DIR="$HOME/Library/Application Support/Mozilla/NativeMessagingHosts"
+    TARGET_DIR="$HOME/Library/Application Support/Google/Chrome/NativeMessagingHosts"
 else
     # Si on est sur Linux
-    TARGET_DIR="$HOME/.mozilla/native-messaging-hosts"
+    TARGET_DIR="$HOME/.config/google-chrome/NativeMessagingHosts"
 fi
 
 # Nom de l'application
@@ -22,7 +26,16 @@ DIR="$(pwd)"
 cp "$DIR/$HOST.json" "$TARGET_DIR"
 
 # Modifier le chemin de l'éxecutable dans le manifeste copié
-sed -i "s#/home/mathieu/Projet_S3/Native#$DIR#" "$TARGET_DIR/$HOST.json"
+sed -i "s#/path/to/app#$DIR#" "$TARGET_DIR/$HOST.json"
+
+# Sur chrome, modifier la clé pour l'id
+EXT="extensions\""
+REPL="origins\""
+sed -i "s#$EXT#$REPL#"  "$TARGET_DIR/$HOST.json"
+# Et la valeur de l'id
+EXT="ocsp_checker@e2"
+REPL="chrome-extension://$ID/"
+sed -i "s#$EXT#$REPL#"  "$TARGET_DIR/$HOST.json"
 
 # Donner les droits de lecture
 chmod o+r "$TARGET_DIR/$HOST.json"
