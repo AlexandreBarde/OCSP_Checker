@@ -19,7 +19,7 @@ input[type=number]::-webkit-outer-spin-button {
   margin-top: 10px;
 }
 
-#unfollowed input {
+#unfollowed input, #modif_site input {
   width: 37px;
 }
 
@@ -37,6 +37,7 @@ input[type=number]::-webkit-outer-spin-button {
   box-sizing: border-box;
   padding-left: 3px;
   padding-right: 3px;
+  cursor: pointer;
 }
 
 #sites tr:hover .edit {
