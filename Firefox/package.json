@@ -1,5 +1,5 @@
 {
-  "name": "test_webpack",
+  "name": "ocsp_checker",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
