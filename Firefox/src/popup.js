@@ -87,6 +87,7 @@ document.addEventListener('click', function (e) {
         url_parser.getCurrentHostname()
             .then(hostname => {
                 stor.removeSite(e.target.id);
+                if(hostname == e.target.id) ui.showUnfollowed();
                 ui.printSites();
             })
     }
