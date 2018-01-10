@@ -22,3 +22,20 @@ input[type=number]::-webkit-outer-spin-button {
 #unfollowed input {
   width: 37px;
 }
+
+.list_sites_instruc, .list_sites_instruc:hover {
+  text-align: center;
+  color: black;
+}
+
+
+.edit {
+  visibility: hidden;
+  box-sizing: border-box;
+  padding-left: 3px;
+  padding-right: 3px;
+}
+
+#sites tr:hover .edit {
+  visibility: visible;
+}

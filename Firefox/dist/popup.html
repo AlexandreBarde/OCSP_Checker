@@ -3,7 +3,9 @@
 
 <head>
     <meta charset="utf-8">
+
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" />
+    <link href="https://opensource.keycdn.com/fontawesome/4.7.0/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" href="style.css" />
 </head>
 
@@ -15,12 +17,8 @@
           <p>
               <strong>Attention : ce site n'est pas suivi</strong>
           </p>
-          <p>
-            Vous pouvez suivre ce site et être informé de la sécurité de ce dernier. Pour cela, veuillez entrer
-            l'ancienneté maximale acceptée du cache de son certificat et valider.
-          </p>
           <!-- Jours -->
-          <input id="days" type="number" maxlength="2" value="10" required>
+          <input id="days" type="number" maxlength="2" value="2" required>
           <label>jour(s)</label>
 
           <!-- Heures -->
@@ -35,26 +33,27 @@
           <input id="seconds" type="number" maxlength="2" value="0" required>
           <label>seconde(s)</label>
 
-          <button type="button" class="btn btn-outline-success btn-sm" id="follow">Valider</button>
+          <button type="button" class="btn btn-outline-success btn-sm" id="follow">Suivre</button>
       </div>
       <div id="followed" class="alert alert-success" hidden>
           <p>
               <strong>Ce site est suivi</strong>
           </p>
-          <p>
-            L'ancienneté du cache du certificat de ce site est surveillée par l'extension.
-          </p>
           <button type="button" class="btn btn-outline-danger btn-sm" id="unfollow">Ne plus suivre</button>
       </div>
 
       <div id="no_stapling"  class="alert alert-warning" hidden>
-          <p>Ce site n'utilise pas OCSP Stapling</p>
+          <p>
+            <strong>Ce site n'utilise pas OCSP Stapling</strong>
+          </p>
       </div>
 
-      <table class="table" id="sites">
-          <th>Site</th>
-          <th>Ancienneté critique</th>
-      </table>
+      <p class="list_sites_instruc">Liste des sites suivis<br>
+        <a title="Développer" href="" class="list_sites_instruc" id="chevron-down" hidden><i class="fa fa-chevron-circle-down"></i></a>
+        <a title="Réduire" href="" class="list_sites_instruc" id="chevron-up"><i class="fa fa-chevron-circle-up"></i></a>
+      </p>
+
+      <table class="table table-hover" id="sites"></table>
       <button type="button" class="btn btn-light btn-block" id="unfollowall">Vider la liste des sites suivis</button>
     </div>
 
