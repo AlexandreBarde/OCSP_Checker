@@ -120,6 +120,7 @@ ui.btn_modif_done.addEventListener('click', () => {
 
   if(!isNaN(days) && !isNaN(hours) && !isNaN(mins) && !isNaN(secs)
      && (days >= 0 && hours >= 0 && mins >= 0 && secs >= 0)
+     && (hours < 24 && mins < 60 && secs < 60)
      && (days + hours + mins + secs > 0)) {
 
     url_parser.getCurrentHostname()
