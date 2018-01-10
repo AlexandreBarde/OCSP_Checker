@@ -1,0 +1,11 @@
+{
+  "name": "ocsp_checker",
+  "version": "1.0.0",
+  "description": "Récupère l'attestation OCSP d'un serveur web à la demande de l'extension",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}

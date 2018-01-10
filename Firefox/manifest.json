@@ -1,14 +1,14 @@
 {
-    "description": "a",
+    "description": "Vérifie l'ancienneté des attestations OCSP",
     "manifest_version": 2,
     "name": "OCSP Checker",
     "version": "2.1",
     "options_ui": {
-      "page": "src/options/options.html"
+        "page": "dist/options/options.html"
     },
     "applications": {
         "gecko": {
-            "id": "my_ext@example.org",
+            "id": "ocsp_checker@e2",
             "strict_min_version": "50.0"
         }
     },

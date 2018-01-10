@@ -1,0 +1,7 @@
+{
+    "name": "com.e2.ocsp_checker",
+    "description": "Interroge un serveur web pour recuperer sont attestation OCSP",
+    "path": "/home/mathieu/Projet_S3/Native/app.js",
+    "type": "stdio",
+    "allowed_extension": [ "ocsp_checker@e2" ]
+}
