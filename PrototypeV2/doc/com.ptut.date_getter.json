@@ -1,9 +1,0 @@
-{
-  "name": "com.ptut.date_getter",
-  "description": "Application native date_getter",
-  "path": "/home/mathieu/Projet_S3/PrototypeV2/build/Date_Getter",
-  "type": "stdio",
-  "allowed_origins": [
-    "chrome-extension://hchdfeoakndabkeahnmiimkokofdjapg/"
-  ]
-}
