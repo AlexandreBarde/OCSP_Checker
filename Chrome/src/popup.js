@@ -60,7 +60,7 @@ ui.btn_follow.addEventListener('click', () => {
                 });
                 ui.follow(hostname, time.asSeconds());
                 // Envoyer une requête au background pour forcer la vérification
-                port.postMessage({get_date: hostname})
+                messaging.sendBackground(port, { get_date: hostname })
             } else {
                 //TODO: message d'erreur
             }

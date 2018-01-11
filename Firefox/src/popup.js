@@ -7,54 +7,36 @@ const stor = require('./storage')
 
 var siteToModif;
 
-/**
- * Vérifie un serveur utilise OCSP Stapling 
- * @param {String} hostname 
- * @returns {Promise}
- */
-function hasStapling(hostname) {
-    return new Promise((resolve, reject) => {
-        messaging.sendBackground({ has_ocsp: hostname })
-            .then(rep => {
-                if (date.isDate(rep)) {
-                    resolve(rep)
-                } else {
-                    reject()
-                }
-            })
-    })
-}
+const port = browser.runtime.connect()
+
+// Ecouter les réponse du background script
+port.onMessage.addListener(message => {
+    // Si le site courant supporte OCSP Stapling
+    if (message.has_stapling) {
+        // Si il est déjà suivi
+        if (stor.isFollowed(message.hostname)) {
+            ui.showFollowed()
+        } else {
+            ui.showUnfollowed()
+        }
+    } else {
+        // Sinon empecher de le suivre
+        ui.showDisabled()
+    }
+})
 
 /**
  * Affiche le status (suivi/non suivi/désactive)
  * du site courant
  */
 function updateSiteStatus() {
-    // récupérer le nom d'hote
     url_parser.getCurrentHostname()
         .then(hostname => {
-            // Demander au background script si le site utilise OCSP Stapling
-            hasStapling(hostname)
-                // Si c'est le cas
-                .then(date_resp => {
-                    // Si le site est pas suivi le montrer
-                    if (stor.isFollowed(hostname)) {
-                        ui.showFollowed()
-                    } else {
-                        // Sinon proposer de le suivre
-                        ui.showUnfollowed()
-                    }
-                }).catch(() => {
-                    // Si le background n'as pas renvoyé de date, le site n'utilise pas l'OCSP Stapling
-                    ui.showDisabled()
-                })
+            // Demander au background de vérifier si le site courant support OCSP Stapling 
+            messaging.sendBackground(port, { check_stapling: hostname })
         })
 }
 
-// Quand on ouvre la popup
-// afficher l'état du site courant et la liste des sites
-updateSiteStatus()
-ui.printSites()
 
 
 // Quand on clique sur "Suivre"
@@ -79,7 +61,7 @@ ui.btn_follow.addEventListener('click', () => {
                 });
                 ui.follow(hostname, time.asSeconds());
                 // Envoyer une requête au background pour forcer la vérification
-                messaging.sendBackground({ get_date: hostname })
+                messaging.sendBackground(port, { get_date: hostname })
             } else {
                 //TODO: message d'erreur
             }
@@ -162,7 +144,7 @@ ui.btn_modif_done.addEventListener('click', () => {
 
                 stor.addSite(siteToModif, time.asSeconds())
                 // Refaire une vérification auprès du background avec la nouvelle date
-                messaging.sendBackground({ get_date: hostname })
+                messaging.sendBackground(port, { get_date: hostname })
                 ui.printSites()
                 ui.div_modif.hidden = true;
             })
@@ -179,3 +161,8 @@ function valid_modif(days, hours, mins, secs) {
         && (days + hours + mins + secs > 0)
     )
 }
+
+// Quand on ouvre la popup
+// afficher l'état du site courant et la liste des sites
+ui.printSites()
+updateSiteStatus()
