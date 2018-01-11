@@ -2,13 +2,15 @@ function save_options()
 {
   // Récupération des différents champs
   var couleur = document.getElementById('couleur').value;
+  var couleurTexte = document.getElementById('couleurTexte').value;
   var emplacement = document.getElementById('emplacement').value;
   var affichageNotif = document.getElementById('affNotif').checked;
   // Stockage dans chrome storage
   chrome.storage.sync.set({
     couleurNotif: couleur,
     emplacementNotif: emplacement,
-    affichageNotifPerm: affichageNotif
+    affichageNotifPerm: affichageNotif,
+    couleurTexteNotif: couleurTexte
   }, function() {
     // Récupération du div status
     var status = document.getElementById('status');
@@ -31,12 +33,14 @@ function restore_options()
   // Valeur par défaut
   chrome.storage.sync.get({
     couleurNotif: '#fffff',
+    couleurTexteNotif: '#fffff',
     emplacementNotif: 'haut_gauche',
     affichageNotifPerm: true
   }, function(items) {
     // Attribution des valeurs aux différents champs de la page
     document.getElementById('emplacement').value = items.emplacementNotif;
     document.getElementById('couleur').value = items.couleurNotif;
+    document.getElementById('couleurTexte').value = items.couleurTexteNotif;
     document.getElementById('affNotif').checked = items.affichageNotifPerm;
   });
 }

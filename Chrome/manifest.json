@@ -26,10 +26,10 @@
         }
     ],
     "icons": {
-        "128": "assets/icons/icon.png"
+        "128": "icons/icon.png"
     },
     "browser_action": {
-        "default_icon": "assets/icons/icon.png",
+        "default_icon": "icons/icon.png",
         "default_title": "OCSP Checker",
         "default_popup": "dist/popup.html"
     },
