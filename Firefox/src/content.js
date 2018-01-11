@@ -14,39 +14,48 @@ browser.runtime.onMessage.addListener(message => {
 function showDate(miseajour, depassement)
 {
 
-  var couleur_titre = 'red';
-  var couleur_texte = 'red';
+  var couleur_titre = 'pink';
+  var couleur_texte = 'black';
+  var couleur_partie_texte = 'red';
   var opacite_notif = '95';
   var position_notif_stockage = 'haut_gauche';
   var position_notif = '';
 
   chrome.storage.sync.get({
-    couleurNotif: '#fffff',
-    couleurTexteNotif: '#fffff',
+    couleurNotif: 'pink',
+    couleurTexteNotif: 'black',
+    couleurPartieTexteNotif: 'red',
     emplacementNotif: 'haut_gauche',
-    opaciteNotif: '95',
+    opaciteNotif: "95",
     affichageNotifPerm: true
   }, function(items) {
     // Attribution des valeurs aux variables
     opacite_notif = items.opaciteNotif;
     couleur_titre = items.couleurNotif;
     couleur_texte = items.couleurTexteNotif;
+    couleur_partie_texte = items.couleurPartieTexteNotif;
     position_notif_stockage = items.emplacementNotif;
   });
+
+  alert(opacite_notif);
+  alert(couleur_titre);
+  alert(couleur_texte);
+  alert(couleur_partie_texte);
+  alert(position_notif_stockage);
 
   switch (position_notif_stockage)
   {
   case "bas_droite":
-    position_notif = 'bottom: 5%; left: 3%;';
-    break;
-  case "bas_gauche":
     position_notif = 'bottom: 5%; right: 3%;';
     break;
+  case "bas_gauche":
+    position_notif = 'bottom: 5%; left: 3%;';
+    break;
   case "haut_droite":
-    position_notif = 'top: 5%; left: 3%;';
+    position_notif = 'top: 5%; right: 3%;';
     break;
   case "haut_gauche":
-    position_notif = 'top: 5%; right: 3%;';
+    position_notif = 'top: 5%; left: 3%;';
     break;
   }
 
@@ -63,14 +72,15 @@ function showDate(miseajour, depassement)
                  font-size: 20px; border: 0px;\
                  opacity: 0.' + opacite_notif + ';\
                  padding: 0px; margin-bottom: 0;\
+                 color: ' + couleur_texte + ';\
                 }\
                 #OCSP_check_div_texte {\
-                 background-color: ' + couleur_texte + ';\
+                 background-color: ' + couleur_partie_texte + ';\
                  border-radius: 0px 0px 4px 4px;\
                  opacity: 0.' + opacite_notif + ';\
                  font-size: 18px;\
                  font-family: Arial;\
-                 color: black;\
+                 color: ' + couleur_texte + ';\
                 }\
                 #OCSP_check_div_notif {\
                  width: 400px;\
@@ -81,10 +91,10 @@ function showDate(miseajour, depassement)
                  ' + position_notif + '\
                  font-family: NULL;\
                  font-family: Arial;\
-                 color: black;\
+                 color: ' + couleur_texte + ';\
                }\
                #OCSP_circle {\
-                background-color: ' + couleur_texte + ';\
+                background-color: ' + couleur_partie_texte + ';\
                 visibility: hidden;\
                 width: 50px;\
                 height: 50px;\
@@ -94,7 +104,7 @@ function showDate(miseajour, depassement)
                 ' + position_notif + '\
                 font-family: NULL;\
                 font-family: Arial;\
-                color: black;\
+                color: ' + couleur_texte + ';\
                 cursor: pointer;\
               }\
               #OCSP_circle:hover\
