@@ -5,27 +5,27 @@ const date = require('./date')
 const storage = require('./storage')
 const moment = require('moment')
 
-var serveur_precedent
+// Variable accessible à tout le fichier
+// permet de ne pas refaire la verification
+// à chaque fois qu'on navigue sur le site
+let serveur_precedent
 
 // Quand on reçoit une demande du background script
 chrome.runtime.onConnect.addListener(port => {
     port.onMessage.addListener(message => {
-        console.log(message)
         // Dans le cas ou on doit verifier que le site support OCSP Stapling
         if (message.check_stapling) {
-            console.log("Vérification")
-            console.log(message.check_stapling)
             // Demander la date de la dernière mise à jour de l'attestation OCSP
             // à l'application native
             messaging.sendNative(message.check_stapling)
                 .then(response => {
-                    console.log(response)
                     // Si on a reçu une date, OCSP Stapling est supporté
                     let is_date = date.isDate(response)
-                    port.postMessage({
+                    let stapling_infos = {
                         has_stapling: is_date,
                         hostname: message.check_stapling
-                    })
+                    }
+                    port.postMessage(stapling_infos)
                 })
         } else if (message.get_date) {
             // La popup peut aussi demander la date
@@ -43,13 +43,15 @@ function checkUpdate(hostname) {
             let dep = date.treatUpdate(response, hostname)
             if (dep) {
                 messaging.sendContent(dep)
+                // Si la date est dépassée, refaire la vérification au prochain chargement
+                serveur_precedent = undefined
             }
         })
 }
 
 
 // A chaque fois qu'un onglet est chargé
-browser.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
+chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
     if (changeInfo.status === 'complete') {
         // Récuperer le nom d'hôte du serveur
         let p_hostname = url_parser.getCurrentHostname()
@@ -59,17 +61,7 @@ browser.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
             if ((typeof serveur_precedent === 'undefined' || serveur_precedent != hostname) && storage.isFollowed(hostname)) {
                 // Sauvegarder le serveur courant
                 serveur_precedent = hostname
-                // Recuperer la date 
-                let p_date = messaging.sendNative(hostname)
-                p_date.then(update => {
-                    let dep = date.treatUpdate(update, hostname)
-                    // Si la date a été dépassée, envoyer l'information au content script
-                    if (dep) {
-                        messaging.sendContent(dep)
-                        // Et forcer la verification à la prochaine actualisation
-                        serveur_precedent = undefined
-                    }
-                })
+                checkUpdate(hostname)
             }
         })
     }

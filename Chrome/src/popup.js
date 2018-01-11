@@ -26,11 +26,15 @@ port.onMessage.addListener(message => {
     }
 })
 
+/**
+ * Met à jour l'état (suivi/non suivi/pas supporté) du
+ * site courant
+ */
 function updateSiteStatus() {
     url_parser.getCurrentHostname()
         .then(hostname => {
             // Demander au background de vérifier si le site courant support OCSP Stapling 
-            port.postMessage({ check_stapling: hostname })
+            messaging.sendBackground(port, { check_stapling: hostname })
         })
 }
 
@@ -138,7 +142,7 @@ ui.btn_modif_done.addEventListener('click', () => {
 
                 stor.addSite(siteToModif, time.asSeconds())
                 // Refaire une vérification auprès du background avec la nouvelle date
-                messaging.sendBackground({ get_date: hostname })
+                messaging.sendBackground(port, { get_date: hostname })
                 ui.printSites()
                 ui.div_modif.hidden = true;
             })

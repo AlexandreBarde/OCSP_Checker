@@ -1,5 +1,7 @@
 const date = require('./date')
 
+const id_app = 'com.e2.ocsp_checker'
+
 /**
  * Envoie un message à l'application native
  * @param {String} message 
@@ -7,15 +9,17 @@ const date = require('./date')
  *      Promesse contenant la date de mise à jour
  */
 function sendNative(message) {
-    return browser.runtime.sendNativeMessage('com.e2.ocsp_checker', { url: message })
+    return new Promise((resolve, reject) => {
+        chrome.runtime.sendNativeMessage(id_app, { url: message }, resolve)
+    })
 }
 
 /**
  * Envoie un message depuis la popup a background
  * @param {String} message 
  */
-function sendBackground(message) {
-    return browser.runtime.sendMessage(message)
+function sendBackground(port, message) {
+    port.postMessage(message)
 }
 
 /**
@@ -24,9 +28,11 @@ function sendBackground(message) {
  */
 function sendContent(message) {
     /// Recuperer l'onglet actif
-    let p_tabs = browser.tabs.query({ active: true, lastFocusedWindow: true });
+    let p_tabs = new Promise((resolve, reject) => {
+        chrome.tabs.query({ active: true, lastFocusedWindow: true }, resolve)
+    })
     p_tabs.then(tabs => {
-        browser.tabs.sendMessage(tabs[0].id, message)
+        chrome.tabs.sendMessage(tabs[0].id, message)
     })
 }
 

@@ -1,21 +1,20 @@
 {
-  "name": "test_webpack",
+  "name": "ocsp_checker_chrome",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "Groupe E2",
+  "license": "MIT",
   "devDependencies": {
-    "chai": "^4.1.2",
-    "mocha": "^4.1.0",
-    "webpack": "^3.10.0"
+    "uglifyjs-webpack-plugin": "^1.1.6",
+    "webpack": "^3.10.0",
+    "path": "^0.12.7"
   },
   "dependencies": {
     "moment": "^2.20.1",
-    "moment-duration-format": "^2.1.1",
-    "path": "^0.12.7"
+    "moment-duration-format": "^2.1.1"
   }
 }

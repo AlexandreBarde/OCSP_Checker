@@ -5,14 +5,12 @@
     "version": "2.1",
     "background": {
         "scripts": [
-            "dist/js/browser-polyfill.min.js",
             "dist/js/background.bundle.js"
         ]
     },
     "content_scripts": [
         {
             "js": [
-                "dist/js/browser-polyfill.min.js",
                 "dist/js/content.bundle.js"
             ],
             "matches": [
