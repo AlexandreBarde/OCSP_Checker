@@ -5,9 +5,11 @@ const messaging = require('./messaging')
 const date = require('./date')
 const stor = require('./storage')
 
+
 var siteToModif;
 
-const port = browser.runtime.connect()
+// Se connecter au backgound
+const port = chrome.runtime.connect()
 
 // Ecouter les réponse du background script
 port.onMessage.addListener(message => {
@@ -26,8 +28,8 @@ port.onMessage.addListener(message => {
 })
 
 /**
- * Affiche le status (suivi/non suivi/désactive)
- * du site courant
+ * Met à jour l'état (suivi/non suivi/pas supporté) du
+ * site courant
  */
 function updateSiteStatus() {
     url_parser.getCurrentHostname()
@@ -36,8 +38,6 @@ function updateSiteStatus() {
             messaging.sendBackground(port, { check_stapling: hostname })
         })
 }
-
-
 
 // Quand on clique sur "Suivre"
 ui.btn_follow.addEventListener('click', () => {
@@ -81,7 +81,6 @@ ui.btn_unfollowall.addEventListener('click', () => {
     ui.unfollowAllSites()
     // Actualiser la popup en fonction de la page ou on se trouve
     updateSiteStatus()
-
 })
 
 // Quand on clique sur la fenêtre
@@ -162,7 +161,26 @@ function valid_modif(days, hours, mins, secs) {
     )
 }
 
-// Quand on ouvre la popup
-// afficher l'état du site courant et la liste des sites
+const refresh = document.getElementById('refresh')
+
+// Quand un site est suivi et qu'on clique sur l'icon pour refaire la vérification
+refresh.addEventListener('click', () => {
+    // Faire tourner la petite fleche
+    refresh.classList.add('active')
+    setTimeout(() => {
+        refresh.classList.remove('active')
+    }, 800)
+    // Refaire la requête
+    url_parser.getCurrentHostname()
+        .then(hostname => {
+            messaging.sendBackground(port, { get_date: hostname })
+        })
+})
+
+
+
+// Quand on charge la page
+// afficher la liste des sites
 ui.printSites()
+// Puis verifier l'état du site
 updateSiteStatus()

@@ -4,7 +4,7 @@
     "name": "OCSP Checker",
     "version": "2.1",
     "options_ui": {
-        "page": "dist/options.html"
+        "page": "dist/options/options.html"
     },
     "applications": {
         "gecko": {

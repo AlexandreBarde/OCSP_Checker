@@ -28,12 +28,8 @@ input {
   margin:auto;
 }
 
-#followed {
+#followed, #unfollowed, #no_stapling {
   width: 100%;
-  margin: 0;
-}
-
-#unfollowed {
   margin: 0;
 }
 

@@ -23,11 +23,12 @@ function printSites() {
     if (storage.isAvailable()) {
         // Vide l'ancien tableau
         clear()
-
         let row = sites_list.insertRow(0);
 
         if (storage.isEmpty()) {
             row.insertCell(0).innerHTML += "Aucun site suivi.";
+            row.insertCell(1).innerHTML += " ";
+            row.insertCell(2).innerHTML += " ";
         } else {
             for (let i = 0; i < storage.getLength(); i++) {
                 let hostname = storage.getHostname(i)
