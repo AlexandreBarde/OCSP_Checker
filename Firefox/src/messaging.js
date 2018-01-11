@@ -1,3 +1,5 @@
+const date = require('./date')
+
 /**
  * Envoie un message à l'application native
  * @param {String} message 
@@ -10,14 +12,26 @@ function sendNative(message) {
 
 /**
  * Envoie un message depuis la popup a background
- * @param {Port} port 
  * @param {String} message 
  */
-function sendBackground(port, message) {
-    return port.postMessage(message)
+function sendBackground(message) {
+    return browser.runtime.sendMessage(message)
+}
+
+/**
+ * Envoie un message au content script
+ * @param {Object} message 
+ */
+function sendContent(message) {
+    /// Recuperer l'onglet actif
+    let p_tabs = browser.tabs.query({ active: true, lastFocusedWindow: true });
+    p_tabs.then(tabs => {
+        browser.tabs.sendMessage(tabs[0].id, message)
+    })
 }
 
 module.exports = {
     sendNative,
-    sendBackground
+    sendBackground,
+    sendContent
 }

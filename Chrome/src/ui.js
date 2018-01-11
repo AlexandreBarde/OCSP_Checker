@@ -49,7 +49,6 @@ function follow(site) { //TODO: Durée
     storage.addSite(site, '12 jours')
     showFollowed()
     printSites()
-    console.log(localStorage)
 }
 
 /**
@@ -60,7 +59,6 @@ function unfollow(site) {
     storage.removeSite(site)
     showUnfollowed()
     printSites()
-    console.log(localStorage)
 }
 
 /**
@@ -70,7 +68,6 @@ function unfollowall() {
     storage.removeAllSites()
     showUnfollowed()
     printSites()
-    console.log(localStorage)
 }
 
 /**

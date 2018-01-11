@@ -15,7 +15,7 @@ module.exports = {
     },
 
     plugins: [
-
-	    new UglifyJsPlugin()
+        // Minifier les fichier et enlever les commentaires à la compilation
+        new UglifyJsPlugin()
     ]
 }

@@ -5,33 +5,49 @@ const date = require('./date')
 const storage = require('./storage')
 const moment = require('moment')
 
+var serveur_precedent
 
 // Ecouter les message de la popup
 browser.runtime.onMessage.addListener((request, sender, response) => {
-    // Renvoyer à la popup la promesse contenant la réponse
-    response(messaging.sendNative(request))
+    // Si la popup a juste demandé si l'OCSP Stapling est supporté
+    // essayer de renvoyer la date
+    if (request.has_ocsp) {
+        response(messaging.sendNative(request.has_ocsp))
+        // Si la popup demande une verification de la date
+    } else if (request.get_date) {
+        // Forcer la verification de l'hote demandé
+        messaging.sendNative(request.get_date)
+            .then(update => {
+                let dep = date.treatUpdate(update, request.get_date)
+                if (dep)
+                    messaging.sendContent(dep)
+            })
+    }
 })
 
-
-/* browser.browserAction.onClicked.addListener(() => {
-    // Recuperer le nom d'hote de la page courante
-    let p_hostname = url_parser.getCurrentHostname()
-    // Quand le nom est récupéré, l'envoyer à l'application native
-    p_hostname.then((hostname) => {
-        let p_date = sendNative(hostname)
-        // Quand l'application a répondu, calculer l'age de la maj
-        p_date.then((response) => {
-            let age = date.ocspAge(response.text)
-            // Calculer la différence entre l'anciennete de la maj
-            // et l'ancienneté critique pour ce site
-            let offset = date.timeDiff(age, '01:00:00')
-            // Si la temps écoulé depuis la mise à jour dépasse le temps limite
-            if (offset < 0) {
-                // Afficher l'age de la date et à quel point elle dépasse la limite
-                let exc = date.formatDuration(moment.duration(Math.abs(offset), 'milliseconds'))
-                console.log(`Dépassement de ${exc}.\nL'attestation a ${date.formatDuration(age)}`)
+// A chaque fois qu'un onglet est chargé
+browser.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
+    if (changeInfo.status === 'complete') {
+        // Récuperer le nom d'hôte du serveur
+        let p_hostname = url_parser.getCurrentHostname()
+        p_hostname.then(hostname => {
+            // Verifier qu'on ne soit pas encore sur le même serveur
+            // et que le site soit suivi
+            if ((typeof serveur_precedent === 'undefined' || serveur_precedent != hostname) && storage.isFollowed(hostname)) {
+                // Sauvegarder le serveur courant
+                serveur_precedent = hostname
+                // Recuperer la date 
+                let p_date = messaging.sendNative(hostname)
+                p_date.then(update => {
+                    let dep = date.treatUpdate(update, hostname)
+                    // Si la date a été dépassée, envoyer l'information au content script
+                    if (dep) {
+                        messaging.sendContent(dep)
+                        // Et forcer la verification à la prochaine actualisation
+                        serveur_precedent = undefined
+                    }
+                })
             }
-
         })
-    })
-}) */
+    }
+})

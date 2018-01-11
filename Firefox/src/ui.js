@@ -54,7 +54,7 @@ function printSites() {
  * Renvoie le string permettant d'ajouter les icônes de modification et de suppression
  */
 function iconsWithId(site) { //Si vous avez une meilleure solution je suis preneur
-  return "<i class=\"fa fa-pencil edit edit_site\" id=\"" + site +"\"></i> <i class=\"fa fa-remove edit delete_site\" id=\"" + site + "\"></i>"
+    return "<i class=\"fa fa-pencil edit edit_site\" id=\"" + site + "\"></i> <i class=\"fa fa-remove edit delete_site\" id=\"" + site + "\"></i>"
 }
 
 /**
@@ -73,7 +73,6 @@ function follow(site, duree) {
     storage.addSite(site, duree)
     showFollowed()
     printSites()
-    console.log(localStorage)
 }
 
 /**
@@ -84,7 +83,6 @@ function unfollow(site) {
     storage.removeSite(site)
     showUnfollowed()
     printSites()
-    console.log(localStorage)
 }
 
 /**
@@ -92,9 +90,7 @@ function unfollow(site) {
  */
 function unfollowAllSites() {
     storage.removeAllSites()
-    showUnfollowed()
     printSites()
-    console.log(localStorage)
 }
 
 /**

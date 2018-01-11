@@ -9,10 +9,8 @@ const stor = require('./storage')
 // récupérer le nom d'hote
 url_parser.getCurrentHostname()
     .then(hostname => {
-        console.log(hostname)
         browser.runtime.sendMessage(hostname)
             .then(rep => {
-                console.log(rep)
                 ui.printSites()
                 // Si le site n'utilise pas OCSP Stapling
                 if (!date.isDate(rep.text)) {
