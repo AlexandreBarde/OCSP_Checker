@@ -5,7 +5,7 @@ const moment_formatter = require('moment-duration-format')
 /**
  * Calcule le temps écoulé depuis la dernière mise
  * à jour de l'attestation
- * @param {String} str_date 
+ * @param {String} str_date
  * @returns {moment.duration}
  */
 function ocspAge(str_date) {
@@ -19,8 +19,8 @@ function ocspAge(str_date) {
 /**
  * Donne la différence entre l'ancienneté critique
  * et l'ancienneté actuelle
- * @param {Moment.duration} duration 
- * @param {String} critical 
+ * @param {Moment.duration} duration
+ * @param {String} critical
  * @returns {Number}
  */
 function timeDiff(duration, critical) {
@@ -34,7 +34,7 @@ function timeDiff(duration, critical) {
 
 /**
  * Formate le temps écoulé depuis la mise à jour
- * @param {moment.duration} duration 
+ * @param {moment.duration} duration
  * @returns {String}
  */
 function formatDuration(duration) {
