@@ -5,6 +5,7 @@ const messaging = require('./messaging')
 const date = require('./date')
 const stor = require('./storage')
 
+
 var siteToModif;
 
 // Se connecter au backgound
@@ -159,6 +160,23 @@ function valid_modif(days, hours, mins, secs) {
         && (days + hours + mins + secs > 0)
     )
 }
+
+const refresh = document.getElementById('refresh')
+
+// Quand un site est suivi et qu'on clique sur l'icon pour refaire la vérification
+refresh.addEventListener('click', () => {
+    // Faire tourner la petite fleche
+    refresh.classList.add('active')
+    setTimeout(() => {
+        refresh.classList.remove('active')
+    }, 800)
+    // Refaire la requête
+    url_parser.getCurrentHostname()
+        .then(hostname => {
+            messaging.sendBackground(port, { get_date: hostname })
+        })
+})
+
 
 
 // Quand on charge la page
