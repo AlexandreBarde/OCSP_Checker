@@ -11,8 +11,12 @@
     </div>
     <div class="container">
       <div class="form-group">
-        <label for="couleur">Choisissez la couleur de la notification</label>
+        <label for="couleur">Choisissez la couleur de la partie titre de la notification</label>
         <input type="color" style="background-color:#fff; padding:0;" value="#ff0000" class="form-control" id="couleur">
+      </div>
+      <div class="form-group">
+        <label for="couleurTexte">Choisissez la couleur de la partie texte de la notification</label>
+        <input type="color" style="background-color:#fff; padding:0;" value="#ff0000" class="form-control" id="couleurTexte">
       </div>
       <div class="form-group">
         <label for="emplacement">Choisissez l'emplacement de la notification</label>
@@ -22,6 +26,10 @@
           <option value="haut_droite">En haut à droite</option>
           <option value="haut_gauche">En haut à gauche</option>
         </select>
+      </div>
+      <div class="form-group">
+        <label for="couleurTexte">Opacité de la notification</label>
+        <input type="range" min="0" max="99" value="95" name="opacite" class="form-control" id="opacite">
       </div>
       <div class="container">
         <div class="form-group">
