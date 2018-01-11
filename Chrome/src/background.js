@@ -54,8 +54,6 @@ chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
         // Récuperer le nom d'hôte du serveur
         let p_hostname = url_parser.getCurrentHostname()
         p_hostname.then(hostname => {
-            console.log(`Serveur précedent ${serveur_precedent}`)
-            console.log(`Serveur courant ${hostname}`)
             // Verifier qu'on ne soit pas encore sur le même serveur
             // et que le site soit suivi
             if ((typeof serveur_precedent === 'undefined' || serveur_precedent != hostname) && storage.isFollowed(hostname)) {
