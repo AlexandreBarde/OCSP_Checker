@@ -6,6 +6,7 @@ function save_options()
   var couleurTexte = document.getElementById('couleurTexte').value;
   var emplacement = document.getElementById('emplacement').value;
   var opacite = document.getElementById('opacite').value;
+  var temps = document.getElementById('temps').value;
   var affichageNotif = document.getElementById('affNotif').checked;
   // Stockage dans chrome storage
   chrome.storage.sync.set({
@@ -14,6 +15,7 @@ function save_options()
     affichageNotifPerm: affichageNotif,
     couleurTexteNotif: couleurTexte,
     couleurPartieTexteNotif: couleurPartieTexte,
+    tempsNotif: temps,
     opaciteNotif: opacite
   }, function() {
     // Récupération du div status
@@ -41,6 +43,7 @@ function restore_options()
     couleurPartieTexteNotif: 'black',
     emplacementNotif: 'haut_gauche',
     opaciteNotif: "95",
+    temps: 2,
     affichageNotifPerm: true
   }, function(items) {
     // Attribution des valeurs aux différents champs de la page
@@ -49,6 +52,7 @@ function restore_options()
     document.getElementById('opacite').value = items.opaciteNotif;
     document.getElementById('couleurPartieTexte').value = items.couleurPartieTexteNotif;
     document.getElementById('couleurTexte').value = items.couleurTexteNotif;
+    document.getElementById('temps').value = items.tempsNotif;
     document.getElementById('affNotif').checked = items.affichageNotifPerm;
   });
 }

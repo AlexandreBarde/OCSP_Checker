@@ -20,6 +20,7 @@ function showDate(miseajour, depassement)
   var opacite_notif = '95';
   var position_notif_stockage = 'haut_gauche';
   var position_notif = '';
+  var temps_affichage = 3;
 
   chrome.storage.sync.get({
     couleurNotif: 'pink',
@@ -27,6 +28,7 @@ function showDate(miseajour, depassement)
     couleurPartieTexteNotif: 'red',
     emplacementNotif: 'haut_gauche',
     opaciteNotif: "95",
+    tempsNotif: 3,
     affichageNotifPerm: true
   }, function(items) {
     // Attribution des valeurs aux variables
@@ -35,6 +37,7 @@ function showDate(miseajour, depassement)
     couleur_texte = items.couleurTexteNotif;
     couleur_partie_texte = items.couleurPartieTexteNotif;
     position_notif_stockage = items.emplacementNotif;
+    temps_affichage = items.tempsNotif;
   });
 
   alert(opacite_notif);
@@ -42,6 +45,7 @@ function showDate(miseajour, depassement)
   alert(couleur_texte);
   alert(couleur_partie_texte);
   alert(position_notif_stockage);
+  alert(temps_affichage);
 
   switch (position_notif_stockage)
   {
@@ -135,7 +139,7 @@ function showDate(miseajour, depassement)
   // Montrer la notification
   showNotif();
   // La cacher après un temps défini dans les paramètres
-  setTimeout(hideNotif, 3000);
+  setTimeout(hideNotif, temps_affichage*1000);
 }
 
 function showNotif() {
