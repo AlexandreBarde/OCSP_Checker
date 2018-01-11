@@ -14,8 +14,8 @@ function sendNative(message) {
  * Envoie un message depuis la popup a background
  * @param {String} message 
  */
-function sendBackground(message) {
-    return browser.runtime.sendMessage(message)
+function sendBackground(port, message) {
+    port.postMessage(message)
 }
 
 /**

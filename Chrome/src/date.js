@@ -1,4 +1,5 @@
 const moment = require('moment')
+const stor = require('./storage')
 const moment_formatter = require('moment-duration-format')
 
 /**
@@ -8,7 +9,7 @@ const moment_formatter = require('moment-duration-format')
  * @returns {moment.duration}
  */
 function ocspAge(str_date) {
-    let update = buildMoment(str_date)
+    let update = moment(str_date)
     let now = moment()
     let diff = now.diff(update)
     let duration = moment.duration(diff, 'millisecond')
@@ -25,7 +26,7 @@ function ocspAge(str_date) {
 function timeDiff(duration, critical) {
     // Prendre les 2 durées en millisecondes
     let duration_ms = duration.asMilliseconds()
-    let critical_ms = moment.duration(critical).asMilliseconds()
+    let critical_ms = moment.duration({ seconds: critical }).asMilliseconds()
     // Calculer la différence entre les 2
     let difference_ms = critical_ms - duration_ms
     return difference_ms
@@ -40,25 +41,38 @@ function formatDuration(duration) {
     return duration.format('d [jours] HH:mm:ss')
 }
 
-/**
- * Construit une date depuis le string
- * renvoyé par l'application native
- * @param {String} str_date 
- * @returns {moment}
- */
-function buildMoment(str_date) {
-    // Retirer le "UTC"
-    let d = str_date.replace('UTC ', '')
-    return moment(d, 'MMM DD HH:mm:ss YYYY')
-}
-
 function isDate(text) {
     return !isNaN(new Date(text))
 }
+
+function treatUpdate(date_str, hostname) {
+    // Calculer l'age de la mise à jour
+    let age = ocspAge(date_str)
+    // Calculer la différence entre l'age de la maj et l'ancienneté critique
+    // TODO Remplacer par la fonction de ./storage quand ça aura fini de buguer
+    let dur = localStorage.getItem(hostname)
+    let diff = timeDiff(age, dur)
+    // Si la différence est négatif, l'ancienneté critique est dépassée
+    if (diff < 0) {
+        // Formatter le depassement
+        let offset = formatDuration(moment.duration(Math.abs(diff)))
+        // Preparer le message a envoyer au content
+        let msg = {
+            maj: formatDuration(age),
+            depas: offset
+        }
+        return msg
+    } else {
+        return false
+    }
+}
+
+
 
 module.exports = {
     ocspAge,
     timeDiff,
     formatDuration,
-    isDate
+    isDate,
+    treatUpdate
 }

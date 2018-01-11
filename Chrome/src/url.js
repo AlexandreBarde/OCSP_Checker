@@ -12,9 +12,13 @@ function getHostname(url) {
  * Récupère le nom d'hote de l'onglet courant
  */
 function getCurrentHostname() {
-    let p_tabs = browser.tabs.query({ active: true, currentWindow: true })
+    let p_tabs = new Promise((resolve, reject) => {
+        chrome.tabs.query({ active: true, lastFocusedWindow: true }, tabs => {
+            resolve(tabs)
+        })
+    })
     let p_hostname = new Promise((resolve, reject) => {
-        p_tabs.then((tabs) => {
+        p_tabs.then(tabs => {
             resolve(getHostname(tabs[0].url))
         })
     })
