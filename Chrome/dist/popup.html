@@ -64,19 +64,19 @@
                 <strong>Modification : </strong>
             </p>
             <!-- Jours -->
-            <input id="days_modif" type="number" maxlength="2" value="2" required>
+            <input id="days_modif" type="number" maxlength="2" value="2" min="0" required>
             <label>j</label>
 
             <!-- Heures -->
-            <input id="hours_modif" type="number" maxlength="2" value="0" required>
+            <input id="hours_modif" type="number" maxlength="2" value="0" min="0" max="23" required>
             <label>h</label>
 
             <!-- Minutes -->
-            <input id="minutes_modif" type="number" maxlength="2" value="0" required>
+            <input id="minutes_modif" type="number" maxlength="2" value="0" min="0" max="59" required>
             <label>m</label>
 
             <!-- Secondes -->
-            <input id="seconds_modif" type="number" maxlength="2" value="0" required>
+            <input id="seconds_modif" type="number" maxlength="2" value="0" min="0" max="59" required>
             <label>s</label>
 
             <button type="button" class="btn btn-outline-success btn-sm" id="modif_done">Modifier</button>
