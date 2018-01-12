@@ -39,7 +39,7 @@ function addSite(hostname, time) {
 }
 
 /**
- * Récupère un site de la liste
+ * Récupère l'ancienneté pour un site stocké
  * @param {String} hostname
  */
 function getSite(hostname) {

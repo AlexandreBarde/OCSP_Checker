@@ -119,6 +119,14 @@ function showDisabled() {
     no_stapling.hidden = false
 }
 
+function showAddWarning() {
+    document.getElementById("add_err").hidden = false;
+}
+
+function showModifWarning() {
+    document.getElementById("modif_err").hidden = false;
+}
+
 module.exports = {
     printSites,
     btn_follow,
@@ -134,5 +142,7 @@ module.exports = {
     showDisabled,
     follow,
     unfollow,
+    showAddWarning,
+    showModifWarning,
     div_modif
 }
