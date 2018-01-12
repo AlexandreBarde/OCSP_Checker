@@ -20,8 +20,8 @@ function showDate(miseajour, depassement) {
     div_notif.appendChild(div_texte)
     document.body.appendChild(div_notif)
     // Ecrire les informations ne dépendant pas des options
-    txt.textContent = `Dernière mise à jour: ${miseajour}\nDépassement: ${depassement}`
     div_titre.textContent = "Attestation OCSP trop ancienne"
+    txt.textContent = `Mise à jour: ${miseajour}\nDépassement: ${depassement}`
 
     // Recuperer les valeurs des options
     let p_opts = new Promise((resolve, reject) => {
@@ -44,7 +44,7 @@ function showDate(miseajour, depassement) {
         // Donner les couleurs aux elements
         div_titre.style.backgroundColor = items.couleurNotif
         div_texte.style.backgroundColor = items.couleurPartieTexteNotif
-        div_texte.style.opacity = `0.${items.opaciteNotif}`
+        div_texte.style.opacity = items.opaciteNotif / 100
         txt.style.color = items.couleurTexteNotif
         let top, bottom, left, right
         switch (emplacement_notif_stockage) {
@@ -72,7 +72,7 @@ function showDate(miseajour, depassement) {
         if (left)
             div_notif.style.left = left
         if (right)
-            div_notif.style.left = top
+            div_notif.style.left = right
         // Montrer la notification
         showNotif();
         // La cacher après un temps défini dans les paramètres

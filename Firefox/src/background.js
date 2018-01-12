@@ -20,7 +20,6 @@ browser.runtime.onConnect.addListener(port => {
                         has_stapling: is_date,
                         hostname: message.check_stapling
                     }
-                    console.log(stapling_infos)
                     port.postMessage(stapling_infos)
                 })
         } else if (message.get_date) {
@@ -38,8 +37,6 @@ function checkUpdate(hostname) {
             let dep = date.treatUpdate(response, hostname)
             if (dep) {
                 messaging.sendContent(dep)
-                // Si la date est dépassée, refaire la vérification au prochain chargement
-                serveur_precedent = undefined
             }
         })
 }
