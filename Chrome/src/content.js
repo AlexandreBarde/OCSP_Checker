@@ -1,5 +1,5 @@
 chrome.runtime.onMessage.addListener(message => {
-    showDate('2 jours 03:07:08', '2 jours 03:07:08')
+    showDate(message.maj, message.depas)
 });
 
 var div_notif

@@ -5,7 +5,6 @@ browser.runtime.onMessage.addListener(message => {
 var div_notif
 
 function showDate(miseajour, depassement) {
-  alert('kek')
   // Créer les elements HTML de la notif
   div_notif = document.createElement('div')
   let div_titre = document.createElement('div')
@@ -14,16 +13,15 @@ function showDate(miseajour, depassement) {
   div_notif.id = "OCSP_check_div_notif"
   div_titre.id = "OCSP_check_div_titre"
   div_texte.id = "OCSP_check_div_texte"
-  depas.id = "OCSP_check_texte"
-  maj.id = "OCSP_check_texte"
+  txt.id = 'texte'
   // Mettre en place la structure
-  div_texte.appendChild(maj)
-  div_texte.appendChild(depas)
+  div_texte.appendChild(txt)
   div_notif.appendChild(div_titre)
   div_notif.appendChild(div_texte)
   document.body.appendChild(div_notif)
   // Ecrire les informations statiques
   div_titre.textContent = "Attestation OCSP trop ancienne"
+  txt.textContent = `Dernière mise à jour: ${miseajour}\nDépassement: ${depassement}`
 
   // Recuperer les valeurs des options
   let p_opts = browser.storage.sync.get({
@@ -36,15 +34,16 @@ function showDate(miseajour, depassement) {
   })
 
   // Une fois les options chargées, les prendre en compte
-  p_opts.then(params => {
-    let emplacement_notif_stockage = params.emplacementNotif
+  p_opts.then(items => {
+    let emplacement_notif_stockage = items.emplacementNotif
+    let temps_affichage = items.temps_affichage = items.tempsNotif
     // Donner les couleurs aux elements
-    div_titre.style.backgroundColor = params.couleurNotif
-    div_texte.style.backgroundColor = params.couleurPartieNotif
-    div_texte.style.opacity = `0.${params.opaciteNotif}`
-    txt.style.color = params.couleurTexteNotif
+    div_titre.style.backgroundColor = items.couleurNotif
+    div_texte.style.backgroundColor = items.couleurPartieTexteNotif
+    div_texte.style.opacity = `0.${items.opaciteNotif}`
+    txt.style.color = items.couleurTexteNotif
     let top, bottom, left, right
-    switch (position_notif_stockage) {
+    switch (emplacement_notif_stockage) {
       case 'bas_droite':
         bottom = '5%'
         right = '3%'
