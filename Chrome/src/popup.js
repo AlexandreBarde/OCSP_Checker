@@ -35,6 +35,7 @@ function updateSiteStatus() {
     url_parser.getCurrentHostname()
         .then(hostname => {
             // Demander au background de vérifier si le site courant support OCSP Stapling 
+            console.log('Envoi au background')
             messaging.sendBackground(port, { check_stapling: hostname })
         })
 }

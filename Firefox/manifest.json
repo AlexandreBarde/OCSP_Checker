@@ -22,6 +22,9 @@
             "js": [
                 "dist/js/content.bundle.js"
             ],
+            "css": [
+                "dist/notif.css"
+            ],
             "matches": [
                 "https://*/*"
             ]
