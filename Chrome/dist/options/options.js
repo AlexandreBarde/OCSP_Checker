@@ -6,13 +6,11 @@ function save_options() {
   let emplacement = document.getElementById('emplacement').value
   let opacite = document.getElementById('opacite').value
   let temps = document.getElementById('temps').value
-  let affichageNotif = document.getElementById('affNotif').checked
   // Enregistrement de ces options
   let p_sync = new Promise((resolve, reject) => {
     chrome.storage.sync.set({
       couleurNotif: couleur,
       emplacementNotif: emplacement,
-      affichageNotifPerm: affichageNotif,
       couleurTexteNotif: couleurTexte,
       couleurPartieTexteNotif: couleurPartieTexte,
       tempsNotif: temps,
@@ -45,7 +43,6 @@ function restore_options() {
       emplacementNotif: 'haut_gauche',
       opaciteNotif: "95",
       temps: 2,
-      affichageNotifPerm: true
     }, items => {
       resolve(items)
     })
@@ -58,7 +55,6 @@ function restore_options() {
     document.getElementById('couleurPartieTexte').value = items.couleurPartieTexteNotif
     document.getElementById('couleurTexte').value = items.couleurTexteNotif
     document.getElementById('temps').value = items.temps
-    document.getElementById('affNotif').checked = items.affichageNotifPerm
   })
 }
 
