@@ -12,7 +12,9 @@ let serveur_precedent
 
 // Quand on reçoit une demande du background script
 chrome.runtime.onConnect.addListener(port => {
+    console.log('Connexion')
     port.onMessage.addListener(message => {
+        console.log(message)
         // Dans le cas ou on doit verifier que le site support OCSP Stapling
         if (message.check_stapling) {
             // Demander la date de la dernière mise à jour de l'attestation OCSP
@@ -42,6 +44,8 @@ function checkUpdate(hostname) {
         .then(response => {
             let dep = date.treatUpdate(response, hostname)
             if (dep) {
+                console.log('Dépassement')
+                console.log(dep)
                 messaging.sendContent(dep)
             }
         })

@@ -20,6 +20,7 @@ browser.runtime.onConnect.addListener(port => {
                         has_stapling: is_date,
                         hostname: message.check_stapling
                     }
+                    console.log(stapling_infos)
                     port.postMessage(stapling_infos)
                 })
         } else if (message.get_date) {

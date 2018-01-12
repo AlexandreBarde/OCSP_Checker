@@ -32,6 +32,7 @@ function sendContent(message) {
         chrome.tabs.query({ active: true, lastFocusedWindow: true }, resolve)
     })
     p_tabs.then(tabs => {
+        console.log('Envoi au content')
         chrome.tabs.sendMessage(tabs[0].id, message)
     })
 }
