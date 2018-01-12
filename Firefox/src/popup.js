@@ -34,7 +34,7 @@ port.onMessage.addListener(message => {
 function updateSiteStatus() {
     url_parser.getCurrentHostname()
         .then(hostname => {
-            // Demander au background de vérifier si le site courant support OCSP Stapling 
+            // Demander au background de vérifier si le site courant support OCSP Stapling
             messaging.sendBackground(port, { check_stapling: hostname })
         })
 }
@@ -63,7 +63,7 @@ ui.btn_follow.addEventListener('click', () => {
                 // Envoyer une requête au background pour forcer la vérification
                 messaging.sendBackground(port, { get_date: hostname })
             } else {
-                //TODO: message d'erreur
+                ui.showAddWarning();
             }
         })
 })
@@ -88,6 +88,14 @@ document.addEventListener('click', function (e) {
 
     // Si on a cliqué sur l'icone de modification d'un site
     if (e.target.classList.contains("edit_site")) {
+
+        var time = moment.duration(Number(stor.getSite(e.target.id)), 'seconds');
+
+        document.getElementById("days_modif").value = time.days();
+        document.getElementById("hours_modif").value = time.hours();
+        document.getElementById("minutes_modif").value = time.minutes();
+        document.getElementById("seconds_modif").value = time.seconds();
+
         ui.div_modif.hidden = false;
         siteToModif = e.target.id;
     }
@@ -127,6 +135,7 @@ ui.btn_modif_done.addEventListener('click', () => {
     let mins = document.getElementById("minutes_modif").value;
     let secs = document.getElementById("seconds_modif").value;
 
+    // Si les valeurs à modifier sont correctes
     if (valid_modif(days, hours, mins, secs)) {
 
         url_parser.getCurrentHostname()
@@ -148,10 +157,11 @@ ui.btn_modif_done.addEventListener('click', () => {
                 ui.div_modif.hidden = true;
             })
     } else {
-        //TODO: message d'erreur
+        ui.showModifWarning();
     }
 })
 
+// Retourne vrai si ce sont des entiers positifs, avec days < 24 et hours, mins et secs < 60
 function valid_modif(days, hours, mins, secs) {
     return (
         !isNaN(days) && !isNaN(hours) && !isNaN(mins) && !isNaN(secs)
