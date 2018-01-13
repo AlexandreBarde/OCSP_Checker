@@ -20,7 +20,7 @@ module.exports = function (hostname) {
             socket.on('OCSPResponse', stapled => {
                 // Si il n'y a pas eu de réponse, le serveur n'utilise pas OCSP Stapling
                 if (!stapled) {
-                    resolve('NO_OCSP')
+                    resolve('NO_STAPLING')
                 } else {
                     // Sinon décoder la réponse
                     let res = OCSPResponse.decode(stapled, 'der')
@@ -28,7 +28,7 @@ module.exports = function (hostname) {
                     // Vérifier qu'il s'agisse bien d'une attestation
                     if (type != 'id-pkix-ocsp-basic') {
                         // Sinon le serveur n'utilise pas la bonne implémentation
-                        resolve('NO_OCSP')
+                        resolve('NO_STAPLING')
                     } else {
                         // Décoder le corps de l'attestation
                         let bytes = res.responseBytes.response
