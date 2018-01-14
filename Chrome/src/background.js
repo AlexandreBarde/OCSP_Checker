@@ -10,11 +10,10 @@ const moment = require('moment')
 // à chaque fois qu'on navigue sur le site
 let serveur_precedent
 
-// Quand on reçoit une demande du background script
+// Quand la popup se connecte
 chrome.runtime.onConnect.addListener(port => {
-    console.log('Connexion')
+    // Attendre un message de sa part
     port.onMessage.addListener(message => {
-        console.log(message)
         // Dans le cas ou on doit verifier que le site support OCSP Stapling
         if (message.check_stapling) {
             // Demander la date de la dernière mise à jour de l'attestation OCSP
@@ -38,14 +37,17 @@ chrome.runtime.onConnect.addListener(port => {
 })
 
 
+/**
+ * Envoie un nom d'hôte à l'application, et transmet
+ * sa réponse au content script pour l'affichage si nécessaire
+ * @param {String} hostname 
+ */
 function checkUpdate(hostname) {
     // Recuperer la date auprès de l'application native
     messaging.sendNative(hostname)
         .then(response => {
             let dep = date.treatUpdate(response, hostname)
             if (dep) {
-                console.log('Dépassement')
-                console.log(dep)
                 messaging.sendContent(dep)
             }
         })
