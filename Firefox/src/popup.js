@@ -137,11 +137,6 @@ ui.btn_modif_done.addEventListener('click', () => {
 
     // Si les valeurs à modifier sont correctes
     if (valid_modif(days, hours, mins, secs)) {
-        /**
-         * 
-         * ALERTE GIGA BUG: On est pas forcemment sur le site qu'on veut modifier, ça ça marche absolument pas
-         * 
-         */
         url_parser.getCurrentHostname()
             .then(hostname => {
                 let time = moment.duration({
@@ -155,8 +150,8 @@ ui.btn_modif_done.addEventListener('click', () => {
                 });
 
                 stor.addSite(siteToModif, time.asSeconds())
-                // Refaire une vérification auprès du background avec la nouvelle date
-                messaging.sendBackground(port, { get_date: hostname })
+                // Refaire une vérification auprès du background avec la nouvelle date si le site modifié est le site visité
+                if(hostname == siteToModif) messaging.sendBackground(port, { get_date: hostname })
                 ui.printSites()
                 ui.div_modif.hidden = true;
             })
