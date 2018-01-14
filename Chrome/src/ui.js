@@ -40,7 +40,6 @@ function printSites() {
             }
         }
 
-        //TODO: Entête du tableau direct dans le html
         row = sites_list.insertRow(0);
         row.insertCell(0).innerHTML += "<b>Site</b>"
         row.insertCell(1).innerHTML += "<b>Ancienneté critique</b>"
