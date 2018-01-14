@@ -64,7 +64,7 @@ function treatUpdate(date_str, hostname) {
     // Calculer la différence entre l'age de la maj et l'ancienneté critique
     let dur = stor.getSite(hostname)
     let diff = timeDiff(age, dur)
-    // Si la différence est négatif, l'ancienneté critique est dépassée
+    // Si la différence est négative, l'ancienneté critique est dépassée
     if (diff < 0) {
         // Formatter le depassement
         let offset = formatDuration(moment.duration(Math.abs(diff)))
