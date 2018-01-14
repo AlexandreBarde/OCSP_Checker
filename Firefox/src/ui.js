@@ -113,6 +113,9 @@ function showUnfollowed() {
     unfollowed.hidden = false
 }
 
+/**
+ * Affiche que le site n'utilise pas OCSP Stapling
+ */
 function showDisabled() {
     followed.hidden = true
     unfollowed.hidden = true

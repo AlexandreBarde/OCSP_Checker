@@ -81,7 +81,8 @@ function removeAllSites() {
 
 /**
  * Donne l'ancienneté critique pour un nom d'hote
- * @param {string} hostname
+ * @param {String} hostname
+ * @returns {String}
  */
 function getCriticalAge(hostname) {
     if (isAvailable()) {
@@ -92,18 +93,36 @@ function getCriticalAge(hostname) {
     }
 }
 
+/**
+ * Donne le nombre de sites stockés
+ * @returns {Number}
+ */
 function getLength() {
     return localStorage.length
 }
 
+/**
+ * Retourne le nom d'hôte pour une position
+ * donnée dans la liste
+ * @param {Number}
+ */
 function getHostname(i) {
     return localStorage.key(i)
 }
 
+/**
+ * Vérifie si la liste est vide
+ * @returns {Boolean}
+ */
 function isEmpty() {
     return localStorage.length == 0
 }
 
+/**
+ * Vérifie qu'un site soit suivi
+ * @param {String} hostname 
+ * @returns {Boolean}
+ */
 function isFollowed(hostname) {
     return getSite(hostname) != null
 }

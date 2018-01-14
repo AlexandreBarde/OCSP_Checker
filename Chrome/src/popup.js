@@ -35,7 +35,6 @@ function updateSiteStatus() {
     url_parser.getCurrentHostname()
         .then(hostname => {
             // Demander au background de vérifier si le site courant support OCSP Stapling 
-            console.log('Envoi au background')
             messaging.sendBackground(port, { check_stapling: hostname })
         })
 }
@@ -144,6 +143,7 @@ ui.btn_modif_done.addEventListener('click', () => {
 
                 stor.addSite(siteToModif, time.asSeconds())
                 // Refaire une vérification auprès du background avec la nouvelle date
+                // si on se trouve sur le site concerné
                 messaging.sendBackground(port, { get_date: hostname })
                 ui.printSites()
                 ui.div_modif.hidden = true;
@@ -164,7 +164,7 @@ function valid_modif(days, hours, mins, secs) {
 
 const refresh = document.getElementById('refresh')
 
-// Quand un site est suivi et qu'on clique sur l'icon pour refaire la vérification
+// Quand un site est suivi et qu'on clique sur l'icone pour refaire la vérification
 refresh.addEventListener('click', () => {
     // Faire tourner la petite fleche
     refresh.classList.add('active')

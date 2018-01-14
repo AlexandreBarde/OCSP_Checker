@@ -5,10 +5,16 @@ const date = require('./date')
 const storage = require('./storage')
 const moment = require('moment')
 
+// Variable accessible à tout le fichier
+// permet de ne pas refaire la verification
+// à chaque fois qu'on navigue sur le site
 let serveur_precedent
 
+// Quand la popup se connecte
 browser.runtime.onConnect.addListener(port => {
+    // Attendre un message de sa part
     port.onMessage.addListener(message => {
+        // Dans le cas ou on doit verifier que le site support OCSP Stapling
         if (message.check_stapling) {
             // Demander la date de la dernière mise à jour de l'attestation OCSP
             // à l'application native
@@ -30,6 +36,11 @@ browser.runtime.onConnect.addListener(port => {
     })
 })
 
+/**
+ * Envoie un nom d'hôte à l'application, et transmet
+ * sa réponse au content script pour l'affichage si nécessaire
+ * @param {String} hostname 
+ */
 function checkUpdate(hostname) {
     // Recuperer la date auprès de l'application native
     messaging.sendNative(hostname)
