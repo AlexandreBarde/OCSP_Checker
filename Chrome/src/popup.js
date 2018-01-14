@@ -63,7 +63,7 @@ ui.btn_follow.addEventListener('click', () => {
                 // Envoyer une requête au background pour forcer la vérification
                 messaging.sendBackground(port, { get_date: hostname })
             } else {
-                //TODO: message d'erreur
+                //TODO: message d'erreur <--- Quand ?
             }
         })
 })
@@ -136,6 +136,11 @@ ui.btn_modif_done.addEventListener('click', () => {
 
     if (valid_modif(days, hours, mins, secs)) {
 
+        /**
+         * 
+         * ALERTE GIGA BUG: On est pas forcemment sur le site qu'on veut modifier, ça ça marche absolument pas
+         * 
+         */
         url_parser.getCurrentHostname()
             .then(hostname => {
                 let time = moment.duration({
@@ -156,7 +161,7 @@ ui.btn_modif_done.addEventListener('click', () => {
                 ui.div_modif.hidden = true;
             })
     } else {
-        //TODO: message d'erreur
+        //TODO: message d'erreur <-- Oui ?
     }
 })
 
