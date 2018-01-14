@@ -88,10 +88,17 @@ document.addEventListener('click', function (e) {
 
     // Si on a cliqué sur l'icone de modification d'un site
     if (e.target.classList.contains("edit_site")) {
+
+        var time = moment.duration(Number(stor.getSite(e.target.id)), 'seconds');
+
+        document.getElementById("days_modif").value = time.days();
+        document.getElementById("hours_modif").value = time.hours();
+        document.getElementById("minutes_modif").value = time.minutes();
+        document.getElementById("seconds_modif").value = time.seconds();
+
         ui.div_modif.hidden = false;
         siteToModif = e.target.id;
     }
-
     // Si on a cliqué sur l'icone de suppression d'un site
     if (e.target.classList.contains("delete_site")) {
         url_parser.getCurrentHostname()
