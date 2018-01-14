@@ -34,7 +34,7 @@ port.onMessage.addListener(message => {
 function updateSiteStatus() {
     url_parser.getCurrentHostname()
         .then(hostname => {
-            // Demander au background de vérifier si le site courant support OCSP Stapling 
+            // Demander au background de vérifier si le site courant support OCSP Stapling
             messaging.sendBackground(port, { check_stapling: hostname })
         })
 }
@@ -63,7 +63,7 @@ ui.btn_follow.addEventListener('click', () => {
                 // Envoyer une requête au background pour forcer la vérification
                 messaging.sendBackground(port, { get_date: hostname })
             } else {
-                //TODO: message d'erreur <--- Quand ?
+                ui.showAddWarning();
             }
         })
 })
@@ -135,12 +135,6 @@ ui.btn_modif_done.addEventListener('click', () => {
     let secs = document.getElementById("seconds_modif").value;
 
     if (valid_modif(days, hours, mins, secs)) {
-
-        /**
-         * 
-         * ALERTE GIGA BUG: On est pas forcemment sur le site qu'on veut modifier, ça ça marche absolument pas
-         * 
-         */
         url_parser.getCurrentHostname()
             .then(hostname => {
                 let time = moment.duration({
@@ -154,14 +148,13 @@ ui.btn_modif_done.addEventListener('click', () => {
                 });
 
                 stor.addSite(siteToModif, time.asSeconds())
-                // Refaire une vérification auprès du background avec la nouvelle date
-                // si on se trouve sur le site concerné
-                messaging.sendBackground(port, { get_date: hostname })
+                // Refaire une vérification auprès du background avec la nouvelle date si le site modifié est le site visité
+                if(hostname == siteToModif) messaging.sendBackground(port, { get_date: hostname })
                 ui.printSites()
                 ui.div_modif.hidden = true;
             })
     } else {
-        //TODO: message d'erreur <-- Oui ?
+        ui.showModifWarning();
     }
 })
 
