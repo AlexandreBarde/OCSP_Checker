@@ -173,7 +173,7 @@ function valid_modif(days, hours, mins, secs) {
 
 const refresh = document.getElementById('refresh')
 
-// Quand un site est suivi et qu'on clique sur l'icon pour refaire la vérification
+// Quand un site est suivi et qu'on clique sur l'icone pour refaire la vérification
 refresh.addEventListener('click', () => {
     // Faire tourner la petite fleche
     refresh.classList.add('active')

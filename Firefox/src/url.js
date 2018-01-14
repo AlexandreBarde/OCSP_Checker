@@ -1,6 +1,7 @@
 /**
  * Récupère le nom d'hote d'une URL donnée 
  * @param {String} url 
+ * @returns {String}
  */
 function getHostname(url) {
     let parser = document.createElement('a')
@@ -10,6 +11,7 @@ function getHostname(url) {
 
 /**
  * Récupère le nom d'hote de l'onglet courant
+ * @returns {String}
  */
 function getCurrentHostname() {
     let p_tabs = browser.tabs.query({ active: true, currentWindow: true })

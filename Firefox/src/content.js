@@ -36,7 +36,7 @@ function showDate(miseajour, depassement) {
   // Une fois les options chargées, les prendre en compte
   p_opts.then(items => {
     let emplacement_notif_stockage = items.emplacementNotif
-    let temps_affichage = items.temps_affichage = items.tempsNotif
+    let temps_affichage = items.tempsNotif
     // Donner les couleurs aux elements
     div_titre.style.backgroundColor = items.couleurNotif
     div_texte.style.backgroundColor = items.couleurPartieTexteNotif

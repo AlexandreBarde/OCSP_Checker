@@ -41,10 +41,23 @@ function formatDuration(duration) {
     return duration.format('d [jours] HH:mm:ss')
 }
 
+/**
+ * Vérifie si une chaîne de caractère est une date
+ * @param {String} text 
+ * @returns {Boolean}
+ */
 function isDate(text) {
     return !isNaN(new Date(text))
 }
 
+/**
+ * Vérifie si l'ancienneté de l'attestation
+ * dépasse l'ancienneté critique pour une
+ * date et un nom d'hôte donné
+ * @param {String} date_str 
+ * @param {String} hostname 
+ * @returns {Object | boolean}
+ */
 function treatUpdate(date_str, hostname) {
     // Calculer l'age de la mise à jour
     let age = ocspAge(date_str)

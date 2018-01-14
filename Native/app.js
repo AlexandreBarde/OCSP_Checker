@@ -8,6 +8,13 @@ const input = new nativeMessaging.Input();
 const transform = new nativeMessaging.Transform(handle_message);
 const output = new nativeMessaging.Output()
 
+/**
+ * Faire passer le contenu de l'entrée standard
+ * en temps qu'objet dans l'application,
+ * deleguer le traitement du message à handle_message
+ * puis renvoyer le message créer en tant qu'octets
+ * précédé par sa longueur sur la sortie standard
+ */
 process.stdin
     .pipe(input)
     .pipe(transform)
@@ -23,6 +30,8 @@ function handle_message(msg, push, done) {
         push(date)
         done()
     }).catch(err => {
+        // Si on a pas pu se connecter au serveur
+        // envoyer le message d'erreur à l'extension
         push('SERVER_ERROR')
         done()
     })
