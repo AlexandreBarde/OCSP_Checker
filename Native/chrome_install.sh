@@ -2,7 +2,7 @@
 
 # ID de l'extension
 
-ID="ephenibemokabpkneimckgdkdgfgkicp"
+ID="mmphmacfgkfehabflhdhlopnnljdaigo"
 
 # Si on est sur macOS
 if [ "$(uname -s)" = "Darwin" ]; then
