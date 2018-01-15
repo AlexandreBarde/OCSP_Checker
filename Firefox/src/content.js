@@ -21,7 +21,7 @@ function showDate(miseajour, depassement) {
   document.body.appendChild(div_notif)
   // Ecrire les informations statiques
   div_titre.textContent = "Attestation OCSP trop ancienne"
-  txt.textContent = `Mise à jour: ${miseajour}\nDépassement: ${depassement}`
+  txt.innerHTML = `Mise à jour: ${miseajour}<br>Dépassement: ${depassement}`
 
   // Recuperer les valeurs des options
   let p_opts = browser.storage.sync.get({

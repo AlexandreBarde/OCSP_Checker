@@ -10,7 +10,7 @@ const id_app = 'com.e2.ocsp_checker'
  */
 function sendNative(message) {
     return new Promise((resolve, reject) => {
-        chrome.runtime.sendNativeMessage(id_app, { url: message }, resolve)
+        chrome.runtime.sendNativeMessage(id_app, { hostname: message }, resolve)
     })
 }
 
@@ -32,7 +32,6 @@ function sendContent(message) {
         chrome.tabs.query({ active: true, lastFocusedWindow: true }, resolve)
     })
     p_tabs.then(tabs => {
-        console.log('Envoi au content')
         chrome.tabs.sendMessage(tabs[0].id, message)
     })
 }
