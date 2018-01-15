@@ -7,7 +7,7 @@ const date = require('./date')
  *      Promesse contenant la date de mise à jour
  */
 function sendNative(message) {
-    return browser.runtime.sendNativeMessage('com.e2.ocsp_checker', { url: message })
+    return browser.runtime.sendNativeMessage('com.e2.ocsp_checker', { hostname: message })
 }
 
 /**

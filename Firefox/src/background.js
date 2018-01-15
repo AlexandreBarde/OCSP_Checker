@@ -56,17 +56,21 @@ function checkUpdate(hostname) {
 
 // A chaque fois qu'un onglet est chargé
 browser.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
-    if (changeInfo.status === 'complete') {
-        // Récuperer le nom d'hôte du serveur
-        let p_hostname = url_parser.getCurrentHostname()
-        p_hostname.then(hostname => {
-            // Verifier qu'on ne soit pas encore sur le même serveur
-            // et que le site soit suivi
-            if ((typeof serveur_precedent === 'undefined' || serveur_precedent != hostname) && storage.isFollowed(hostname)) {
-                // Sauvegarder le serveur courant
-                serveur_precedent = hostname
-                checkUpdate(hostname)
-            }
-        })
-    }
+    // Recuperer l'onglet actif
+    browser.tabs.query({ active: true, lastFocusedWindow: true }).then(tabs => {
+        // Verifier que ce soit bien lui qui ai été chargé
+        if (changeInfo.status === 'complete' && tabId === tabs[0].id) {
+            // Récuperer le nom d'hôte du serveur
+            let p_hostname = url_parser.getCurrentHostname()
+            p_hostname.then(hostname => {
+                // Verifier qu'on ne soit pas encore sur le même serveur
+                // et que le site soit suivi
+                if ((typeof serveur_precedent === 'undefined' || serveur_precedent != hostname) && storage.isFollowed(hostname)) {
+                    // Sauvegarder le serveur courant
+                    serveur_precedent = hostname
+                    checkUpdate(hostname)
+                }
+            })
+        }
+    })
 })

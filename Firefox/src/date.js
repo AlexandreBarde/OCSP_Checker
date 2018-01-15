@@ -62,7 +62,7 @@ function treatUpdate(date_str, hostname) {
     // Calculer l'age de la mise à jour
     let age = ocspAge(date_str)
     // Calculer la différence entre l'age de la maj et l'ancienneté critique
-    let dur = stor.getSite(hostname)
+    let dur = localStorage.getItem(hostname) // Bug, impossible d'utiliser stor.getSite()
     let diff = timeDiff(age, dur)
     // Si la différence est négative, l'ancienneté critique est dépassée
     if (diff < 0) {

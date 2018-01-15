@@ -24,7 +24,7 @@ process.stdin
 // Quand on reçoit un message
 function handle_message(msg, push, done) {
     // Recuperer la maj OCSP du serveur du message
-    let p_date = getUpdate(msg.url)
+    let p_date = getUpdate(msg.hostname)
     p_date.then(date => {
         // Et la renvoyer à l'application
         push(date)
