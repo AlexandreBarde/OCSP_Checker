@@ -9,19 +9,23 @@ function showDate(miseajour, depassement) {
     div_notif = document.createElement('div')
     let div_titre = document.createElement('div')
     let div_texte = document.createElement('div')
-    let txt = document.createElement('p')
+    let maj = document.createElement('p')
+    let depas = document.createElement('p')
     div_notif.id = "OCSP_check_div_notif"
     div_titre.id = "OCSP_check_div_titre"
     div_texte.id = "OCSP_check_div_texte"
-    txt.id = 'texte'
+    maj.classList.add('texte')
+    depas.classList.add('texte')
     // Mettre en place la structure
-    div_texte.appendChild(txt)
     div_notif.appendChild(div_titre)
     div_notif.appendChild(div_texte)
+    div_texte.appendChild(maj)
+    div_texte.appendChild(depas)
     document.body.appendChild(div_notif)
     // Ecrire les informations ne dépendant pas des options
     div_titre.textContent = "Attestation OCSP trop ancienne"
-    txt.innerHTML = `Mise à jour: ${miseajour}<br>Dépassement: ${depassement}`
+    maj.textContent = `Mise à jour: ${miseajour}`
+    depas.textContent = `Depassement: ${depassement}`
 
     // Recuperer les valeurs des options
     let p_opts = new Promise((resolve, reject) => {
@@ -45,7 +49,8 @@ function showDate(miseajour, depassement) {
         div_titre.style.backgroundColor = items.couleurNotif
         div_texte.style.backgroundColor = items.couleurPartieTexteNotif
         div_texte.style.opacity = items.opaciteNotif / 100
-        txt.style.color = items.couleurTexteNotif
+        maj.style.color = items.couleurTexteNotif
+        depas.style.color = items.couleurTexteNotif
         let top, bottom, left, right
         switch (emplacement_notif_stockage) {
             case 'bas_droite':
