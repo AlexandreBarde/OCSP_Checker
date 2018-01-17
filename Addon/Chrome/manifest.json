@@ -1,0 +1,39 @@
+{
+    "description": "Vérifie l'ancienneté des attestations OCSP",
+    "manifest_version": 2,
+    "name": "OCSP Checker",
+    "version": "2.1",
+    "options_page": "dist/options/options.html",
+    "background": {
+        "scripts": [
+            "dist/js/background.bundle.js"
+        ]
+    },
+    "content_scripts": [
+        {
+            "js": [
+                "dist/js/content.bundle.js"
+            ],
+            "css": [
+                "dist/notif.css"
+            ],
+            "matches": [
+                "https://*/*"
+            ]
+        }
+    ],
+    "icons": {
+        "128": "icons/icon.png"
+    },
+    "browser_action": {
+        "default_icon": "icons/icon.png",
+        "default_title": "OCSP Checker",
+        "default_popup": "dist/popup.html"
+    },
+    "permissions": [
+        "nativeMessaging",
+        "tabs",
+        "storage"
+    ],
+    "update_url":"http://0.0.0.0"
+}

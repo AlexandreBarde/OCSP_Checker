@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Options OCSP Checker</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb"
+    crossorigin="anonymous">
+  <meta charset="UTF-8">
+</head>
+
+<body>
+  <div class="container">
+    <h1 class="display-4">Options de l'extension web OCSP Checker</h1>
+  </div>
+  <div class="container">
+    <div class="form-group">
+      <label for="couleur">Choisissez la couleur de la partie titre de la notification</label>
+      <input type="color" style="background-color:#fff; padding:0;" value="#ff0000" class="form-control" id="couleur">
+    </div>
+    <div class="form-group">
+      <label for="couleurPartieTexte">Choisissez la couleur de la partie texte de la notification</label>
+      <input type="color" style="background-color:#fff; padding:0;" value="#ff0000" class="form-control" id="couleurPartieTexte">
+    </div>
+    <div class="form-group">
+      <label for="couleurTexte">Choisissez la couleur du texte de la notification</label>
+      <input type="color" style="background-color:#fff; padding:0;" value="#ff0000" class="form-control" id="couleurTexte">
+    </div>
+    <div class="form-group">
+      <label for="temps">Temps d'affichage de la notification (en secondes)</label>
+      <input type="number" min="1" class="form-control" value="3" id="temps">
+    </div>
+    <div class="form-group">
+      <label for="emplacement">Choisissez l'emplacement de la notification</label>
+      <select id="emplacement" class="form-control">
+        <option value="bas_droite">En bas à droite</option>
+        <option value="bas_gauche">En bas à gauche</option>
+        <option value="haut_droite">En haut à droite</option>
+        <option value="haut_gauche">En haut à gauche</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="couleurTexte">Opacité de la notification</label>
+      <input type="range" min="5" max="99" value="95" name="opacite" class="form-control" id="opacite">
+    </div>
+  </div>
+  <div class="container">
+    <button type="submit" id="enregistrer" class="btn btn-primary">Enregistrer</button>
+  </div>
+  <br />
+  <div class="container">
+    <div class="alert alert-success" hidden role="alert" id="status"></div>
+  </div>
+  <script src="options.js"></script>
+</body>
+
+</html>
