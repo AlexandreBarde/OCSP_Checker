@@ -30,5 +30,3 @@ webpack --watch
 ```
 ./navigateur_install.sh
 ```
-
-Ne devrait rien afficher
