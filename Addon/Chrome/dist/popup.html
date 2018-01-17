@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css"/>
+    <link href="https://opensource.keycdn.com/fontawesome/4.7.0/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css"/>
+</head>
+
+<body>
+
+<div class="container-fluid">
+    <h3 class="display-4">OCSP Checker</h3>
+    <div id="unfollowed" class="alert alert-warning" hidden>
+        <p class="info">
+            <strong>Ce site n'est pas suivi</strong>
+        </p>
+        <p id="add_err" hidden><strong>Attention :</strong> Merci de rentrer des valeurs valides.</p>
+        <!-- Jours -->
+        <input id="days" type="number" maxlength="2" value="2" min="0" required>
+        <label>j</label>
+
+        <!-- Heures -->
+        <input id="hours" type="number" maxlength="2" value="0" min="0" max="23" required>
+        <label>h</label>
+
+        <!-- Minutes -->
+        <input id="minutes" type="number" maxlength="2" value="0" min="0" max="59" required>
+        <label>m</label>
+
+        <!-- Secondes -->
+        <input id="seconds" type="number" maxlength="2" value="0" min="0" max="59" required>
+        <label>s</label>
+
+        <button type="button" class="btn btn-outline-success btn-sm" id="follow">Suivre</button>
+
+    </div>
+    <div id="followed" class="alert alert-success" hidden>
+        <span id="txt_followed">
+            <strong>Ce site est suivi</strong>
+        </span>
+        <span id="refresh">
+                    <i class="fa fa-refresh"></i>
+                </span>
+        <span id="check" hidden>
+                    OK <i class="fa fa-check"></i>
+         </span>
+        <button type="button" class="btn btn-outline-danger btn-sm" id="unfollow">Ne plus suivre</button>
+    </div>
+
+    <div id="no_stapling" class="alert alert-warning" hidden>
+        <p class="info">
+            <strong>Ce site n'utilise pas OCSP Stapling</strong>
+        </p>
+    </div>
+
+    <div id="modif_site" class="alert alert-info" hidden>
+        <p class="info">
+            <strong>Modification : </strong>
+        </p>
+        <p id="modif_err" hidden><strong>Attention :</strong> Merci de rentrer des valeurs valides.</p>
+        <!-- Jours -->
+        <input id="days_modif" type="number" maxlength="2" value="2" min="0" required>
+        <label>j</label>
+
+        <!-- Heures -->
+        <input id="hours_modif" type="number" maxlength="2" value="0" min="0" max="23" required>
+        <label>h</label>
+
+        <!-- Minutes -->
+        <input id="minutes_modif" type="number" maxlength="2" value="0" min="0" max="59" required>
+        <label>m</label>
+
+        <!-- Secondes -->
+        <input id="seconds_modif" type="number" maxlength="2" value="0" min="0" max="59" required>
+        <label>s</label>
+
+        <button type="button" class="btn btn-outline-success btn-sm" id="modif_done">Modifier</button>
+    </div>
+    <a title="Développer" class="list_sites_instruc" id="chevron-down">
+        <i class="fa fa-chevron-down"></i>
+    </a>
+    <a title="Réduire" class="list_sites_instruc" id="chevron-up" hidden>
+        <i class="fa fa-chevron-up"></i>
+    </a>
+
+
+    <table class="table table-hover" id="sites" hidden></table>
+    <button type="button" class="btn btn-light btn-block" id="unfollowall" hidden>Vider la liste</button>
+</div>
+
+<script src="./js/popup.bundle.js"></script>
+</body>
+
+</html>

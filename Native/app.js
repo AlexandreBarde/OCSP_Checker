@@ -27,7 +27,7 @@ function handle_message(msg, push, done) {
     let p_date = getUpdate(msg.hostname)
     p_date.then(date => {
         // Et la renvoyer à l'application
-        push(date)
+        push({ update: date })
         done()
     }).catch(err => {
         // Si on a pas pu se connecter au serveur
