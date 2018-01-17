@@ -27,22 +27,8 @@ webpack --watch
 
 # Pour l'application native
 
-Copier *com.e2.ocsp_checker.json* dans *~/.mozilla/NativeMessagingHosts/*
-
-Modifier la valeur de *path* dans le JSON avec l'emplacement de app.js:
-*/emplacement-du-repo/Native/app.js*
-
-Installer les dépendance:
-Dans Native/
-
 ```
-npm install
-```
-
-Vérifier que l'application marche
-
-```
-echo 100 | ./app.js
+./navigateur_install.sh
 ```
 
 Ne devrait rien afficher

@@ -1,0 +1,30 @@
+#OCSP_check_div_titre{
+    border-radius: 4px 4px 0px 0px;
+    font-weight: bold;
+    text-align: center;
+    font-size: 20px;
+    border: 0px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    margin-bottom: 0;
+}
+
+#OCSP_check_div_texte {
+    border-radius: 0px 0px 4px 4px;
+    font-size: 18px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+#OCSP_check_div_notif {
+    width: 400px;
+    height: 110px;
+    z-index: 9999;
+    position: fixed;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.texte {
+    padding-left: 5px;
+    padding-right: 5px;
+    line-height: 1.5em;
+}
