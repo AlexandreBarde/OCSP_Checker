@@ -1,9 +1,8 @@
 const date = require('../src/date')
-const moment = require('moment')
 
 describe('Date module', () => {
     let update = '2018-01-17T22:00:00.000Z'
-    describe('fonction isDate', () => {
+    describe('function isDate', () => {
         it('should not be a date', () => {
             let not_a_date = 'NO_OCSP'
             expect(date.isDate(not_a_date)).toBeFalsy()
@@ -60,6 +59,54 @@ describe('Date module', () => {
         it('should be 2 jours 01:02:03', () => {
             let dur = 2 * day_ms + hour_ms + 2 * minute_ms + 3 * sec_ms
             expect(date.formatDuration(dur)).toBe('2 jours 01:02:03')
+        })
+    })
+    describe('function asMilliseconds', () => {
+        it('should be 1000', () => {
+            expect(date.asMilliseconds(0, 0, 0, 1)).toEqual(1000)
+        })
+        it('should be 60000', () => {
+            expect(date.asMilliseconds(0, 0, 1, 0)).toEqual(60000)
+        })
+        it('should be 3 600 000', () => {
+            expect(date.asMilliseconds(0, 1, 0, 0)).toEqual(3600000)
+        })
+        it('should be 86400000 ', () => {
+            expect(date.asMilliseconds(1, 0, 0, 0)).toEqual(3600000 * 24)
+        })
+    })
+    describe('function toObject', () => {
+        it('should be a 1 sec object', () => {
+            expect(date.toObject(1000)).toEqual({
+                days: 0,
+                hours: 0,
+                minutes: 0,
+                seconds: 1
+            })
+        })
+        it('should be a 1 min object', () => {
+            expect(date.toObject(60000)).toEqual({
+                days: 0,
+                hours: 0,
+                minutes: 1,
+                seconds: 0
+            })
+        })
+        it('should be a 1 hour object', () => {
+            expect(date.toObject(3600000)).toEqual({
+                days: 0,
+                hours: 1,
+                minutes: 0,
+                seconds: 0
+            })
+        })
+        it('should be a 1 day object', () => {
+            expect(date.toObject(86400000)).toEqual({
+                days: 1,
+                hours: 0,
+                minutes: 0,
+                seconds: 0
+            })
         })
     })
 })
