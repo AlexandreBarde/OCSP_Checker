@@ -1,8 +1,7 @@
 #!/bin/sh
 
 # ID de l'extension
-
-ID="mmphmacfgkfehabflhdhlopnnljdaigo"
+ID="jmmjfepnamleggadhpomjiapcbdhcneg"
 
 # Si on est sur macOS
 if [ "$(uname -s)" = "Darwin" ]; then

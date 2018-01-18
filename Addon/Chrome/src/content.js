@@ -78,7 +78,7 @@ function showDate(miseajour, depassement) {
         if (left)
             div_notif.style.left = left
         if (right)
-            div_notif.style.left = right
+            div_notif.style.right = right
         // Montrer la notification
         showNotif();
         // La cacher après un temps défini dans les paramètres
