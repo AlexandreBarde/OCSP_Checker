@@ -1,4 +1,5 @@
 const storage = require('./storage')
+const date = require('./date')
 
 // Boutons
 
@@ -53,9 +54,9 @@ function printSites() {
         } else {
             for (let i = 0; i < storage.getLength(); i++) {
                 let hostname = storage.getHostname(i)
-                let critical_age = storage.getCriticalAge(hostname)
+                let critical_age = storage.getCriticalSeconds(hostname)
                 row.insertCell(0).innerHTML += hostname
-                row.insertCell(1).innerHTML += critical_age
+                row.insertCell(1).innerHTML += date.formatDuration(critical_age)
                 row.insertCell(2).innerHTML += iconsWithId(hostname)
                 row = sites_list.insertRow(0);
             }

@@ -11,7 +11,7 @@ function getHostname(url) {
 
 /**
  * Récupère le nom d'hote de l'onglet courant
- * @returns {String} - Nom d'hôte du site courant
+ * @returns {Promise} - Nom d'hôte du site courant
  */
 function getCurrentHostname() {
     let p_tabs = new Promise((resolve) => {
@@ -25,5 +25,6 @@ function getCurrentHostname() {
 }
 
 module.exports = {
-    getCurrentHostname
+    getCurrentHostname,
+    getHostname
 }

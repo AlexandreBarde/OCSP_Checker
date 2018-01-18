@@ -1,5 +1,5 @@
-const moment = require('moment')
 const ui = require('./ui')
+const date = require('./date')
 const url_parser = require('./url')
 const messaging = require('./messaging')
 const stor = require('./storage')
@@ -58,26 +58,16 @@ ui.btn_follow.addEventListener('click', () => {
             let hours = document.getElementById('hours').value;
             let mins = document.getElementById('minutes').value;
             let secs = document.getElementById('seconds').value;
-
             if (valid_modif(days, hours, mins, secs)) {
-
-                let time = moment.duration({
-                    seconds: secs,
-                    minutes: mins,
-                    hours: hours,
-                    days: days,
-                    weeks: 0,
-                    months: 0,
-                    years: 0
-                });
-                let critical_duration = time.asSeconds()
-                ui.follow(hostname, critical_duration);
+                // Stocker la durée un millisecondes
+                let time = date.asMilliseconds(days, hours, mins, secs)
+                ui.follow(hostname, time);
                 // Envoyer une requête au background pour forcer la vérification
                 // avec l'adresse du serveur concerné et la duree limite
                 messaging.sendBackground(port, {
                     hostname: hostname,
                     action: 'get_date',
-                    lim: critical_duration
+                    lim: time
                 })
             } else {
                 ui.showAddWarning();
@@ -106,12 +96,12 @@ document.addEventListener('click', function (e) {
     // Si on a cliqué sur l'icone de modification d'un site
     if (e.target.classList.contains('edit_site')) {
 
-        let time = moment.duration(Number(stor.getCriticalSeconds(e.target.id)), 'seconds');
-
-        document.getElementById('days_modif').value = time.days();
-        document.getElementById('hours_modif').value = time.hours();
-        document.getElementById('minutes_modif').value = time.minutes();
-        document.getElementById('seconds_modif').value = time.seconds();
+        let time = stor.getCriticalSeconds(e.target.id)
+        let obj_date = date.toObject(time)
+        document.getElementById('days_modif').value = obj_date.days
+        document.getElementById('hours_modif').value = obj_date.hours
+        document.getElementById('minutes_modif').value = obj_date.minutes
+        document.getElementById('seconds_modif').value = obj_date.seconds
         // Afficher les champs de modification
         ui.showModif()
         siteToModif = e.target.id;
@@ -156,22 +146,13 @@ ui.btn_modif_done.addEventListener('click', () => {
     if (valid_modif(days, hours, mins, secs)) {
         url_parser.getCurrentHostname()
             .then(hostname => {
-                let time = moment.duration({
-                    seconds: secs,
-                    minutes: mins,
-                    hours: hours,
-                    days: days,
-                    weeks: 0,
-                    months: 0,
-                    years: 0
-                });
-
-                stor.addSite(siteToModif, time.asSeconds())
+                let time = date.asMilliseconds(days, hours, mins, secs)
+                stor.addSite(siteToModif, time)
                 // Refaire une vérification auprès du background avec la nouvelle date si le site modifié est le site visité
                 if (hostname === siteToModif) messaging.sendBackground(port, {
                     hostname: hostname,
                     action: 'get_date',
-                    lim: stor.getCriticalSeconds(hostname)
+                    lim: time
                 })
                 ui.printSites()
                 // Rafficher l'écran précedent
