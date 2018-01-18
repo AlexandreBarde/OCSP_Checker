@@ -14,7 +14,8 @@ module.exports = {
         filename: '[name].bundle.js'
     },
 
-/*     plugins: [
+    plugins: [
+        // Minifier le code en sortie
         new UglifyJsPlugin()
-    ] */
+    ]
 }

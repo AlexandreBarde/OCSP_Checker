@@ -1,3 +1,6 @@
+/**
+ * Enregistre les options de la notification
+ */
 function save_options() {
   // Récupération des différents champs
   let couleur = document.getElementById('couleur').value
@@ -7,7 +10,7 @@ function save_options() {
   let opacite = document.getElementById('opacite').value
   let temps = document.getElementById('temps').value
   // Enregistrement de ces options
-  let p_sync = new Promise((resolve, reject) => {
+  let p_sync = new Promise((resolve) => {
     chrome.storage.sync.set({
       couleurNotif: couleur,
       emplacementNotif: emplacement,
@@ -32,9 +35,12 @@ function save_options() {
   })
 }
 
+/**
+ * Récupère les options de l'utilisateur pour en donner
+ * les valeurs au champs
+ */
 function restore_options() {
-
-  let p_opts = new Promise((resolve, reject) => {
+  let p_opts = new Promise((resolve) => {
     // Valeur par défaut
     chrome.storage.sync.get({
       couleurNotif: '#fffff',

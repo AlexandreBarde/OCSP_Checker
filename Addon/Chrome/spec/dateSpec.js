@@ -1,3 +1,7 @@
+/**
+ * Tests de non régréssion pour le traitement de la date sans librairie
+ */
+
 const date = require('../src/date')
 
 describe('Date module', () => {

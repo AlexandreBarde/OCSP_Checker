@@ -30,3 +30,9 @@ webpack --watch
 ```
 ./navigateur_install.sh
 ```
+
+# Tests du module date
+Dans la dossier Addon/Chrome
+```
+npm run test
+```

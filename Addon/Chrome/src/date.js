@@ -38,7 +38,8 @@ function asMilliseconds(days, hours, minutes, seconds) {
 /**
  * Crée un objet durée en fonction
  * d'une durée en millisecondes
- * @param {Number} duration 
+ * @param {Number} duration - Durée à mettre sous forme d'objet
+ * @returns {Object} - Objet représentant la durée
  */
 function toObject(duration) {
     let s = duration / 1000
@@ -69,30 +70,17 @@ function formatDuration(duration) {
     let format = `${date_obj.hours}:${date_obj.minutes}:${date_obj.seconds}`
     // Condition vraie si la durée n'est composée que de jours
     let only_days = parseInt(date_obj.hours) === 0 && parseInt(date_obj.minutes) === 0 && parseInt(date_obj.seconds) === 0
-    // Si il y a au moins 1 jours
-    if (date_obj.days > 0) {
-        // Si il n'y en a qu'un
-        if (date_obj.days === 1) {
-            // Si c'est le seul élément
-            if (only_days) {
-                // Rajouter jour au singulier
-                format = `${date_obj.days} jour`
-            } else {
-                // Rajouter aussi le reste de la durée
-                format = `${date_obj.days} jour ${format}`
-            }
-        }
-        else {
-            // Si il n'y a que des jours
-            if (only_days) {
-                // Mettre jour au pluriel
-                format = `${date_obj.days} jours`
-            } else {
-                // Rajouter aussi le reste de la durée
-                format = `${date_obj.days} jours ${format}`
-            }
-        }
+    // Si il n'y a qu'un jour
+    if (date_obj.days === 1) {
+        // Si c'est le seul élément, afficher 1 jour
+        if (only_days) format = '1 jour'
+        // Sinon rajouter hms
+        else format = `1 jour ${format}`
+    } else if (date_obj.days > 1) {
+        if (only_days) format = `${date_obj.days} jours`
+        else format = `${date_obj.days} jours ${format}`
     }
+
     return format
 }
 

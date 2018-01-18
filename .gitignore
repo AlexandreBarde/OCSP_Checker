@@ -2,4 +2,8 @@
 *~
 *#
 .vscode
-/PrototypeV2/build/
+node_modules/
+web-ext-artifacts/
+*.pem
+*.crx
+*.xpi
