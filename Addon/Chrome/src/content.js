@@ -49,7 +49,7 @@ function showDate(miseajour, depassement) {
         // Donner les couleurs aux elements
         div_titre.style.backgroundColor = items.couleurNotif
         div_texte.style.backgroundColor = items.couleurPartieTexteNotif
-        div_texte.style.opacity = items.opaciteNotif / 100
+        div_texte.style.opacity = '' + items.opaciteNotif / 100
         maj.style.color = items.couleurTexteNotif
         depas.style.color = items.couleurTexteNotif
         let top, bottom, left, right
