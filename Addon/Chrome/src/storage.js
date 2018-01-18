@@ -1,4 +1,3 @@
-const moment = require('moment')
 const date = require('./date')
 
 /**
@@ -41,11 +40,11 @@ function addSite(hostname, time) {
  */
 function getCriticalSeconds(hostname) {
     if (isAvailable()) {
-        let site = localStorage.getItem(hostname);
-        if (site == null) {
+        let critical = localStorage.getItem(hostname);
+        if (critical == null) {
             return null;
         }
-        return site
+        return critical
     } else {
         isUnavailableError()
         return null;
@@ -73,20 +72,6 @@ function removeAllSites() {
         localStorage.clear();
     } else {
         isUnavailableError();
-    }
-}
-
-/**
- * Donne l'ancienneté critique pour un nom d'hote
- * @param {String} hostname
- * @returns {String}
- */
-function getCriticalAge(hostname) {
-    if (isAvailable()) {
-        let timesec = moment.duration(Number(localStorage.getItem(hostname)), 'seconds');
-        return date.formatDuration(timesec);
-    } else {
-        isUnavailableError()
     }
 }
 
@@ -131,7 +116,6 @@ module.exports = {
     addSite,
     isAvailable,
     isUnavailableError,
-    getCriticalAge,
     getLength,
     getHostname,
     isEmpty,

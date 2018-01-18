@@ -14,7 +14,7 @@ module.exports = {
         filename: '[name].bundle.js'
     },
 
-    plugins: [
+/*     plugins: [
         new UglifyJsPlugin()
-    ]
+    ] */
 }
