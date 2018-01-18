@@ -28,7 +28,6 @@ function check_update(update, limit) {
 chrome.runtime.onConnect.addListener(port => {
     // Attendre un message de sa part
     port.onMessage.addListener(message => {
-        console.log(message)
         // Dans tous les cas, on doit envoyer le nom d'hôte à l'application
         messaging.sendNative(message)
             .then(response => {
@@ -41,10 +40,9 @@ chrome.runtime.onConnect.addListener(port => {
                     // Renvoyer true ou false à la popup pour le site concerné
                     port.postMessage(stapling_infos)
                 } else if (message.action === 'get_date') {
-                    console.log(message)
                     // Si la popup a demandé la date de la dernière mise à jour
                     // Calculer le depassement de l'ancienneté critique
-                    if (!check_update(response.update, message.lim) && message.manual) {
+                    if (check_update(response.update, message.lim) === false && message.manual) {
                         port.postMessage({show_ok: true})
                     }
                 }
@@ -54,7 +52,7 @@ chrome.runtime.onConnect.addListener(port => {
 
 
 // A chaque fois qu'un onglet est chargé
-chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
+chrome.tabs.onUpdated.addListener((tabId, changeInfo) => {
     chrome.tabs.query({active: true, lastFocusedWindow: true}, tabs => {
         // Si l'onglet courant est chargé
         if (tabs[0].id === tabId && changeInfo.status === 'complete') {
