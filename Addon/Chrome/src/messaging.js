@@ -1,3 +1,4 @@
+// Identifiant de l'application native
 const id_app = 'com.e2.ocsp_checker'
 
 /**
