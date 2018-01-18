@@ -7,7 +7,7 @@ const id_app = 'com.e2.ocsp_checker'
  * @returns {Promise} - Date de la mise à jour
  */
 function sendNative(message) {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve) => {
         chrome.runtime.sendNativeMessage(id_app, message, resolve)
     })
 }
