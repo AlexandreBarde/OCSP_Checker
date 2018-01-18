@@ -20,37 +20,76 @@ function timeDiff(duration, critical) {
     return duration - critical
 }
 
+/**
+ * Converti une durée en milliseconds
+ * @param {Number} days - Jours de la durée
+ * @param {Number} hours - Heures de la durée
+ * @param {Number} minutes - Minutes de la durée
+ * @param {Number} seconds - Secondes de la durée
+ */
+function asMilliseconds(days, hours, minutes, seconds) {
+    let d = days * 24 * 3600 * 1000
+    let h = hours * 3600 * 1000
+    let m = minutes * 60 * 1000
+    let s = seconds * 1000
+    return d + h + m + s
+}
 
 /**
- * Formate le temps écoulé depuis la mise à jour
- * @param {moment.duration} duration
- * @returns {String} - date formattée
+ * Crée un objet durée en fonction
+ * d'une durée en millisecondes
+ * @param {Number} duration 
  */
-function formatDuration(duration) {
+function toObject(duration) {
     let s = duration / 1000
     let days = Math.floor(s / 3600 / 24)
     let hours = Math.floor((s / 3600) - days * 24)
     let minutes = Math.floor(s / 60 - (days * 24 * 60 + hours * 60))
-    let seconds = s - (days * 3600 * 24 + hours * 3600 + minutes * 60)
+    let seconds = Math.floor(s - (days * 3600 * 24 + hours * 3600 + minutes * 60))
+    return {
+        days: days,
+        hours: hours,
+        minutes: minutes,
+        seconds: seconds
+    }
+}
 
-    if (hours < 10) hours = '0' + hours
-    if (minutes < 10) minutes = '0' + minutes
-    if (seconds < 10) seconds = '0' + seconds
-    let format = `${hours}:${minutes}:${seconds}`
-    let only_days = hours == 0 && minutes == 0 && seconds == 0
-    if (days > 0) {
-        if (days === 1) {
+/**
+ * Formate le temps écoulé depuis la mise à jour
+ * @param {Number} duration - Durée à formatter
+ * @returns {String} - durée formattée
+ */
+function formatDuration(duration) {
+    // Recupérer la durée sous la forme d'un objet
+    let date_obj = toObject(duration)
+    // Rajouter un 0 devant les heures/minutes/secondes si elles n'ont qu'un chiffre
+    if (date_obj.hours < 10) date_obj.hours = '0' + date_obj.hours
+    if (date_obj.minutes < 10) date_obj.minutes = '0' + date_obj.minutes
+    if (date_obj.seconds < 10) date_obj.seconds = '0' + date_obj.seconds
+    let format = `${date_obj.hours}:${date_obj.minutes}:${date_obj.seconds}`
+    // Condition vraie si la durée n'est composée que de jours
+    let only_days = parseInt(date_obj.hours) === 0 && parseInt(date_obj.minutes) === 0 && parseInt(date_obj.seconds) === 0
+    // Si il y a au moins 1 jours
+    if (date_obj.days > 0) {
+        // Si il n'y en a qu'un
+        if (date_obj.days === 1) {
+            // Si c'est le seul élément
             if (only_days) {
-                format = `${days} jour`
+                // Rajouter jour au singulier
+                format = `${date_obj.days} jour`
             } else {
-                format = `${days} jour ${format}`
+                // Rajouter aussi le reste de la durée
+                format = `${date_obj.days} jour ${format}`
             }
         }
         else {
+            // Si il n'y a que des jours
             if (only_days) {
-                format = `${days} jours`
+                // Mettre jour au pluriel
+                format = `${date_obj.days} jours`
             } else {
-                format = `${days} jours ${format}`
+                // Rajouter aussi le reste de la durée
+                format = `${date_obj.days} jours ${format}`
             }
         }
     }
@@ -71,7 +110,7 @@ function isDate(text) {
  * dépasse l'ancienneté critique pour une
  * date et un nom d'hôte donné
  * @param {String} date_str - date de la mise à jour
- * @param {String} lim - ancienneté critique
+ * @param {String} lim - ancienneté critique en millisecondes
  * @returns {Object | boolean} - Age de la mise à jour et dépassement si l'attestation est trop vieille
  */
 function treatUpdate(date_str, lim) {
@@ -79,14 +118,12 @@ function treatUpdate(date_str, lim) {
     let age = ocspAge(date_str, new Date())
     // Calculer la différence entre l'age de la maj et l'ancienneté critique
     let diff = timeDiff(age, lim)
-    // Si la différence est négative, l'ancienneté critique est dépassée
-    if (diff < 0) {
-        // Formatter le depassement
-        let offset = formatDuration(Math.abs(diff))
+    // Si la différence est positive, l'ancienneté critique est dépassée
+    if (diff > 0) {
         // Preparer le message a envoyer au content
         return {
             maj: formatDuration(age),
-            depas: offset
+            depas: formatDuration(diff)
         }
     } else {
         return false
@@ -99,5 +136,7 @@ module.exports = {
     formatDuration,
     isDate,
     treatUpdate,
-    timeDiff
+    timeDiff,
+    asMilliseconds,
+    toObject
 }
