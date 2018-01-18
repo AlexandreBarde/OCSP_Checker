@@ -4,6 +4,7 @@
 .vscode
 node_modules/
 web-ext-artifacts/
-Addon/*.pem
+*.pem
 *.xpi
-Addon/*.crx
+*.crx
+doc/
