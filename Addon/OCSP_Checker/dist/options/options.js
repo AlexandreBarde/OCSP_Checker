@@ -12,12 +12,12 @@ function save_options() {
   // Enregistrement de ces options
   let p_sync = new Promise((resolve) => {
     chrome.storage.sync.set({
-      couleurNotif: couleur,
-      emplacementNotif: emplacement,
-      couleurTexteNotif: couleurTexte,
-      couleurPartieTexteNotif: couleurPartieTexte,
-      tempsNotif: temps,
-      opaciteNotif: opacite
+      title_color: couleur,
+      position: emplacement,
+      text_color: couleurTexte,
+      color: couleurPartieTexte,
+      duration: temps,
+      opacity: opacite
     }, () => {
       resolve()
     })
@@ -43,24 +43,24 @@ function restore_options() {
   let p_opts = new Promise((resolve) => {
     // Valeur par défaut
     chrome.storage.sync.get({
-      couleurNotif: '#fffff',
-      couleurTexteNotif: '#fffff',
-      couleurPartieTexteNotif: 'black',
-      emplacementNotif: 'haut_gauche',
-      opaciteNotif: "95",
-      temps: 2,
+      title_color: '#db4030',
+      text_color: '#ecf0f1',
+      color: '#c0392b',
+      position: 'haut_gauche',
+      opacity: 95,
+      duration: 3,
     }, items => {
       resolve(items)
     })
   })
 
   p_opts.then(items => {
-    document.getElementById('emplacement').value = items.emplacementNotif
-    document.getElementById('couleur').value = items.couleurNotif
-    document.getElementById('opacite').value = items.opaciteNotif
-    document.getElementById('couleurPartieTexte').value = items.couleurPartieTexteNotif
-    document.getElementById('couleurTexte').value = items.couleurTexteNotif
-    document.getElementById('temps').value = items.temps
+    document.getElementById('emplacement').value = items.position
+    document.getElementById('couleur').value = items.title_color
+    document.getElementById('opacite').value = items.opacity
+    document.getElementById('couleurPartieTexte').value = items.color
+    document.getElementById('couleurTexte').value = items.text_color
+    document.getElementById('temps').value = items.duration
   })
 }
 

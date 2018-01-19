@@ -11,6 +11,7 @@
 
 #OCSP_check_div_texte {
     border-radius: 0px 0px 4px 4px;
+    padding-top: 5px;
     font-size: 18px;
     font-family: Arial, Helvetica, sans-serif;
 }
@@ -23,11 +24,9 @@
     font-family: Arial, Helvetica, sans-serif;
 }
 
-.texte {
-    padding-left: 5px;
-    padding-right: 5px;
-    padding-top: 2px;
-    padding-bottom: 2px;
+.OCSP_check_texte {
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 4px;
     margin: 0;
-    line-height: 1.5em;
 }

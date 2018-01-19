@@ -15,8 +15,8 @@ function showDate(miseajour, depassement) {
     div_notif.id = 'OCSP_check_div_notif'
     div_titre.id = 'OCSP_check_div_titre'
     div_texte.id = 'OCSP_check_div_texte'
-    maj.classList.add('texte')
-    depas.classList.add('texte')
+    maj.classList.add('OCSP_check_texte')
+    depas.classList.add('OCSP_check_texte')
     // Mettre en place la structure
     div_notif.appendChild(div_titre)
     div_titre.appendChild(titre)
@@ -31,30 +31,30 @@ function showDate(miseajour, depassement) {
 
     // Recuperer les valeurs des options
     let p_opts = new Promise((resolve) => {
+        // Valeur par défaut
         chrome.storage.sync.get({
-            couleurNotif: 'red',
-            couleurTexteNotif: 'black',
-            couleurPartieTexteNotif: 'red',
-            emplacementNotif: 'haut_gauche',
-            opaciteNotif: '95',
-            tempsNotif: 4,
+            title_color: '#db4030',
+            text_color: '#ecf0f1',
+            color: '#c0392b',
+            position: 'haut_gauche',
+            opacity: 95,
+            duration: 3,
         }, items => {
             resolve(items)
         })
     })
-
     // Une fois les options chargées, les prendre en compte
     p_opts.then(items => {
-        let emplacement_notif_stockage = items.emplacementNotif
         // Donner les couleurs aux elements
-        div_titre.style.backgroundColor = items.couleurNotif
-        div_texte.style.backgroundColor = items.couleurPartieTexteNotif
-        div_texte.style.opacity = '' + items.opaciteNotif / 100
-        maj.style.color = items.couleurTexteNotif
-        depas.style.color = items.couleurTexteNotif
-        titre.style.color = items.couleurTexteNotif
+        div_titre.style.backgroundColor = items.title_color
+        div_texte.style.backgroundColor = items.color
+        div_texte.style.opacity = '' + items.opacity / 100
+        maj.style.color = items.text_color
+        depas.style.color = items.text_color
+        titre.style.color = items.text_color
+        // Appliquer la couleur de la police à tous les textes
         let top, bottom, left, right
-        switch (emplacement_notif_stockage) {
+        switch (items.position) {
             case 'bas_droite':
                 bottom = '5%'
                 right = '3%'
@@ -83,7 +83,7 @@ function showDate(miseajour, depassement) {
         // Montrer la notification
         showNotif();
         // La cacher après un temps défini dans les paramètres
-        setTimeout(hideNotif(), items.tempsNotif * 1000);
+        setTimeout(hideNotif, parseInt(items.duration) * 1000);
     })
 
 
