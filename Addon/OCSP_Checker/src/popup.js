@@ -12,6 +12,9 @@ const port = chrome.runtime.connect()
 
 // Ecouter les réponse du background script
 port.onMessage.addListener(message => {
+    // Dès qu'on reçoit la réponse, cacher l'écran de chargement
+    document.getElementById('loading').hidden = true
+    console.log(document.getElementById('loading'))
     // Si le site courant supporte OCSP Stapling
     if (message.has_stapling) {
         // Si il est déjà suivi
