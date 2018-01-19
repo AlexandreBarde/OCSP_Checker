@@ -2,7 +2,7 @@
     "description": "Vérifie l'ancienneté des attestations OCSP",
     "manifest_version": 2,
     "name": "OCSP Checker",
-    "version": "2.3",
+    "version": "2.4",
     "options_ui": {
         "page": "dist/options/options.html"
     },
