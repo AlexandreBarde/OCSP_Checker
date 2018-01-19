@@ -31,7 +31,9 @@ input {
     margin: auto;
 }
 
-#followed, #unfollowed, #no_stapling {
+#followed,
+#unfollowed,
+#no_stapling {
     width: 100%;
     margin: 0;
 }
@@ -42,18 +44,21 @@ input {
     font-size: 2em;
 }
 
-.list_sites_instruc, .list_sites_instruc:hover {
+.list_sites_instruc,
+.list_sites_instruc:hover {
     text-align: center;
     color: black;
 }
 
-#chevron-up, #chevron-down {
+#chevron-up,
+#chevron-down {
     display: block;
     margin: auto;
     padding-bottom: 2px;
 }
 
-#chevron-down:hover, #chevron-up:hover {
+#chevron-down:hover,
+#chevron-up:hover {
     cursor: pointer;
 }
 
@@ -89,15 +94,75 @@ input {
     margin-left: 4%;
 }
 
+
+/* Animation au clic sur refresh */
+
 .active {
     -webkit-transition: -webkit-transform .7s ease-in-out;
     transition: -webkit-transform .7s ease-in-out;
     -webkit-transform: rotate(360deg);
     transform: rotate(360deg);
-
 }
 
-b, td {
+b,
+td {
     text-align: center;
 }
 
+
+/* Animation du chargement */
+
+#loading {
+    padding-top: 38px;
+    padding-bottom: 39px;
+}
+
+.spinner {
+    margin: 0 auto;
+    width: 70px;
+    text-align: center;
+}
+
+.spinner>div {
+    width: 10px;
+    height: 10px;
+    background-color: rgb(139, 139, 139);
+    border-radius: 100%;
+    display: inline-block;
+    -webkit-animation: sk-bouncedelay 1.4s infinite ease-in-out both;
+    animation: sk-bouncedelay 1.4s infinite ease-in-out both;
+}
+
+.spinner .bounce1 {
+    -webkit-animation-delay: -0.32s;
+    animation-delay: -0.32s;
+}
+
+.spinner .bounce2 {
+    -webkit-animation-delay: -0.16s;
+    animation-delay: -0.16s;
+}
+
+@-webkit-keyframes sk-bouncedelay {
+    0%,
+    80%,
+    100% {
+        -webkit-transform: scale(0)
+    }
+    40% {
+        -webkit-transform: scale(1.0)
+    }
+}
+
+@keyframes sk-bouncedelay {
+    0%,
+    80%,
+    100% {
+        -webkit-transform: scale(0);
+        transform: scale(0);
+    }
+    40% {
+        -webkit-transform: scale(1.0);
+        transform: scale(1.0);
+    }
+}

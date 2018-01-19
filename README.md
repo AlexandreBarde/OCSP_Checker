@@ -32,7 +32,7 @@ webpack --watch
 ```
 
 # Tests du module date
-Dans la dossier Addon/Chrome
+Dans la dossier Addon/OCSP\_CHECKER
 ```
 npm run test
 ```
