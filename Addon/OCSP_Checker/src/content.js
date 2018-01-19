@@ -2,7 +2,6 @@ chrome.runtime.onMessage.addListener(message => {
     showDate(message.maj, message.depas)
 });
 
-
 let div_notif
 
 function showDate(miseajour, depassement) {
@@ -10,6 +9,7 @@ function showDate(miseajour, depassement) {
     div_notif = document.createElement('div')
     let div_titre = document.createElement('div')
     let div_texte = document.createElement('div')
+    let titre = document.createElement('p')
     let maj = document.createElement('p')
     let depas = document.createElement('p')
     div_notif.id = 'OCSP_check_div_notif'
@@ -19,12 +19,13 @@ function showDate(miseajour, depassement) {
     depas.classList.add('texte')
     // Mettre en place la structure
     div_notif.appendChild(div_titre)
+    div_titre.appendChild(titre)
     div_notif.appendChild(div_texte)
     div_texte.appendChild(maj)
     div_texte.appendChild(depas)
     document.body.appendChild(div_notif)
     // Ecrire les informations ne dépendant pas des options
-    div_titre.textContent = 'Attestation OCSP trop ancienne'
+    titre.textContent = 'Attestation OCSP trop ancienne'
     maj.textContent = `Mise à jour: ${miseajour}`
     depas.textContent = `Depassement: ${depassement}`
 
@@ -36,7 +37,7 @@ function showDate(miseajour, depassement) {
             couleurPartieTexteNotif: 'red',
             emplacementNotif: 'haut_gauche',
             opaciteNotif: '95',
-            tempsNotif: 3,
+            tempsNotif: 4,
         }, items => {
             resolve(items)
         })
@@ -45,13 +46,13 @@ function showDate(miseajour, depassement) {
     // Une fois les options chargées, les prendre en compte
     p_opts.then(items => {
         let emplacement_notif_stockage = items.emplacementNotif
-        let temps_affichage = items.temps_affichage = items.tempsNotif
         // Donner les couleurs aux elements
         div_titre.style.backgroundColor = items.couleurNotif
         div_texte.style.backgroundColor = items.couleurPartieTexteNotif
         div_texte.style.opacity = '' + items.opaciteNotif / 100
         maj.style.color = items.couleurTexteNotif
         depas.style.color = items.couleurTexteNotif
+        titre.style.color = items.couleurTexteNotif
         let top, bottom, left, right
         switch (emplacement_notif_stockage) {
             case 'bas_droite':
@@ -82,7 +83,7 @@ function showDate(miseajour, depassement) {
         // Montrer la notification
         showNotif();
         // La cacher après un temps défini dans les paramètres
-        setTimeout(hideNotif, temps_affichage * 1000);
+        setTimeout(hideNotif(), items.tempsNotif * 1000);
     })
 
 
