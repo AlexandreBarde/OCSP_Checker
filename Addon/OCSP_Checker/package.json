@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "node test.js"
+    "test": "node test.js",
+    "build": "./build.sh"
+
   },
   "author": "Groupe E2",
   "license": "MIT",
